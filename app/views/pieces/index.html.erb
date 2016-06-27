@@ -1,0 +1,9 @@
+<h1>Pieces#index</h1>
+<table>
+<% for @piece in @pieces %>
+<tr>
+  <td><a href="/pieces/<%=@piece.repo%>/<%=@piece.slug%>"><%=@piece.title%></a></td>
+  <td><%=@piece.composer.name%></td>
+</tr>
+<% end %>
+</table>

@@ -10,6 +10,7 @@ namespace :init_db do
           p.title = metadata['title']
           p.composer = c
           p.slug = slug
+          p.repo = 'miscellaneous'
         end
       end
 
@@ -19,4 +20,6 @@ namespace :init_db do
     Rake::Task['db:reset'].invoke 
     Rake::Task['db:migrate'].invoke 
   end
+  
+  task :all => [:db_reset, :miscellaneous]
 end

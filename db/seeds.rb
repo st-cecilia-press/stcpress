@@ -25,3 +25,22 @@ manuscripts = Manuscript.create([
 { name: 'GB-Occ MS 59', archive: 'Corpus Christi College [GB-Occ]', shelfmark: 'MS 59', diamm: 558, description: 'non-music MS with interpolated music , 13th century; provenance: England'}
 ])
 
+books = Books.create([
+{ title: "The First Set of English Madrigals to 3, 4, 5, and 6 Voices", date: 1604},
+{ title: "Deuteromelia", date: 1609},
+{ title: "Canzonette a Tre Voce", date: 1601},
+{ title: "First Book of Songs or Ayres", date: 1597},
+{ title: "TIERS LIVRE DES CHANSONS A QVATRE CINCQ ET six parties, nouuellement composées par Orlando di Lassus", date: 1566},
+{ title: "Canzonets to three voyces", date: 1608},
+{ title: "Motetti novi e chanzoni franciose a quatro sopra doi", date: 1520},
+{ title: "A Brief Discourse", date: 1614},
+{ title: "Musae Sione IX", date: 1610},
+{ title: "Ein außbund schöner Teutscher Liedlein zu singen, vnd auff allerley Jnstrument, zugebrauchen, sonderlich außerlesen", date: 1560},
+{ title: "Il primo libro di madrigali d'Archadelt a tre voci", date: 1542},
+{ title: "Premier Livre Dv Recveil Des Flevrs Prodvictes De La Divine Mvsicqve a Trois Parties De par Clemens non Papa Thomas Cricquillon & aultres excellens Musichiens", date: 1560},
+{ title: "37 Chansons musicales a quatre parties", date: 1528},
+{ title: "The First book of Balletts to Five Voyces", date: 1595},
+{ title: "51 Galliards, Pavans, Bransles and Basse Dances", date: 1530},
+{ title: "Tiers Livre de chansons à quatre parties de Ja. Arcadet et autres.", date: 1567}
+])
+

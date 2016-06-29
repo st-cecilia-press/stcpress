@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :book_content do
+    book 
+    piece 
+  end
+  factory :book do
+    title "MyString"
+  end
   factory :manuscript_content do
     manuscript
     piece 

@@ -11,12 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627213139) do
+ActiveRecord::Schema.define(version: 20160629122509) do
 
   create_table "composers", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "manuscript_contents", force: :cascade do |t|
+    t.integer  "manuscript_id"
+    t.integer  "piece_id"
+    t.string   "position"
+    t.integer  "diamm"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "manuscript_contents", ["manuscript_id"], name: "index_manuscript_contents_on_manuscript_id"
+  add_index "manuscript_contents", ["piece_id"], name: "index_manuscript_contents_on_piece_id"
+
+  create_table "manuscripts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "archive"
+    t.string   "shelfmark"
+    t.integer  "diamm"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "pieces", force: :cascade do |t|

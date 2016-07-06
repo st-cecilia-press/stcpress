@@ -5,7 +5,7 @@
 <table class="table">
 <tr><th>Name</th><th>Archive</th><th>Shelfmark</th></tr>
   <% @piece.manuscripts.each do |man| %>
-  <tr><td><%= man.name %></td><td><%= man.archive %></td><td><%= man.shelfmark %></td></tr>
+  <tr><td><%= link_to man.name, manuscript_path(slug: man.slug) %></td><td><%= man.archive %></td><td><%= man.shelfmark %></td></tr>
   <% end %>
 <% end %>
 
@@ -15,7 +15,7 @@
 <table class="table">
 <tr><th>Title</th><th>Date Published</th></tr>
 <% @piece.books.each do |book| %>
-<tr><td><%= book.title %></td><td><%= book.date %></td></tr>
+<tr><td><%= link_to book.title, book_path(slug: book.slug) %></td><td><%= book.date %></td></tr>
 <% end %>
 <% end %>
 

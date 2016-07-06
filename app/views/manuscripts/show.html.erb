@@ -1,0 +1,9 @@
+<h1><%=@manuscript.name%></h1>
+
+<table class="table">
+    <tr><th>Piece</th><th>Composer</th><th>Position in Manuscript</th></tr>
+    <% @manuscript.pieces.each do |piece| %>
+        <tr><td><%= link_to piece.title, piece_path(piece.repo, piece.slug) %></td><td><%=piece.composer.name%></td><td></td></tr>
+
+    <% end %>
+</table>

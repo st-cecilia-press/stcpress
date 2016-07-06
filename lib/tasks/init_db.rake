@@ -22,7 +22,7 @@ namespace :init_db do
         end
         if metadata["books"]
           metadata["books"].each do |book|
-            b = Book.find_by(title: book["title"])
+            b = Book.find_by(slug: book["slug"])
             bc = BookContent.create(piece: piece, book: b)
           end
         end

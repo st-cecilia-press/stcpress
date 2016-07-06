@@ -5,6 +5,7 @@ FactoryGirl.define do
   end
   factory :book do
     title "MyString"
+    sequence(:slug) { |n| "slug#{n}" }
   end
   factory :manuscript_content do
     manuscript
@@ -12,7 +13,7 @@ FactoryGirl.define do
   end
   factory :manuscript do
     name "Blackcloak Manuscript"
-    slug "manuscript_slug"
+    sequence(:slug) { |n| "slug#{n}" }
   end
   factory :piece do
     title "My Piece"

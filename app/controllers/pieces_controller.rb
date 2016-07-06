@@ -4,6 +4,6 @@ class PiecesController < ApplicationController
   end
 
   def show
-    @piece = Piece.where(repo: params[:repo]).where(slug: params[:slug]).first
+    @piece = Piece.find_by(repo: params[:repo], slug: params[:slug])
   end
 end

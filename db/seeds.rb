@@ -26,21 +26,21 @@ manuscripts = Manuscript.create([
 ])
 
 books = Book.create([
-{ slug: 'bateson_first_set_of_english_madrigals', title: "The First Set of English Madrigals to 3, 4, 5, and 6 Voices", date: 1604},
-{ slug: 'ravenscroft_deuteromelia', title: "Deuteromelia", date: 1609},
-{ slug: 'croce_canzonette_a_tre_voce', title: "Canzonette a Tre Voce", date: 1601},
-{ slug: 'dowland_first_book_of_songs', title: "First Book of Songs or Ayres", date: 1597},
-{ slug: 'lassus_tiers_livre_des_chansons', title: "TIERS LIVRE DES CHANSONS A QVATRE CINCQ ET six parties, nouuellement composées par Orlando di Lassus", date: 1566},
-{ slug: 'youll_canzonets_to_three_voyces', title: "Canzonets to three voyces", date: 1608},
-{ slug: 'willaert_motetti_novi_e_chanzoni_franciose', title: "Motetti novi e chanzoni franciose a quatro sopra doi", date: 1520},
-{ slug: 'ravenscroft_a_brief_discourse', title: "A Brief Discourse", date: 1614},
-{ slug: 'praetorius_musae_sione_ix', title: "Musae Sione IX", date: 1610},
-{ slug: 'ein_aussbund_schoner_teutscher_liedlein', title: "Ein außbund schöner Teutscher Liedlein zu singen, vnd auff allerley Jnstrument, zugebrauchen, sonderlich außerlesen", date: 1560},
-{ slug: 'arcadelt_il_primo_libro_di_madrigali', title: "Il primo libro di madrigali d'Archadelt a tre voci", date: 1542},
-{ slug: 'phalese_premier_livre_du_recueil_des_fleurs', title: "Premier Livre Dv Recveil Des Flevrs Prodvictes De La Divine Mvsicqve a Trois Parties De par Clemens non Papa Thomas Cricquillon & aultres excellens Musichiens", date: 1560},
-{ slug: 'attaignant_37_chansons_musicales', title: "37 Chansons musicales a quatre parties", date: 1528},
-{ slug: 'morley_first_book_of_balletts', title: "The First book of Balletts to Five Voyces", date: 1595},
-{ slug: 'attaignant_51_galliards_pavans_bransles_and_basse_dances', title: "51 Galliards, Pavans, Bransles and Basse Dances", date: 1530},
-{ slug: 'le_roy_ballard_tiers_livre_de_chansons', title: "Tiers Livre de chansons à quatre parties de Ja. Arcadet et autres.", date: 1567}
+{ slug: 'bateson_first_set_of_english_madrigals', title: "The First Set of English Madrigals to 3, 4, 5, and 6 Voices", date: Date.new(1604)},
+{ slug: 'ravenscroft_deuteromelia', title: "Deuteromelia", date: Date.new(1609)},
+{ slug: 'croce_canzonette_a_tre_voce', title: "Canzonette a Tre Voce", date: Date.new(1601)},
+{ slug: 'dowland_first_book_of_songs', title: "First Book of Songs or Ayres", date: Date.new(1597)},
+{ slug: 'lassus_tiers_livre_des_chansons', title: "TIERS LIVRE DES CHANSONS A QVATRE CINCQ ET six parties, nouuellement composées par Orlando di Lassus", date: Date.new(1566)},
+{ slug: 'youll_canzonets_to_three_voyces', title: "Canzonets to three voyces", date: Date.new(1608)},
+{ slug: 'willaert_motetti_novi_e_chanzoni_franciose', title: "Motetti novi e chanzoni franciose a quatro sopra doi", date: Date.new(1520)},
+{ slug: 'ravenscroft_a_brief_discourse', title: "A Brief Discourse", date: Date.new(1614)},
+{ slug: 'praetorius_musae_sione_ix', title: "Musae Sione IX", date: Date.new(1610)},
+{ slug: 'ein_aussbund_schoner_teutscher_liedlein', title: "Ein außbund schöner Teutscher Liedlein zu singen, vnd auff allerley Jnstrument, zugebrauchen, sonderlich außerlesen", date: Date.new(1560)},
+{ slug: 'arcadelt_il_primo_libro_di_madrigali', title: "Il primo libro di madrigali d'Archadelt a tre voci", date: Date.new(1542)},
+{ slug: 'phalese_premier_livre_du_recueil_des_fleurs', title: "Premier Livre Dv Recveil Des Flevrs Prodvictes De La Divine Mvsicqve a Trois Parties De par Clemens non Papa Thomas Cricquillon & aultres excellens Musichiens", date: Date.new(1560)},
+{ slug: 'attaignant_37_chansons_musicales', title: "37 Chansons musicales a quatre parties", date: Date.new(1528)},
+{ slug: 'morley_first_book_of_balletts', title: "The First book of Balletts to Five Voyces", date: Date.new(1595)},
+{ slug: 'attaignant_51_galliards_pavans_bransles_and_basse_dances', title: "51 Galliards, Pavans, Bransles and Basse Dances", date: Date.new(1530)},
+{ slug: 'le_roy_ballard_tiers_livre_de_chansons', title: "Tiers Livre de chansons à quatre parties de Ja. Arcadet et autres.", date: Date.new(1567)}
 ])
 

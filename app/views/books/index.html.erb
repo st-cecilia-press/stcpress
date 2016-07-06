@@ -1,0 +1,11 @@
+<h1>Books#index</h1>
+<table class="table">
+    <tr><th>Title</th><th>Publication Date</th></tr>
+
+<% for @book in @books %>
+<tr>
+    <td><%= link_to @book.title, book_path(@book.slug) %></a></td>
+  <td><%=@book.date%></td>
+</tr>
+<% end %>
+</table>

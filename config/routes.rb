@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   resources :pieces, only: [:index] 
   get 'pieces/:repo/:slug' => 'pieces#show', as: 'piece'
+
+  resources :manuscripts, only: [:index]
   get 'manuscripts/:slug' => 'manuscripts#show', as: 'manuscript'
+
+  resources :books, only: [:index]
   get 'books/:slug' => 'books#show', as: 'book'
 
   # The priority is based upon order of creation: first created -> highest priority.

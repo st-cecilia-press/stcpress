@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706162836) do
+ActiveRecord::Schema.define(version: 20160706225322) do
 
   create_table "book_contents", force: :cascade do |t|
     t.integer  "piece_id"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20160706162836) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "images", force: :cascade do |t|
+    t.integer "book_content_id"
+    t.integer "manuscript_content_id"
+    t.string  "name"
+    t.string  "description"
+    t.string  "url"
+    t.string  "filename"
+  end
+
+  add_index "images", ["book_content_id"], name: "index_images_on_book_content_id"
+  add_index "images", ["manuscript_content_id"], name: "index_images_on_manuscript_content_id"
 
   create_table "manuscript_contents", force: :cascade do |t|
     t.integer  "manuscript_id"
@@ -70,5 +82,21 @@ ActiveRecord::Schema.define(version: 20160706162836) do
   end
 
   add_index "pieces", ["composer_id"], name: "index_pieces_on_composer_id"
+
+  create_table "song_voicings", force: :cascade do |t|
+    t.integer  "voicing_id"
+    t.integer  "piece_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "song_voicings", ["piece_id"], name: "index_song_voicings_on_piece_id"
+  add_index "song_voicings", ["voicing_id"], name: "index_song_voicings_on_voicing_id"
+
+  create_table "voicings", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

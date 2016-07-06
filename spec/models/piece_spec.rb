@@ -7,6 +7,9 @@ RSpec.describe Piece, type: :model do
   it { should have_many(:book_contents) }
   it { should have_many(:books).through(:book_contents)}
 
+  it { should have_many(:song_voicings) }
+  it { should have_many(:voicings).through(:song_voicings)}
+
   it { should belong_to(:composer) }
 end
 

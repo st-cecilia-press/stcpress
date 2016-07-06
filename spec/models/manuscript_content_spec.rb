@@ -2,6 +2,7 @@ require 'rails_helper'
 RSpec.describe ManuscriptContent, type: :model do
   it { should belong_to(:piece)}
   it { should belong_to(:manuscript)}
+  it { should have_many(:images)}
 end
 
 RSpec.describe ManuscriptContent, "validations" do

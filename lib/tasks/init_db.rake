@@ -20,6 +20,12 @@ namespace :init_db do
             mc.diamm = manuscript["diamm"] 
           end
         end
+        if metadata["books"]
+          metadata["books"].each do |book|
+            b = Book.find_by(title: book["title"])
+            bc = BookContent.create(piece: piece, book: b)
+          end
+        end
       end
 
     }

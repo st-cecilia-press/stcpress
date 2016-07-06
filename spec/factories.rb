@@ -12,6 +12,7 @@ FactoryGirl.define do
   end
   factory :manuscript do
     name "Blackcloak Manuscript"
+    slug "manuscript_slug"
   end
   factory :piece do
     title "My Piece"

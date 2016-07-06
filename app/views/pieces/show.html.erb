@@ -1,5 +1,21 @@
 <h1><%=@piece.title%></h1>
 <h2>By: <%=@piece.composer.name%></h2>
+<% if @piece.manuscripts.count > 0 %>
+<h2>Manuscripts</h2>
+<table class="table">
+<tr><th>Name</th><th>Archive</th><th>Shelfmark</th></tr>
+  <% @piece.manuscripts.each do |man| %>
+  <tr><td><%= man.name %></td><td><%= man.archive %></td><td><%= man.shelfmark %></td></tr>
+  <% end %>
+<% end %>
 
 
+<% if @piece.books.count > 0 %>
+<h2>Books</h2>
+<table class="table">
+<tr><th>Title</th><th>Date Published</th></tr>
+<% @piece.books.each do |book| %>
+<tr><td><%= book.title %></td><td><%= book.date %></td></tr>
+<% end %>
+<% end %>
 

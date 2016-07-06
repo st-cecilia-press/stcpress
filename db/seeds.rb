@@ -25,7 +25,7 @@ manuscripts = Manuscript.create([
 { name: 'GB-Occ MS 59', archive: 'Corpus Christi College [GB-Occ]', shelfmark: 'MS 59', diamm: 558, description: 'non-music MS with interpolated music , 13th century; provenance: England'}
 ])
 
-books = Books.create([
+books = Book.create([
 { title: "The First Set of English Madrigals to 3, 4, 5, and 6 Voices", date: 1604},
 { title: "Deuteromelia", date: 1609},
 { title: "Canzonette a Tre Voce", date: 1601},

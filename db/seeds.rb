@@ -41,7 +41,7 @@ books = Book.create([
 { slug: 'attaignant_37_chansons_musicales', title: "37 Chansons musicales a quatre parties", date: Date.new(1528)},
 { slug: 'morley_first_book_of_balletts', title: "The First book of Balletts to Five Voyces", date: Date.new(1595)},
 { slug: 'attaignant_51_galliards_pavans_bransles_and_basse_dances', title: "51 Galliards, Pavans, Bransles and Basse Dances", date: Date.new(1530)},
-{ slug: 'le_roy_ballard_tiers_livre_de_chansons', title: "Tiers Livre de chansons à quatre parties de Ja. Arcadet et autres.", date: Date.new(1567)}
+{ slug: 'le_roy_ballard_tiers_livre_de_chansons', title: "Tiers Livre de chansons à quatre parties de Ja. Arcadet et autres.", date: Date.new(1567)},
 { slug: 'orchesographie', title: "Orchesographie", date: Date.new(1589)}
 ])
 

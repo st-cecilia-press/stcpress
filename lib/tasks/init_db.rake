@@ -18,12 +18,34 @@ namespace :init_db do
             mc = ManuscriptContent.create(piece: piece, manuscript: m)
             mc.position = manuscript["position"] 
             mc.diamm = manuscript["diamm"] 
+            if manuscript["images"]
+              manuscript["images"].each do |image|
+                img = Image.create do |i|
+                  i.manuscript_content_id =  mc.id 
+                  i.url =  image["url"]  if image["url"]
+                  i.filename =  image["filename"] if image["filename"]
+                  i.name =  image["name"] if image["name"]
+                  i.description =  image["description"] if image["description"]
+                end
+              end
+            end
           end
         end
         if metadata["books"]
           metadata["books"].each do |book|
             b = Book.find_by(slug: book["slug"])
             bc = BookContent.create(piece: piece, book: b)
+            if book["images"]
+              book["images"].each do |image|
+                img = Image.create do |i|
+                  i.book_content_id =  bc.id 
+                  i.url =  image["url"]  if image["url"]
+                  i.filename =  image["filename"] if image["filename"]
+                  i.name =  image["name"] if image["name"]
+                  i.description =  image["description"] if image["description"]
+                end
+              end
+            end
           end
         end
       end

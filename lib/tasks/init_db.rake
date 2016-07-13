@@ -15,9 +15,7 @@ namespace :init_db do
         if metadata["manuscripts"]
           metadata["manuscripts"].each do |manuscript|
             m = Manuscript.find_by(name: manuscript["name"]) 
-            mc = ManuscriptContent.create(piece: piece, manuscript: m)
-            mc.position = manuscript["position"] 
-            mc.diamm = manuscript["diamm"] 
+            mc = ManuscriptContent.create(piece: piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
             if manuscript["images"]
               manuscript["images"].each do |image|
                 img = Image.create do |i|

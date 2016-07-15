@@ -45,6 +45,8 @@ books = Book.create([
 { slug: 'orchesographie', title: "Orchesographie", date: Date.new(1589)},
 { slug: 'morley_madrigals_to_4_voyces', title: "Madrigals to Foure Voyces", date: Date.new(1594)},
 { slug: 'petrucci_frottole_iii', title: "Frottolle Libro Tertio", date: Date.new(1504)},
-{ slug: 'attaignant_chansons_nouvelles_tiers_livre', title: "Tiers liure contenant xxix. Chansons NOVVELLES A QVATRE PARTIES", date: Date.new(1540)}
+{ slug: 'attaignant_chansons_nouvelles_tiers_livre', title: "Tiers liure contenant xxix. Chansons NOVVELLES A QVATRE PARTIES", date: Date.new(1540)},
+{ slug: 'gibbons_first_set_of_madrigals', title: "The First Set of Madrigals and Mottets of 5 Parts Newly Composed by Orlando Gibbons", date: Date.new(1612)},
+{ slug: 'lassus_libro_de_villanelle', title: "Libro de villanelle, moresche, ed altre canzoni", date: Date.new(1582)}
 ])
 

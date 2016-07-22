@@ -1,4 +1,5 @@
 <h1><%=@piece.title%> <small>By: <%=@piece.composer.name%></small></h1>
+<% directory = "/#{@piece.repo}/#{@piece.slug}" %>
 <% if @piece.manuscripts.count > 0 or @piece.books.count > 0 %>
 <h2>Published in:</h2>
 <% if @piece.manuscripts.count > 0 %>
@@ -32,3 +33,21 @@
 <% end %>
 
 <% end %>
+<h3>Editions</h3>
+<% @piece.editions.each do |edition| %>
+<a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:pdf]%>"><%=edition[:pdf]%></a><br>
+<a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:midi]%>"><%=edition[:midi]%></a><br>
+<% if edition[:parts] %>
+  <table class="table">
+  <tr><th>Part</th><th>Emphasized</th><th>Mute</th><th>Solo</th></tr>
+  <% parts = edition[:parts].sort_by{ |hsh| hsh[:order] } 
+      parts.each do |part|%> 
+  <tr><td><%=part[:name]%></td> 
+  <td><a href="<%=directory%>/<%=part[:emphasized][:midi]%>">midi</a>|<a href="<%=directory%>/<%=part[:emphasized][:mp3]%>">mp3</a></td>
+  <td><a href="<%=directory%>/<%=part[:mute][:midi]%>">midi</a>|<a href="<%=directory%>/<%=part[:mute][:mp3]%>">mp3</a></td>
+  <td><a href="<%=directory%>/<%=part[:solo][:midi]%>">midi</a>|<a href="<%=directory%>/<%=part[:solo][:mp3]%>">mp3</a></td>
+  <%end%>
+</table>
+  
+<%end %>
+<%end %>

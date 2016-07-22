@@ -32,6 +32,7 @@ namespace :init_db do
         if metadata["books"]
           metadata["books"].each do |book|
             b = Book.find_by(slug: book["slug"])
+            puts piece.title if b.nil? 
             bc = BookContent.create(piece: piece, book: b)
             if book["images"]
               book["images"].each do |image|

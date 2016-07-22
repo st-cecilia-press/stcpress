@@ -35,6 +35,7 @@ books = Book.create([
 { slug: 'willaert_motetti_novi_e_chanzoni_franciose', title: "Motetti novi e chanzoni franciose a quatro sopra doi", date: Date.new(1520)},
 { slug: 'ravenscroft_a_brief_discourse', title: "A Brief Discourse", date: Date.new(1614)},
 { slug: 'praetorius_musae_sione_ix', title: "Musae Sione IX", date: Date.new(1610)},
+{ slug: 'praetorius_musae_sione_vi', title: "Musae Sione VI", date: Date.new(1609)},
 { slug: 'ein_aussbund_schoner_teutscher_liedlein', title: "Ein außbund schöner Teutscher Liedlein zu singen, vnd auff allerley Jnstrument, zugebrauchen, sonderlich außerlesen", date: Date.new(1560)},
 { slug: 'arcadelt_il_primo_libro_di_madrigali', title: "Il primo libro di madrigali d'Archadelt a tre voci", date: Date.new(1542)},
 { slug: 'phalese_premier_livre_du_recueil_des_fleurs', title: "Premier Livre Dv Recveil Des Flevrs Prodvictes De La Divine Mvsicqve a Trois Parties De par Clemens non Papa Thomas Cricquillon & aultres excellens Musichiens", date: Date.new(1560)},
@@ -52,5 +53,9 @@ books = Book.create([
 { slug: 'bennet_madrigals_to_four_voices', title: "Madrigals to Four Voyces newly published by John Bennet", date: Date.new(1599)},
 { slug: 'ravenscroft_pammelia', title: "Pammelia", date: Date.new(1609)},
 { slug: 'byrd_gradualia', title: "Graudualia Cantiones Sacrae", date: Date.new(1610)},
+{ slug: 'attaignant_31_chansons_musicale', title: 'Trente et une Chansons Musicale', date: Date.new(1529) },
+{ slug: 'attaignant_chansons_vieilles_esleves_iii', title: "Tiers livre contenant xxx. Chansons vieilles esleves", date: Date.new(1538)},
+{ slug: 'morley_canzonettes_to_three_voyces_1606', title: "Canzonets to Three Voyces", date: Date.new(1606)},
+{ slug: 'morley_canzonettes_to_three_voyces_1606', title: "Canzonets to Three Voyces", date: Date.new(1606)}
 ])
 

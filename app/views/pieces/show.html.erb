@@ -1,4 +1,4 @@
-<h1><%=@piece.title%> <small>By: <%=@piece.composer.name%></small></h1>
+<h1><%=@piece.title%> <small>By: <a href="/composers/<%=@piece.composer.slug%>"><%=@piece.composer.name%></a></small></h1>
 <% directory = "/#{@piece.repo}/#{@piece.slug}" %>
 <% if @piece.manuscripts.count > 0 or @piece.books.count > 0 %>
 <h2>Published in:</h2>
@@ -21,7 +21,7 @@
 
 <% if @piece.books.count > 0 %>
 <% @piece.book_contents.each do |bc| %>
-    <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | Publication Date: <%= bc.book.date %><br/>
+    <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | Publication Year: <%= bc.book.date.strftime('%Y') %><br/>
     <% if bc.images.count > 0 %>
         <ul>
             <% bc.images.each do |img| %>

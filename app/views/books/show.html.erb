@@ -3,7 +3,7 @@
 <table class="table">
     <tr><th>Piece</th><th>Composer</th></tr>
     <% @book.pieces.each do |piece| %>
-        <tr><td><%= link_to piece.title, piece_path(piece.repo, piece.slug) %></td><td><%=piece.composer.name%></td></tr>
+        <tr><td><%= link_to piece.title, piece.url %></td><td><%=piece.composer.name%></td></tr>
 
     <% end %>
 </table>

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   resources :pieces, only: [:index] 
-  get 'pieces/:repo/:slug' => 'pieces#show', as: 'piece'
+  get 'pieces(/:repo)/:slug' => 'pieces#show', as: 'piece'
+  
+  resources :composers, only: [:index]
+  get 'composers/:name' => 'composers#show', as: 'composer'
 
   resources :manuscripts, only: [:index]
   get 'manuscripts/:slug' => 'manuscripts#show', as: 'manuscript'
@@ -9,6 +12,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index]
   get 'books/:slug' => 'books#show', as: 'book'
 
+  root 'home#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

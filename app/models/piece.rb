@@ -13,18 +13,20 @@ class Piece < ActiveRecord::Base
 
   def editions
     public_path = Rails.public_path.to_s 
-    Dir.chdir("#{public_path}/#{self.repo}/#{self.slug}")
-    basenames = Array.new
-    Dir.glob('*.pdf').each { |pdf|
-      basenames.push(pdf.split('.')[0])
-    }
+    directory = "#{public_path}/#{self.repo}/#{self.slug}"
     
+    basenames = Dir.glob("#{directory}/*.pdf").map do |pdf|
+      File.basename(pdf.split('.')[0])
+    end
+    
+    Dir.glob("#{directory}/*_mute.mid").empty? ? no_midi = true : no_midi = false
+
     my_editions = Array.new
-    my_parts = parts("#{public_path}/#{self.repo}/#{self.slug}/#{self.slug}.ly") unless Dir.glob('*_mute.mid').empty?
+    my_parts = parts("#{directory}/#{self.slug}.ly") unless  no_midi
     basenames.each { |basename|
-      unless Dir.glob('*_mute.mid').empty?
+      unless no_midi
         music = Array.new
-        my_parts.each  { |part|
+        my_parts.each  do |part|
           music.push(
             { order: part[:order],
               name: part[:name],
@@ -42,10 +44,10 @@ class Piece < ActiveRecord::Base
               },
             }
           ) 
-        } 
+        end
       end
       current_edition = { pdf: "#{basename}.pdf", midi: "#{basename}.mid"}
-      current_edition[:parts] = music unless Dir.glob('*_mute.mid').empty?
+      current_edition[:parts] = music unless no_midi
       my_editions.push(current_edition)
     }
     return my_editions 
@@ -65,5 +67,13 @@ class Piece < ActiveRecord::Base
     end  
     return my_parts      
     
+  end
+  def url
+    num_pieces = Piece.where(slug: self.slug).count
+    if num_pieces == 1
+      return "/pieces/#{self.slug}"
+    elsif num_pieces > 1
+      return "/pieces/#{self.repo}/#{self.slug}"
+    end
   end
 end

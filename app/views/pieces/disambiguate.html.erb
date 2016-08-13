@@ -1,0 +1,4 @@
+<h1><%=@pieces.first.slug%> Disambiguation</h1>
+<% @pieces.each do |piece| %>
+  <a href="/pieces/<%=piece.repo%>/<%=piece.slug%>"><%= piece.title %> by <%=piece.composer.name%></a><br>
+<% end %>

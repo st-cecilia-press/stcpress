@@ -1,8 +1,15 @@
 require 'rails_helper'
-RSpec.describe Piece, type: :model do
+RSpec.describe Composer, type: :model do
   it { should have_many(:pieces)}
 end
 
 RSpec.describe Composer, "validations" do
   it { is_expected.to validate_presence_of(:name) }
+end
+
+RSpec.describe Composer, "stub" do
+  it "returns appropriate stub link" do
+    composer = create(:composer, name: 'John Doe')
+    expect(composer.stub).to eq('John_Doe')
+  end
 end

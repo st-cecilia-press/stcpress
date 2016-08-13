@@ -17,6 +17,7 @@ FactoryGirl.define do
   end
   factory :book do
     title "Biggest Book of Chansons"
+    date Date.new(1600)
     sequence(:slug) { |n| "slug#{n}" }
   end
   factory :manuscript_content do
@@ -31,7 +32,7 @@ FactoryGirl.define do
     title "My Piece"
     composer
     repo "repo"
-    slug "page_slug"
+    slug "slug"
   end
   factory :composer do
     name "Josquin"

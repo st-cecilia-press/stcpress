@@ -1,2 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+  padding-top: 50px;
+}
+.base {
+  padding: 40px 15px;
+}

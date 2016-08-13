@@ -10,7 +10,7 @@ describe "GET /books" do
     expect(response).to have_http_status(:success)
     expect(response.body).to include("<a href=\"/books/#{book1.slug}\">#{book1.title}</a>")
     expect(response.body).to include("<a href=\"/books/#{book2.slug}\">#{book2.title}</a>")
-    expect(response.body).to include(book1.date.to_s)
-    expect(response.body).to include(book2.date.to_s)
+    expect(response.body).to include(book1.date.strftime('%Y'))
+    expect(response.body).to include(book2.date.strftime('%Y'))
   end
 end

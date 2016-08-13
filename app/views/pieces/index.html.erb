@@ -1,9 +1,21 @@
-<h1>Pieces#index</h1>
-<table>
+
+<h1>Pieces</h1>
+<table class="table">
+<thead>
+<tr><th>Title</th><th>Composer</th></tr>
+</thead>
+<tbody>
 <% for @piece in @pieces %>
 <tr>
-  <td><a href="/pieces/<%=@piece.repo%>/<%=@piece.slug%>"><%=@piece.title%></a></td>
-  <td><%=@piece.composer.name%></td>
+  <td><%= link_to @piece.title, @piece.url %></td>
+  <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
 </tr>
 <% end %>
+</tbody>
+
 </table>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('.table').DataTable({"pageLength": 100});
+} );
+</script>

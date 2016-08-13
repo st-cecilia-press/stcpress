@@ -1,0 +1,7 @@
+<h1><%=@composer.name%></h1>
+<ul>
+
+<% @composer.pieces.sort_by(&:title).each do |piece| %>
+  <li><%= link_to piece.title, piece.url %></li>
+<% end %>
+</ul>

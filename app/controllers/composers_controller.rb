@@ -1,6 +1,6 @@
 class ComposersController < ApplicationController
   def index
-    @composers = Composer.all
+    @composers = Composer.all.order(:name)
   end
 
   def show

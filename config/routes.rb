@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :books, only: [:index]
   get 'books/:slug' => 'books#show', as: 'book'
 
+  get 'contact' => 'contact#new'
+  post 'contact' => 'contact#create'
+
+  get 'about' => 'static_pages#about'
+
   root 'home#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

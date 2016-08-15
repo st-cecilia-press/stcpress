@@ -1,6 +1,6 @@
 <h1>Composers</h1>
 <ul>
 <% @composers.each do |composer| %>
-<li><a href="<%=composer.slug%>"><%=composer.name%></a></li>
+<li><%= link_to composer.name, "/composers/#{composer.slug}" %></li>
 <% end %>
 </ul>

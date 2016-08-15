@@ -26,7 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'bootstrap-sass'
-
+gem 'mail_form'
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
+gem 'recaptcha', require: 'recaptcha/rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

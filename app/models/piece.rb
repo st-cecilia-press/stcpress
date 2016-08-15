@@ -46,7 +46,7 @@ class Piece < ActiveRecord::Base
           ) 
         end
       end
-      current_edition = { pdf: "#{basename}.pdf", midi: "#{basename}.mid"}
+      current_edition = { pdf: "#{basename}.pdf", midi: "#{basename}.mid", mp3: "#{basename}.mp3"}
       current_edition[:parts] = music unless no_midi
       my_editions.push(current_edition)
     }

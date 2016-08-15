@@ -37,6 +37,7 @@
 <% @piece.editions.each do |edition| %>
 <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:pdf]%>"><%=edition[:pdf]%></a><br>
 <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:midi]%>"><%=edition[:midi]%></a><br>
+<a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:mp3]%>"><%=edition[:mp3]%></a><br>
 <% if edition[:parts] %>
   <table class="table">
   <tr><th>Part</th><th>Emphasized</th><th>Mute</th><th>Solo</th></tr>

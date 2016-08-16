@@ -80,6 +80,7 @@ namespace :puma do
 end
 
 namespace :deploy do
+
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
@@ -106,7 +107,19 @@ namespace :deploy do
     end
   end
 
+  desc 'Generate db data'
+  task :init_db do
+    on primary fetch(:migration_role) do
+      within release_path do
+        with rails_env: fetch(:rails_env)  do
+          execute :rake, 'init_db:all'
+        end
+      end
+    end
+  end
+
   before :starting,     :check_revision
+  before :finishing,    :init_db
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 

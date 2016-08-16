@@ -245,6 +245,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mail_form
+  puma
   rails (= 4.2.5)
   rails-assets-datatables!
   recaptcha

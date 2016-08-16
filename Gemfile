@@ -43,6 +43,7 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'puma'
 group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-puma'

@@ -1,0 +1,27 @@
+---
+title: Margot Labourez Les Vignes
+composer: Jacques Arcadelt
+voicings:
+- SATB
+- STTB
+books:
+- slug: 'le_roy_ballard_tiers_livre_de_chansons'
+  images:
+  - url: http://gallica.bnf.fr/ark:/12148/btv1b8562464w/f32.highres
+    filename: margot_sop_hires.jpg
+    name: Hi Res version of Soparno Part
+    description:
+  - url: https://repository.royalholloway.ac.uk/file/13da21c9-6864-b0f8-115c-3dcb320f7665/1/K11e3_3_complete_file_for_printing.pdf
+    filename: margot_sop.png
+    name: Facsimile of Soprano Part of Margot
+    description: On Page 15 of Linked PDF
+  - url: https://repository.royalholloway.ac.uk/file/13da21c9-6864-b0f8-115c-3dcb320f7665/1/K11e3_3_complete_file_for_printing.pdf
+    filename: margot_tenor.png
+    name: Facsimile of Tenor Part of Margot
+    description: On Page 32 of Linked PDF
+  - url: https://repository.royalholloway.ac.uk/file/13da21c9-6864-b0f8-115c-3dcb320f7665/1/K11e3_3_complete_file_for_printing.pdf
+    filename: margot_bassus.png
+    name: Facsimile of Bassus Part of Margot
+    description: On Page 49 of Linked PDF
+  
+notes: 'Original only has first and second verse. Comes from a larger poem. see: http://ticri.univ-lorraine.fr/wicri-lor.fr/index.php/Margot_labourez_les_vignes'

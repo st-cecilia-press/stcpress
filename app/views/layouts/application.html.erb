@@ -51,7 +51,13 @@
       <div class ="base">
 <%= yield %>
 </div>
-    </div>
+   </div>
+    <footer class="footer">
+      <div class="container">
+     <%= link_to image_tag( 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png', height: "40px", class: "pull-right", style:"margin-top:10px"), 'https://creativecommons.org/licenses/by/4.0/' %>
+        <p class="text-muted">All music editions © Monique Rio. <br/>Permission granted for use with attribution. (CC BY 4.0) </p> 
+      </div>
+    </footer>
 
 </body>
 </html>

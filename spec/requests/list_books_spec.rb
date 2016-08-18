@@ -13,4 +13,17 @@ describe "GET /books" do
     expect(response.body).to include(book1.date.strftime('%Y'))
     expect(response.body).to include(book2.date.strftime('%Y'))
   end
+  it "shows composers in book" do
+    book = create(:book, date: Date.new(1585))
+    composer1 = create(:composer)
+    composer2 = create(:composer, name: 'Composer Composerson')
+    piece1 = create(:piece, composer: composer1)
+    piece2 = create(:piece, composer: composer2)
+    bc1 = create(:book_content, piece: piece1, book: book)
+    bc2 = create(:book_content, piece: piece2, book: book)
+
+    get '/books'
+    expect(response.body).to include(composer1.name)
+    expect(response.body).to include(composer2.name)
+  end
 end

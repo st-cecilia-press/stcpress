@@ -1,11 +1,22 @@
 <h1>Books</h1>
 <table class="table">
-    <tr><th>Title</th><th>Publication Date</th></tr>
+<thead>
+    <tr><th>Title</th><th>Composers</th><th>Publication Date</th></tr>
+</thead>
+<tbody>
 
 <% for @book in @books %>
+  <% composers = @book.pieces.map { |p| p.composer}.uniq %>
 <tr>
     <td><%= link_to @book.title, book_path(@book.slug) %></a></td>
+    <td><%= render partial: 'composer', collection: composers, spacer_template: 'shared/comma'%></td>
   <td><%=@book.date.strftime('%Y')%></td>
 </tr>
 <% end %>
+</tbody>
 </table>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('.table').DataTable({"pageLength": 100, "order": [1, 'asc']});
+} );
+</script>

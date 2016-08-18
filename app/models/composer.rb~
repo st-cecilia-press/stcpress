@@ -6,4 +6,8 @@ class Composer < ActiveRecord::Base
   def slug
     return self.name.tr(' ', '_')
   end  
+
+  def url
+    return "/composers/#{self.slug}"
+  end
 end

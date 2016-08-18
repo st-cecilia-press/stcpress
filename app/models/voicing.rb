@@ -4,3 +4,7 @@ class Voicing < ActiveRecord::Base
 
   validates :name, presence: true
 end
+public
+def weigh_voicing
+  return self.name.gsub('S','1').gsub('A','2').gsub('T','3').gsub('B','4')
+end

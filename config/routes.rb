@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :pieces, only: [:index] 
+  resources :pieces, only: [:index] do
+  end
+  get 'pieces/voicings' => 'voicings#index'
+  get 'pieces/voicings/:voicing' => 'voicings#show'
   get 'pieces(/:repo)/:slug' => 'pieces#show', as: 'piece'
   
   resources :composers, only: [:index]

@@ -1,0 +1,9 @@
+<h1>Voicings</h1>
+<ul>
+<% @number_of_voices.each do |v| %>
+  <li><%= link_to v, "/pieces/voicings/#{v}" %></li>
+<% end %>
+<% @voicings.each do |v| %>
+  <li><%= link_to v.name, "/pieces/voicings/#{v.name}" %></li>
+<% end %>
+</ul>

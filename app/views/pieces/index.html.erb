@@ -2,13 +2,15 @@
 <h1>Pieces</h1>
 <table class="table">
 <thead>
-<tr><th>Title</th><th>Composer</th></tr>
+<tr><th>Title</th><th>Composer</th><th>Number of Parts</th><th>Voicings</th></tr>
 </thead>
 <tbody>
 <% for @piece in @pieces %>
 <tr>
   <td><%= link_to @piece.title, @piece.url %></td>
   <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
+  <td><%= @piece.voicings.exists? ? @piece.voicings.first.name.length : 0 %></td>
+  <td><%= render partial: 'voicing', collection: @piece.voicings, spacer_template: 'shared/comma' %></td>
 </tr>
 <% end %>
 </tbody>

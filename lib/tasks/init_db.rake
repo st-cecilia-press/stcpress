@@ -12,6 +12,10 @@ namespace :init_db do
           p.slug = slug
           p.repo = 'miscellaneous'
         end
+        metadata['voicings'].each do |voicing|
+          v = Voicing.find_or_create_by(name: voicing) 
+          sv = SongVoicing.create(piece: piece, voicing: v) 
+        end
         if metadata["manuscripts"]
           metadata["manuscripts"].each do |manuscript|
             m = Manuscript.find_by(name: manuscript["name"]) 

@@ -39,6 +39,20 @@ describe "GET /pieces/repo/piece" do
     expect(response.body).to include(piece.title)
     expect(response.body).to include(book.title)
   end
+  it "shows voicings and number of voices" do
+    piece = create(:piece)
+    voicing = create(:voicing, name: 'SATB')
+    voicing2 = create(:voicing, name: 'STTB')
+    sv1 = create(:song_voicing, piece: piece, voicing: voicing)
+    sv2 = create(:song_voicing, piece: piece, voicing: voicing2)
+
+    get "/pieces/#{piece.repo}/#{piece.slug}"
+    
+    expect(response.body).to include('SATB')
+    expect(response.body).to include('STTB')
+    expect(response.body).to include('4')
+    
+  end
 end
 
 describe "Get /pieces/piece" do

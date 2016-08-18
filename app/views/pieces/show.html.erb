@@ -1,70 +1,73 @@
 <h1><%=@piece.title%> <small>By: <a href="/composers/<%=@piece.composer.slug%>"><%=@piece.composer.name%></a></small></h1>
-<% directory = "/#{@piece.repo}/#{@piece.slug}" %>
-<% if @piece.manuscripts.count > 0 or @piece.books.count > 0 %>
-<h2>Published in:</h2>
-<% if @piece.manuscripts.count > 0 %>
-    
-  <% @piece.manuscript_contents.each do |mc| %>
-      <%= link_to mc.manuscript.name, manuscript_path(slug: mc.manuscript.slug) %><br/>
-      <b>Archive:</b> <%= mc.manuscript.archive %> <b>Shelfmark:</b> <%= mc.manuscript.shelfmark %> 
-  <b>Position in Manuscript:</b> <%= mc.position %> <br/>
-
-      <% if mc.images.count > 0 %>
-          <ul>
-        <% mc.images.each do |img| %>
-            <li><a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=img.filename%>"><%=img.name%></a> | <a href="<%=img.url%>">Source</a> <% if img.description %> | <%= img.description %><% end %></li>
-        <% end %>
-          </ul>
-      <% end %>
-  <% end %>
-<% end %>
-
-<% if @piece.books.count > 0 %>
-<% @piece.book_contents.each do |bc| %>
-    <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | Publication Year: <%= bc.book.date.strftime('%Y') %><br/>
-    <% if bc.images.count > 0 %>
-        <ul>
-            <% bc.images.each do |img| %>
-            <li><a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=img.filename%>"><%=img.name%></a> | <a href="<%=img.url%>">Source</a> <% if img.description %> | <%= img.description %><% end %></li>
-            <% end %>
-        </ul>
-    <% end %>
-<% end %>
-<% end %>
-
-<% end %>
 <h3>Editions</h3>
 <% editions = @piece.editions.sort { |left, right| left[:pdf].chomp('.pdf') <=> right[:pdf].chomp('.pdf')} %>
 <% editions.each do |edition| %>
-<% if edition[:pdf] =~ /-transposed/ %>
-<h4>Transposed Edition 
-<% else %>
-<h4>Original Key Edition 
-<% end %>
- <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
- <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
-</a>
- <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
- <i class="fa fa-music" aria-hidden="true"></i> MIDI
-</a>
- <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:mp3]%>" class="btn btn-default btn-md">
- <i class="fa fa-volume-up" aria-hidden="true"></i> MP3
-</a></h4>
-<% if edition[:parts] %>
-  <h5 > Practice MIDIs and MP3s </h5>
-  <table class="table">
-  <tr><th>Part</th><th>Emphasized</th><th>Mute</th><th>Solo</th></tr>
-  <% parts = edition[:parts].sort_by{ |hsh| hsh[:order] } 
+  <% if edition[:pdf] =~ /-transposed/ %>
+    <h4>Transposed Edition 
+  <% else %>
+    <h4>Original Key Edition 
+  <% end %>
+   <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
+   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+  </a>
+   <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
+   <i class="fa fa-music" aria-hidden="true"></i> MIDI
+  </a>
+   <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:mp3]%>" class="btn btn-default btn-md">
+   <i class="fa fa-volume-up" aria-hidden="true"></i> MP3
+  </a></h4>
+  <% if edition[:parts] %>
+    <% directory = "/#{@piece.repo}/#{@piece.slug}" %>
+    <h5 > Practice MIDIs and MP3s </h5>
+    <table class="table">
+    <tr><th>Part</th><th>Emphasized</th><th>Mute</th><th>Solo</th></tr>
+    <%parts = edition[:parts].sort_by{ |hsh| hsh[:order] } 
       parts.each do |part|%> 
-  <tr><td><%=part[:name].capitalize%></td> 
-  <td><%= render "midi_button", url: "#{directory}/#{part[:emphasized][:midi]}"%><%= render "mp3_button", url: "#{directory}/#{part[:emphasized][:mp3]}"%></td>
-  <td><%= render "midi_button", url: "#{directory}/#{part[:mute][:midi]}"%><%= render "mp3_button", url: "#{directory}/#{part[:mute][:mp3]}"%></td>
-  <td><%= render "midi_button", url: "#{directory}/#{part[:solo][:midi]}"%><%= render "mp3_button", url: "#{directory}/#{part[:solo][:mp3]}"%></td>
-  <%end%>
-</table>
+        <tr><td><%=part[:name].capitalize%></td> 
+        <td><%= render "midi_button", url: "#{directory}/#{part[:emphasized][:midi]}"%><%= render "mp3_button", url: "#{directory}/#{part[:emphasized][:mp3]}"%></td>
+        <td><%= render "midi_button", url: "#{directory}/#{part[:mute][:midi]}"%><%= render "mp3_button", url: "#{directory}/#{part[:mute][:mp3]}"%></td>
+        <td><%= render "midi_button", url: "#{directory}/#{part[:solo][:midi]}"%><%= render "mp3_button", url: "#{directory}/#{part[:solo][:mp3]}"%></td>
+    <%end%>
+    </table>
 
-<% if editions.index(edition) + 1 < editions.count %>
- <hr>
-<%end%>
+    <% if editions.index(edition) + 1 < editions.count %>
+     <hr>
+    <%end%>
+  <%end %>
 <%end %>
-<%end %>
+<h2>Info</h2>
+<b>Number of Voices</b>: <%= @piece.voicings.exists? ? @piece.voicings.first.name.length : 0 %><br>
+<b>Voicings</b>: <%= render partial: 'voicing', collection: @piece.voicings, spacer_template: 'shared/comma' %>
+<% if @piece.manuscripts.count > 0 or @piece.books.count > 0 %>
+  <h3>Published in</h3>
+  <% if @piece.manuscripts.count > 0 %>
+      
+    <% @piece.manuscript_contents.each do |mc| %>
+        <%= link_to mc.manuscript.name, manuscript_path(slug: mc.manuscript.slug) %><br/>
+        <b>Archive:</b> <%= mc.manuscript.archive %> <b>Shelfmark:</b> <%= mc.manuscript.shelfmark %> 
+    <b>Position in Manuscript:</b> <%= mc.position %> <br/>
+  
+        <% if mc.images.count > 0 %>
+            <ul>
+          <% mc.images.each do |img| %>
+              <li><a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=img.filename%>"><%=img.name%></a> | <a href="<%=img.url%>">Source</a> <% if img.description %> | <%= img.description %><% end %></li>
+          <% end %>
+            </ul>
+        <% end %>
+    <% end %>
+  <% end %>
+  
+  <% if @piece.books.count > 0 %>
+    <% @piece.book_contents.each do |bc| %>
+      <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | Publication Year: <%= bc.book.date.strftime('%Y') %><br/>
+      <% if bc.images.count > 0 %>
+          <ul>
+              <% bc.images.each do |img| %>
+              <li><a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=img.filename%>"><%=img.name%></a> | <a href="<%=img.url%>">Source</a> <% if img.description %> | <%= img.description %><% end %></li>
+              <% end %>
+          </ul>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<% end %>

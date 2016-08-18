@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 
+gem 'pdf-reader'
+gem "font-awesome-rails"
 gem 'bootstrap-sass'
 gem 'mail_form'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'

@@ -2,7 +2,7 @@ require 'yaml'
 namespace :init_db do
   task :miscellaneous => :environment do
     Dir.chdir('public/miscellaneous'){|p|
-      directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test"}
+      directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
       directories.each do |slug|
         metadata = YAML.load_file("#{slug}/metadata.yaml")
         c = Composer.find_or_create_by(name: metadata['composer'])

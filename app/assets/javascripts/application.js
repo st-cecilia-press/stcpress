@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require datatables
+//= require twitter/typeahead.min
 //= require_tree .

@@ -229,6 +229,10 @@ GEM
     ttfunk (1.4.0)
     turbolinks (2.5.3)
       coffee-rails
+    twitter-typeahead-rails (0.11.1)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -272,6 +276,7 @@ DEPENDENCIES
   sqlite3
   therubyracer
   turbolinks
+  twitter-typeahead-rails
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 

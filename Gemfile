@@ -31,6 +31,7 @@ gem 'bootstrap-sass'
 gem 'mail_form'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'twitter-typeahead-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

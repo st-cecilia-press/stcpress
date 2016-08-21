@@ -1,5 +1,44 @@
 require 'yaml'
+require 'find'
 namespace :init_db do
+  task :gervaise_quart => :environment do
+    Dir.chdir('public/gervaise_quart_livre_de_danceries'){ |p|
+      metadata = YAML.load_file('metadata.yaml')
+      composer = Composer.find_or_create_by(name: metadata['composer'])
+      directories = Dir.glob('*').select {|f| File.directory? f and f != "include"}
+      #book = Book.create do |b|
+      #  b.slug = 'gervaise_quart_livre_de_danceries'
+      #  b.title = metadata['title']
+      #  b.date = Date.new(metadata['date'])
+      #end
+      directories.each do |slug|
+        title = slug.gsub(/_\d_/,'_').gsub('_',' ').split.map { |i| i.capitalize }.join(' ')
+        puts title
+        #piece = Piece.create do |p|
+        #  p.title = title
+        #  p.composer = composer
+        #  p.slug = slug
+        #  p.repo = 'gervaise_quart_livre_de_danceries'
+        #end
+        #bc = BookContent.create(piece: piece, book: book)
+        image_paths = []
+        Find.find("./#{slug}") do |path|
+          image_paths << path if path =~ /.*\.png$/
+        end
+        image_paths.each do |image|
+          num = image.match(/(\d)+.png$/)[1] 
+          name = "Facsimile of #{title}"
+          name = "#{name} pg #{num}" unless num.nil?
+          puts name
+        #  img = Image.create do |i|
+        #    i.book_content_id =  bc.id 
+        #    i.filename = image
+        #    i.name = name
+        #  end
+        end
+      end
+    }
+  end
   task :miscellaneous => :environment do
     Dir.chdir('public/miscellaneous'){|p|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}

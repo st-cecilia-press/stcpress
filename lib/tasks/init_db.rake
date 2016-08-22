@@ -26,7 +26,7 @@ namespace :init_db do
         bc = BookContent.create(piece: my_piece, book: book)
         image_paths = []
         Find.find("./#{piece["slug"]}") do |path|
-          image_paths << path if path =~ /.*\.png$/
+          image_paths << File.basename(path) if path =~ /.*\.png$/
         end
         image_paths.each do |image|
           num = image.match(/(\d)+.png$/)[1] if image.match(/(\d)+.png$/)
@@ -36,6 +36,7 @@ namespace :init_db do
             i.book_content_id =  bc.id 
             i.filename = image
             i.name = name
+            i.url = '/gervaise_quart_livre_de_danceries/IMSLP168106-PMLP299254-Quart-Livre-de-Danceries-Claude-Gervaise.pdf'
           end
         end
       end

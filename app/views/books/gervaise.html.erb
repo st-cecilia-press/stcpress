@@ -1,0 +1,22 @@
+<% path = '/gervaise_quart_livre_de_danceries'%>
+<h1><%=@book.title%> <small><%= render partial: 'composer', collection: @composers, spacer_template: 'shared/comma'%></small></h1>
+<h2>Editions</h3>
+<h3>Modern Clef Editions</h3>
+<% @compilations["modern"].each do |modern| %>
+  <%=modern['title']%> <a href="<%=path%>/<%=modern['filename']%>" class="btn btn-default btn-md">
+   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+  </a></br>
+<% end %>
+<h3>Original Clef Editions</h3>
+<% @compilations['original'].each do |original| %>
+  <%=original['title']%> <a href="<%=path%>/<%=original['filename']%>" class="btn btn-default btn-md">
+   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+  </a></br>
+<% end %>
+ <h2> Individual Pieces </h2> 
+<table class="table">
+    <tr><th>Piece</th><th>Composer</th></tr>
+    <% @book.pieces.each do |piece| %>
+        <tr><td><%= link_to piece.title, piece.url %></td><td><%=piece.composer.name%></td></tr>
+    <% end %>
+</table>

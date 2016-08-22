@@ -83,7 +83,7 @@ describe "Get /pieces/piece" do
       FileUtils.rm_r "#{@public_path}/repo2" 
     end
     it "shows disambiguation page with both pieces" do
-      piece = create(:piece, slug: "slug")
+      piece = create(:piece, repo: 'repo', slug: "slug")
       piece2 = create(:piece, repo: "repo2", slug: "slug")
       get "/pieces/slug"
       expect(response).to have_http_status(:success)
@@ -91,4 +91,26 @@ describe "Get /pieces/piece" do
       expect(response.body).to include(piece2.repo)
     end
   end
+end
+
+describe "Get /pieces/slug where repo is 'gervaise_quart_livre_de_danceries'" do
+  before(:each) do
+    @gervaise = 'gervaise_quart_livre_de_danceries'
+    @public_path = Rails.public_path.to_s
+    Dir.mkdir("#{@public_path}/#{@gervaise}/slug")
+    @path = "#{@public_path}/#{@gervaise}/slug"
+  end
+  after(:each) do
+    FileUtils.rm_r "#{@public_path}/#{@gervaise}/slug" 
+  end
+  it "Shows Original Clef and Modern Clef Options. Does not show Mp3" do
+      piece = create(:piece, slug: "slug", repo: @gervaise)
+      `touch #{@public_path}/#{@gervaise}/slug/slug_modern.pdf`
+      `touch #{@public_path}/#{@gervaise}/slug/slug_orig.pdf`
+      get "/pieces/slug"
+      expect(response.body).to include('Original Clefs')
+      expect(response.body).to include('Modern Clefs')
+      expect(response.body).not_to include('MP3')
+  end
+  
 end

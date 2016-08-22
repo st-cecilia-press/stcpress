@@ -1,0 +1,30 @@
+<h1><%=@piece.title%> <small>By: <a href="/composers/<%=@piece.composer.slug%>"><%=@piece.composer.name%></a></small></h1>
+<h3>Editions</h3>
+<% editions = @piece.editions.sort { |left, right| left[:pdf].chomp('.pdf') <=> right[:pdf].chomp('.pdf')} %>
+<% editions.each do |edition| %>
+  <% if edition[:pdf] =~ /_modern/ %>
+    <h4>Modern Clefs Edition 
+  <% elsif edition[:pdf] =~ /_orig/ %>
+    <h4>Original Clefs Edition 
+  <% end %>
+   <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
+   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+  </a>
+   <a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
+   <i class="fa fa-music" aria-hidden="true"></i> MIDI
+  </a>
+<% end %>
+<h2>Info</h2>
+<b>Number of Voices</b>: <%= @piece.voicings.exists? ? @piece.voicings.first.name.length : 0 %><br>
+<b>Voicings</b>: <%= render partial: 'voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %>
+<h3>Published in</h3>
+<% @piece.book_contents.each do |bc| %>
+  <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | Publication Year: <%= bc.book.date.strftime('%Y') %><br/>
+  <% if bc.images.count > 0 %>
+      <ul>
+          <% bc.images.each do |img| %>
+          <li><a href="/<%=@piece.repo%>/<%=@piece.slug%>/<%=img.filename%>"><%=img.name%></a> | <a href="<%=img.url%>">Source</a> <% if img.description %> | <%= img.description %><% end %></li>
+          <% end %>
+      </ul>
+  <% end %>
+<% end %>

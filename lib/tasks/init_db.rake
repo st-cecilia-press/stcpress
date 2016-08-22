@@ -5,36 +5,38 @@ namespace :init_db do
     Dir.chdir('public/gervaise_quart_livre_de_danceries'){ |p|
       metadata = YAML.load_file('metadata.yaml')
       composer = Composer.find_or_create_by(name: metadata['composer'])
-      directories = Dir.glob('*').select {|f| File.directory? f and f != "include"}
-      #book = Book.create do |b|
-      #  b.slug = 'gervaise_quart_livre_de_danceries'
-      #  b.title = metadata['title']
-      #  b.date = Date.new(metadata['date'])
-      #end
-      directories.each do |slug|
-        title = slug.gsub(/_\d_/,'_').gsub('_',' ').split.map { |i| i.capitalize }.join(' ')
-        puts title
-        #piece = Piece.create do |p|
-        #  p.title = title
-        #  p.composer = composer
-        #  p.slug = slug
-        #  p.repo = 'gervaise_quart_livre_de_danceries'
-        #end
-        #bc = BookContent.create(piece: piece, book: book)
+      book = Book.create do |b|
+        b.slug = 'gervaise_quart_livre_de_danceries'
+        b.title = metadata['title']
+        b.date = Date.new(metadata['date'])
+      end
+      metadata["pieces"].each do |piece|
+        title = piece["slug"].gsub(/_\d_/,'_').gsub('_',' ').split.map { |i| i.capitalize }.join(' ')
+        title = "#{title}: #{piece["title"]}" if piece["title"]
+        my_piece = Piece.create do |p|
+          p.title = title
+          p.composer = composer
+          p.slug = piece["slug"]
+          p.repo = 'gervaise_quart_livre_de_danceries'
+        end
+        piece['voicings'].each do |voicing|
+          v = Voicing.find_or_create_by(name: voicing) 
+          sv = SongVoicing.create(piece: my_piece, voicing: v) 
+        end
+        bc = BookContent.create(piece: my_piece, book: book)
         image_paths = []
-        Find.find("./#{slug}") do |path|
+        Find.find("./#{piece["slug"]}") do |path|
           image_paths << path if path =~ /.*\.png$/
         end
         image_paths.each do |image|
-          num = image.match(/(\d)+.png$/)[1] 
+          num = image.match(/(\d)+.png$/)[1] if image.match(/(\d)+.png$/)
           name = "Facsimile of #{title}"
           name = "#{name} pg #{num}" unless num.nil?
-          puts name
-        #  img = Image.create do |i|
-        #    i.book_content_id =  bc.id 
-        #    i.filename = image
-        #    i.name = name
-        #  end
+          img = Image.create do |i|
+            i.book_content_id =  bc.id 
+            i.filename = image
+            i.name = name
+          end
         end
       end
     }
@@ -101,5 +103,5 @@ namespace :init_db do
     Rake::Task['db:seed'].invoke 
   end
   
-  task :all => [:db_reset, :miscellaneous]
+  task :all => [:db_reset, :miscellaneous, :gervaise_quart]
 end

@@ -11,6 +11,7 @@ namespace :init_db do
         b.date = Date.new(metadata['date'])
       end
       metadata["pieces"].each do |piece|
+        puts piece["slug"]
         title = piece["slug"].gsub(/_\d_/,'_').gsub('_',' ').split.map { |i| i.capitalize }.join(' ')
         title = "#{title}: #{piece["title"]}" if piece["title"]
         my_piece = Piece.create do |p|
@@ -46,6 +47,7 @@ namespace :init_db do
     Dir.chdir('public/miscellaneous'){|p|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
       directories.each do |slug|
+        puts slug
         metadata = YAML.load_file("#{slug}/metadata.yaml")
         c = Composer.find_or_create_by(name: metadata['composer'])
         piece = Piece.create do |p|

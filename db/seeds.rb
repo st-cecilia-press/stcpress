@@ -55,7 +55,7 @@ books = Book.create([
 { slug: 'byrd_gradualia', title: "Graudualia Cantiones Sacrae", date: Date.new(1610)},
 { slug: 'attaignant_31_chansons_musicale', title: 'Trente et une Chansons Musicale', date: Date.new(1529) },
 { slug: 'attaignant_chansons_vieilles_esleves_iii', title: "Tiers livre contenant xxx. Chansons vieilles esleves", date: Date.new(1538)},
-{ slug: 'morley_canzonettes_to_three_voyces_1606', title: "Canzonets to Three Voyces", date: Date.new(1606)},
+{ slug: 'azzaiolo_primo_libro_de_viollotte', title: "Il Primo Libro de Villotte alla Padoana con alcune Napolitane a quatro voci intitolate Villotte del fiore", date: Date.new(1564)},
 { slug: 'morley_canzonettes_to_three_voyces_1606', title: "Canzonets to Three Voyces", date: Date.new(1606)}
 ])
 

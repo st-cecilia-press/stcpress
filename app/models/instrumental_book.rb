@@ -1,0 +1,1 @@
+class InstrumentalBook < Repository; end

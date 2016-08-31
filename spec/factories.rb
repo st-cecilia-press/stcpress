@@ -1,4 +1,17 @@
 FactoryGirl.define do
+  factory :publicationship do
+    piece 
+    repository 
+  end
+  factory :instrumental_book do
+    name "repo"
+  end
+  factory :individual_pieces do
+    name "repo"
+  end
+  factory :repository do
+    name "myRepo"
+  end
   factory :song_voicing do
     voicing 
     piece 
@@ -31,7 +44,6 @@ FactoryGirl.define do
   factory :piece do
     title "My Piece"
     composer
-    repo "repo"
     slug "slug"
   end
   factory :composer do

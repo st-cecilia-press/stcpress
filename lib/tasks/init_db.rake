@@ -2,6 +2,9 @@ require 'yaml'
 require 'find'
 namespace :init_db do
   task :gervaise_quart => :environment do
+    r = InstrumentalBook.create do |r|
+      r.name = 'gervaise_quart_livre_de_danceries'
+    end
     Dir.chdir('public/gervaise_quart_livre_de_danceries'){ |p|
       metadata = YAML.load_file('metadata.yaml')
       composer = Composer.find_or_create_by(name: metadata['composer'])
@@ -10,6 +13,7 @@ namespace :init_db do
         b.title = metadata['title']
         b.date = Date.new(metadata['date'])
       end
+      
       metadata["pieces"].each do |piece|
         puts piece["slug"]
         title = piece["slug"].gsub(/_\d_/,'_').gsub('_',' ').split.map { |i| i.capitalize }.join(' ')
@@ -17,13 +21,13 @@ namespace :init_db do
         my_piece = Piece.create do |p|
           p.title = title
           p.composer = composer
-          p.slug = piece["slug"]
-          p.repo = 'gervaise_quart_livre_de_danceries'
+          p.slug = piece["slug"] + '_gervaise_quart'
         end
         piece['voicings'].each do |voicing|
           v = Voicing.find_or_create_by(name: voicing) 
           sv = SongVoicing.create(piece: my_piece, voicing: v) 
         end
+        publicationship = Publicationship.create(piece: my_piece, repository: r)
         bc = BookContent.create(piece: my_piece, book: book)
         image_paths = []
         Find.find("./#{piece["slug"]}") do |path|
@@ -44,6 +48,9 @@ namespace :init_db do
     }
   end
   task :miscellaneous => :environment do
+    r = IndividualPieces.create do |r|
+      r.name = 'miscellaneous'
+    end
     Dir.chdir('public/miscellaneous'){|p|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
       directories.each do |slug|
@@ -54,12 +61,12 @@ namespace :init_db do
           p.title = metadata['title']
           p.composer = c
           p.slug = slug
-          p.repo = 'miscellaneous'
         end
         metadata['voicings'].each do |voicing|
           v = Voicing.find_or_create_by(name: voicing) 
           sv = SongVoicing.create(piece: piece, voicing: v) 
         end
+        publicationship = Publicationship.create(piece: piece, repository: r)
         if metadata["manuscripts"]
           metadata["manuscripts"].each do |manuscript|
             m = Manuscript.find_by(name: manuscript["name"]) 

@@ -30,6 +30,7 @@ books = Book.create([
 { slug: 'ravenscroft_deuteromelia', title: "Deuteromelia", date: Date.new(1609)},
 { slug: 'croce_canzonette_a_tre_voce', title: "Canzonette a Tre Voce", date: Date.new(1601)},
 { slug: 'dowland_first_book_of_songs', title: "First Book of Songs or Ayres", date: Date.new(1597)},
+{ slug: 'dowland_second_book_of_songs', title: "Second Book of Songs or Ayres", date: Date.new(1600)},
 { slug: 'lassus_tiers_livre_des_chansons', title: "TIERS LIVRE DES CHANSONS A QVATRE CINCQ ET six parties, nouuellement composées par Orlando di Lassus", date: Date.new(1566)},
 { slug: 'youll_canzonets_to_three_voyces', title: "Canzonets to three voyces", date: Date.new(1608)},
 { slug: 'willaert_motetti_novi_e_chanzoni_franciose', title: "Motetti novi e chanzoni franciose a quatro sopra doi", date: Date.new(1520)},

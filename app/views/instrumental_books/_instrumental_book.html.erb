@@ -1,0 +1,14 @@
+<% editions = instrumental_book.editions(@piece).sort { |left, right| left[:pdf].chomp('.pdf') <=> right[:pdf].chomp('.pdf')} %>
+<% editions.each do |edition| %>
+  <% if edition[:pdf] =~ /_modern/ %>
+    <h4>Modern Clefs Edition 
+  <% elsif edition[:pdf] =~ /_orig/ %>
+    <h4>Original Clefs Edition 
+  <% end %>
+   <a href="/<%=instrumental_book.name%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
+   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+  </a>
+   <a href="/<%=instrumental_book.name%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
+   <i class="fa fa-music" aria-hidden="true"></i> MIDI
+  </a>
+<% end %>

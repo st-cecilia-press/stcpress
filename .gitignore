@@ -1,5 +1,6 @@
 #cecilia ignore
 /public/
+/storage/
 #Related to getting email to work
 .env
 Procfile

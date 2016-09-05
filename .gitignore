@@ -1,6 +1,7 @@
 #cecilia ignore
 /public/
 /storage/
+.byebug_history
 #Related to getting email to work
 .env
 Procfile

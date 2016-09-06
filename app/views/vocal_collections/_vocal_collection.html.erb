@@ -1,22 +1,22 @@
 
-<% editions = individual_pieces.editions(@piece).sort { |left, right| left[:pdf].chomp('.pdf') <=> right[:pdf].chomp('.pdf')} %>
+<% editions = vocal_collection.editions(@piece).sort { |left, right| left[:pdf].chomp('.pdf') <=> right[:pdf].chomp('.pdf')} %>
 <% editions.each do |edition| %>
   <% if edition[:pdf] =~ /-transposed/ %>
     <h4>Transposed Edition 
   <% else %>
     <h4>Original Key Edition 
   <% end %>
-   <a href="/<%=individual_pieces.name%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
+   <a href="/<%=vocal_collection.name%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
   </a>
-   <a href="/<%=individual_pieces.name%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
+   <a href="/<%=vocal_collection.name%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
    <i class="fa fa-music" aria-hidden="true"></i> MIDI
   </a>
-   <a href="/<%=individual_pieces.name%>/<%=@piece.slug%>/<%=edition[:mp3]%>" class="btn btn-default btn-md">
+   <a href="/<%=vocal_collection.name%>/<%=@piece.slug%>/<%=edition[:mp3]%>" class="btn btn-default btn-md">
    <i class="fa fa-volume-up" aria-hidden="true"></i> MP3
   </a></h4>
   <% if edition[:parts] %>
-    <% directory = "/#{individual_pieces.name}/#{@piece.slug}" %>
+    <% directory = "/#{vocal_collection.name}/#{@piece.slug}" %>
     <h5 > Practice MIDIs and MP3s </h5>
     <table class="table">
     <tr><th>Part</th><th>Emphasized</th><th>Mute</th><th>Solo</th></tr>

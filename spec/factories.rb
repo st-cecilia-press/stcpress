@@ -3,10 +3,13 @@ FactoryGirl.define do
     piece 
     repository 
   end
+  factory :translations_collection do
+    name "repo"
+  end
   factory :instrumental_book do
     name "repo"
   end
-  factory :individual_pieces do
+  factory :vocal_collection do
     name "repo"
   end
   factory :repository do

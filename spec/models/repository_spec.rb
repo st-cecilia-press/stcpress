@@ -58,7 +58,7 @@ scMusicTwoName = "altus"
 scMusicThreeName = "tenor"
     } )
     fake_ly.close
-    repo = create(:individual_pieces)
+    repo = create(:vocal_collection)
     parts = repo.parts(fake_ly.path)
     fake_ly.unlink
     expect(parts.any? { |part| (part[:name] == 'cantus' && part[:order] == 1) }).to be

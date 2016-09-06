@@ -21,7 +21,7 @@ namespace :init_db do
         my_piece = Piece.create do |p|
           p.title = title
           p.composer = composer
-          p.slug = piece["slug"] + '_gervaise_quart'
+          p.slug = piece["slug"]
         end
         piece['voicings'].each do |voicing|
           v = Voicing.find_or_create_by(name: voicing) 
@@ -48,7 +48,7 @@ namespace :init_db do
     }
   end
   task :miscellaneous => :environment do
-    r = IndividualPieces.create do |r|
+    r = VocalCollection.create do |r|
       r.name = 'miscellaneous'
     end
     Dir.chdir('public/miscellaneous'){|p|
@@ -87,7 +87,6 @@ namespace :init_db do
         if metadata["books"]
           metadata["books"].each do |book|
             b = Book.find_by(slug: book["slug"])
-            puts piece.title if b.nil? 
             bc = BookContent.create(piece: piece, book: b)
             if book["images"]
               book["images"].each do |image|
@@ -107,11 +106,34 @@ namespace :init_db do
     }
   end
 
+  task :kasha => :environment do
+    repo = TranslationsCollection.create do |r|
+      r.name = 'bel-accueil'
+    end
+    Dir.chdir('public/bel-accueil'){ |folder|
+      metadata = YAML.load_file('_metadata.yaml')
+      metadata.each do |piece|
+        puts piece['slug']
+        p = Piece.find_or_create_by(slug: piece['slug'])
+        if p.title.nil?
+          p.title = piece['title']
+          c = Composer.find_or_create_by(name: piece['composer'])
+          p.composer = c
+          piece['voicings'].each do |voicing|
+              v = Voicing.find_or_create_by(name: voicing)
+              sv = SongVoicing.create(piece: p, voicing: v)
+          end
+        end
+        pub = Publicationship.create(piece: p, repository: repo)
+      end
+    }
+  end
+
   task :db_reset => :environment do
     Rake::Task['db:reset'].invoke 
     Rake::Task['db:migrate'].invoke 
     Rake::Task['db:seed'].invoke 
   end
   
-  task :all => [:db_reset, :miscellaneous, :gervaise_quart]
+  task :all => [:db_reset, :miscellaneous, :gervaise_quart, :kasha]
 end

@@ -31,3 +31,23 @@ RSpec.describe Piece, "url" do
     expect(url).to eq("/pieces/#{piece.slug}")
   end
 end
+
+RSpec.describe Piece, "image_repo" do
+  it "returns miscellaneous repository if it exists" do
+    piece = create(:piece)
+    other = create(:vocal_collection, name: 'other')
+    misc = create(:vocal_collection, name: 'miscellaneous')
+    pub1 = create(:publicationship, piece: piece, repository: other)
+    pub2 = create(:publicationship, piece: piece, repository: misc)
+
+    image_repo = piece.image_repo
+    expect(image_repo).to eq("miscellaneous")
+  end
+  it "returns whatever other repo if miscellaneous doesn't exist" do
+    piece = create(:piece)
+    other = create(:vocal_collection, name: 'other')
+    pub1 = create(:publicationship, piece: piece, repository: other)
+    image_repo = piece.image_repo
+    expect(image_repo).to eq("other")
+  end
+end

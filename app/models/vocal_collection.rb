@@ -1,0 +1,2 @@
+class VocalCollection < Repository 
+end

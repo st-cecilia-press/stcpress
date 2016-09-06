@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'fileutils'
 
 
-describe "Get /pieces/slug where repo is 'individual_pieces' type" do
+describe "Get /pieces/slug where repo is 'vocal_collection' type" do
   before(:each) do
     @public_path = Rails.public_path.to_s
     Dir.mkdir("#{@public_path}/repo")
@@ -14,7 +14,7 @@ describe "Get /pieces/slug where repo is 'individual_pieces' type" do
   end
   it "shows piece slug" do
 
-    repo = create(:individual_pieces, name: 'repo')
+    repo = create(:vocal_collection, name: 'repo')
     composer = create(:composer)
     piece = create(:piece, composer: composer)
     pub = create(:publicationship, piece: piece, repository: repo)

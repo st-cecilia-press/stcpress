@@ -17,4 +17,12 @@ class Piece < ActiveRecord::Base
   def url
     return "/pieces/#{self.slug}"
   end
+
+  def image_repo
+      if self.repositories.find_by(name: 'miscellaneous')
+          return 'miscellaneous'
+      else
+          return self.repositories.first.name
+      end
+  end
 end

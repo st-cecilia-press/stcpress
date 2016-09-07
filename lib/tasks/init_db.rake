@@ -27,6 +27,10 @@ namespace :init_db do
           v = Voicing.find_or_create_by(name: voicing) 
           sv = SongVoicing.create(piece: my_piece, voicing: v) 
         end
+
+        t = Tag.find_or_create_by(name: 'instrumental')
+        tagging = Tagging.create(piece: my_piece, tag: t)
+
         publicationship = Publicationship.create(piece: my_piece, repository: r)
         bc = BookContent.create(piece: my_piece, book: book)
         image_paths = []
@@ -65,6 +69,18 @@ namespace :init_db do
         metadata['voicings'].each do |voicing|
           v = Voicing.find_or_create_by(name: voicing) 
           sv = SongVoicing.create(piece: piece, voicing: v) 
+        end
+        if metadata["tags"]
+          metadata['tags'].each do |tag|
+            t = Tag.find_or_create_by(name: tag)
+            tagging = Tagging.create(piece: piece, tag: t)
+          end
+        end
+        if metadata["language"]
+          metadata['language'].each do |lang|
+            l = Language.find_or_create_by(name: lang)
+            pl = PieceLanguage.create(piece: piece, language: l)
+          end
         end
         publicationship = Publicationship.create(piece: piece, repository: r)
         if metadata["manuscripts"]
@@ -123,6 +139,20 @@ namespace :init_db do
               v = Voicing.find_or_create_by(name: voicing)
               sv = SongVoicing.create(piece: p, voicing: v)
           end
+          
+          if piece["tags"]
+            piece['tags'].each do |tag|
+              t = Tag.find_or_create_by(name: tag)
+              tagging = Tagging.create(piece: p, tag: t)
+            end
+          end
+          if piece["language"]
+            piece['language'].each do |lang|
+              l = Language.find_or_create_by(name: lang)
+              pl = PieceLanguage.create(piece: p, language: l)
+            end
+          end
+
         end
         pub = Publicationship.create(piece: p, repository: repo)
       end

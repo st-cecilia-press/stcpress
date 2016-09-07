@@ -4,7 +4,7 @@
 
 <h2>Info</h2>
 <b>Number of Voices</b>: <%= @piece.voicings.exists? ? @piece.voicings.first.num_parts : 0 %><br>
-<b>Voicings</b>: <%= render partial: 'voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %>
+<b>Voicings</b>: <%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %>
 <% if @piece.manuscripts.count > 0 or @piece.books.count > 0 %>
   <h3>Published in</h3>
   <% if @piece.manuscripts.count > 0 %>

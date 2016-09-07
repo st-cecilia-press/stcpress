@@ -8,7 +8,7 @@
 <tr>
   <td><%= link_to @piece.title, @piece.url %></td>
   <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
-  <td><%= render partial: 'pieces/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>
 </tr>
 <% end %>
 </tbody>

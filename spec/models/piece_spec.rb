@@ -16,6 +16,12 @@ RSpec.describe Piece, type: :model do
 
   it { should have_many(:publicationships) }
   it { should have_many(:repositories).through(:publicationships)}
+  
+  it { should have_many(:taggings) }
+  it { should have_many(:tags).through(:taggings)}
+
+  it { should have_many(:piece_languages) }
+  it { should have_many(:languages).through(:piece_languages)}
 end
 
 RSpec.describe Piece, "validations" do

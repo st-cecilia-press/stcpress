@@ -1,0 +1,6 @@
+<h1>Repositories</h1>
+<ul>
+  <% @repositories.each do |repo| %>
+    <li><%= link_to repo.name, "/repositories/#{repo.name}" %></li>
+  <% end %>
+</ul>

@@ -1,4 +1,18 @@
 FactoryGirl.define do
+  factory :tagging do
+    tag
+    piece
+  end
+  factory :piece_language do
+    language
+    piece
+  end
+  factory :language do
+    name "English"
+  end
+  factory :tag do
+    name "frottola"
+  end
   factory :publicationship do
     piece 
     repository 

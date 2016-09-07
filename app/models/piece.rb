@@ -11,6 +11,12 @@ class Piece < ActiveRecord::Base
   has_many :publicationships
   has_many :repositories, through: :publicationships
 
+  has_many :taggings
+  has_many :tags, through: :taggings
+
+  has_many :piece_languages
+  has_many :languages, through: :piece_languages
+
   belongs_to :composer
   validates :title, :composer, :slug, presence: true  
 

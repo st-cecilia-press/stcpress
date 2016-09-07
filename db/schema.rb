@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831193444) do
+ActiveRecord::Schema.define(version: 20160906210957) do
 
   create_table "book_contents", force: :cascade do |t|
     t.integer  "piece_id"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20160831193444) do
   add_index "images", ["book_content_id"], name: "index_images_on_book_content_id"
   add_index "images", ["manuscript_content_id"], name: "index_images_on_manuscript_content_id"
 
+  create_table "languages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "manuscript_contents", force: :cascade do |t|
     t.integer  "manuscript_id"
     t.integer  "piece_id"
@@ -71,6 +77,16 @@ ActiveRecord::Schema.define(version: 20160831193444) do
     t.datetime "updated_at",  null: false
     t.string   "slug"
   end
+
+  create_table "piece_languages", force: :cascade do |t|
+    t.integer  "language_id"
+    t.integer  "piece_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "piece_languages", ["language_id"], name: "index_piece_languages_on_language_id"
+  add_index "piece_languages", ["piece_id"], name: "index_piece_languages_on_piece_id"
 
   create_table "pieces", force: :cascade do |t|
     t.string   "title"
@@ -108,6 +124,22 @@ ActiveRecord::Schema.define(version: 20160831193444) do
 
   add_index "song_voicings", ["piece_id"], name: "index_song_voicings_on_piece_id"
   add_index "song_voicings", ["voicing_id"], name: "index_song_voicings_on_voicing_id"
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "piece_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "taggings", ["piece_id"], name: "index_taggings_on_piece_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "voicings", force: :cascade do |t|
     t.string   "name"

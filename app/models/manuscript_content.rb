@@ -5,4 +5,10 @@ class ManuscriptContent < ActiveRecord::Base
 
   
   validates :manuscript, :piece, presence: true  
+
+  def diamm_link
+    unless diamm.blank?
+      return "http://www.diamm.ac.uk/jsp/Descriptions?op=ITEM&itemKey=#{self.diamm}"
+    end
+  end
 end

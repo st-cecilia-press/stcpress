@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require datatables
 //= require twitter/typeahead.min
+//= require listjs
 //= require_tree .

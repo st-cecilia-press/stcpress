@@ -1,7 +1,19 @@
 <h1><%=@composer.name%></h1>
-<ul>
+<h3>Pieces</h3>
+<div id="pieces-list">
+<%= render partial: 'shared/list_search' %>
+  <ul class="list">
+  <% @composer.pieces.sort_by(&:title).each do |piece| %>
+    <li><%= link_to piece.title, piece.url, class: "title" %></li>
+  <% end %>
+  </ul>
+</div>
 
-<% @composer.pieces.sort_by(&:title).each do |piece| %>
-  <li><%= link_to piece.title, piece.url %></li>
-<% end %>
-</ul>
+<script type="text/javascript">
+
+  var options = {
+    valueNames: ['title']
+  };
+
+  var piecesList = new List('pieces-list', options);
+</script>

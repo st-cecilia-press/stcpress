@@ -1,12 +1,17 @@
 <h1>Manuscripts</h1>
 <table class="table">
-    <tr><th>Name</th><th>Archive</th><th>Shelfmark</th></tr>
+    <tr><th>Name</th><th>Archive</th><th>Shelfmark</th><th>Diamm</th></tr>
 
 <% for @manuscript in @manuscripts %>
 <tr>
     <td><%= link_to @manuscript.name, manuscript_path(@manuscript.slug) %></a></td>
   <td><%=@manuscript.archive%></td>
   <td><%=@manuscript.shelfmark%></td>
+  <td> 
+  <% unless @manuscript.diamm.blank? %>
+    <%= link_to 'DIAMM', @manuscript.diamm_link %>
+  <% end %>
+  </td>
 </tr>
 <% end %>
 </table>

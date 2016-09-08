@@ -10,9 +10,9 @@ describe "Get /pieces/voicings" do
 
     get "/pieces/voicings"
     expect(response).to have_http_status(:success)
-    expect(response.body).to include('<a href="/pieces/voicings/4">4</a>')
-    expect(response.body).to include('<a href="/pieces/voicings/SATB">SATB</a>')
-    expect(response.body).to include('<a href="/pieces/voicings/STTB">STTB</a>')
+    expect(response.body).to include('href="/pieces/voicings/4"')
+    expect(response.body).to include('href="/pieces/voicings/SATB"')
+    expect(response.body).to include('href="/pieces/voicings/STTB"')
 
  end
 end

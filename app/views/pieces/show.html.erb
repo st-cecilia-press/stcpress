@@ -4,7 +4,12 @@
 
 <h2>Info</h2>
 <b>Number of Voices</b>: <%= @piece.voicings.exists? ? @piece.voicings.first.num_parts : 0 %><br>
-<b>Voicings</b>: <%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %>
+<b>Voicings</b>: <%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %><br>
+<% unless @piece.languages.first.nil? %>
+  <b>Language</b>:<%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %><br><% end %>
+<b>Tags</b>: <%= render partial: 'tags/tag', collection: @piece.tags%><br>
+  
+  
 <% if @piece.manuscripts.count > 0 or @piece.books.count > 0 %>
   <h3>Published in</h3>
   <% if @piece.manuscripts.count > 0 %>
@@ -12,7 +17,10 @@
     <% @piece.manuscript_contents.each do |mc| %>
         <%= link_to mc.manuscript.name, manuscript_path(slug: mc.manuscript.slug) %><br/>
         <b>Archive:</b> <%= mc.manuscript.archive %> <b>Shelfmark:</b> <%= mc.manuscript.shelfmark %> 
-    <b>Position in Manuscript:</b> <%= mc.position %> <br/>
+    <b>Position in Manuscript:</b> <%= mc.position %> 
+    <% unless mc.diamm.blank? %>
+    <%= link_to 'DIAMM', mc.diamm_link %><br/>
+    <% end %><br/>
   
         <% if mc.images.count > 0 %>
             <ul>

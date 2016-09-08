@@ -1,6 +1,19 @@
 <h1>Composers</h1>
-<ul>
+<div id="composer-list">
+<%= render partial: 'shared/list_search' %>
+<ul class="list">
 <% @composers.each do |composer| %>
-<li><%= link_to composer.name, "/composers/#{composer.slug}" %></li>
+<li><%= link_to composer.name, "/composers/#{composer.slug}", class: "name"%></li>
 <% end %>
 </ul>
+</div>
+
+
+<script type="text/javascript">
+
+  var options = {
+    valueNames: ['name']
+  };
+
+  var composerList = new List('composer-list', options);
+</script>

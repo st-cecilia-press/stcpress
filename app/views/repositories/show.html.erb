@@ -2,7 +2,7 @@
 <h3> Pieces</h3>
 <table class="table">
 <thead>
-<tr><th>Title</th><th>Composer</th><th>Number of Parts</th><th>Voicings</th></tr>
+<tr><th>Title</th><th>Composer</th><th>Number of Parts</th><th>Voicings</th><th>Language</th><th>Tags</th></tr>
 </thead>
 <tbody>
 <% for @piece in @pieces %>
@@ -11,6 +11,8 @@
   <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
   <td><%= @piece.voicings.exists? ? @piece.voicings.first.num_parts : 0 %></td>
   <td><%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'tags/tag', collection: @piece.tags%></td>
 </tr>
 <% end %>
 </tbody>
@@ -18,6 +20,6 @@
 </table>
 <script type="text/javascript">
 $(document).ready( function () {
-    $('.table').DataTable({"pageLength": 100});
+    $('.table').DataTable({"pageLength": 100, "saveState": true});
 } );
 </script>

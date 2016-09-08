@@ -76,6 +76,8 @@ namespace :init_db do
             tagging = Tagging.create(piece: piece, tag: t)
           end
         end
+        t = Tag.find_or_create_by(name: 'original language')
+        tagging = Tagging.create(piece: piece, tag: t)
         if metadata["language"]
           metadata['language'].each do |lang|
             l = Language.find_or_create_by(name: lang)
@@ -131,6 +133,8 @@ namespace :init_db do
       metadata.each do |piece|
         puts piece['slug']
         p = Piece.find_or_create_by(slug: piece['slug'])
+        t = Tag.find_or_create_by(name: 'translation')
+        tagging = Tagging.create(piece: p, tag: t)
         if p.title.nil?
           p.title = piece['title']
           c = Composer.find_or_create_by(name: piece['composer'])

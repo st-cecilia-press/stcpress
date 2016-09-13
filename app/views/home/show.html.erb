@@ -1,5 +1,28 @@
 <div class="jumbotron" style="margin-top:40px">
   <h1>Welcome to St. Cecilia Press!</h1>
-  <p>Home of Monique Rio and Aaron Elkiss's editions of Medieval and Renaissance Music</p>
-  <p><%= link_to 'Explore Pieces', '/pieces', { class: "btn btn-primary btn-lg"}%></p>
+  <p>Home of Monique Rio's modern editions of Medieval and Renaissance Music and
+Carol Anne Perry Lagemann's English Translations of Medieval and Renaissance Music</p>
+  <p>
+  <div class="col-xs-4 col-xs-offset-4">
+    <input class="form-control" id="search" type="text" placeholder="Search">
+  </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready( function () {
+  var pieces = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('composer'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: [
+      <% @pieces.each do |piece| %>
+        { piece: "<%= piece.title %> (<%=piece.composer.name%>)" },
+        <% %>
+      <% end %>
+    ]
+  });
+  pieces.initialize();
+  $('#search').typeahead(null, {
+    displayKey: 'composer',
+    source: pieces.ttAdapter()
+  });
+</script>

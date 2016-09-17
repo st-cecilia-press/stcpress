@@ -3,26 +3,41 @@
   <p>Home of Monique Rio's modern editions of Medieval and Renaissance Music and
 Carol Anne Perry Lagemann's English Translations of Medieval and Renaissance Music</p>
   <p>
+  <form class="form-inline" action="/home" method="post">
   <div class="col-xs-4 col-xs-offset-4">
-    <input class="form-control" id="search" type="text" placeholder="Search">
+    <input class="form-control" id="search" type="text" name="search" placeholder="Search">
   </div>
+  <input type="hidden" id="hidden-input" name="slug" value="">
+  <button type="submit" class="btn btn-default">Submit</button>
+  <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+  </form>
 </div>
 
 <script type="text/javascript">
 $(document).ready( function () {
+  var piecesList = [{title: 'Se La Face Aye Payle', composer: 'Guillaume Dufay', slug: 'se_la_face'}]
+  
   var pieces = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('composer'),
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['title', 'composer']),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: [
-      <% @pieces.each do |piece| %>
-        { piece: "<%= piece.title %> (<%=piece.composer.name%>)" },
-        <% %>
-      <% end %>
-    ]
+    prefetch: '/json/search.json', 
   });
+
   pieces.initialize();
+  
   $('#search').typeahead(null, {
-    displayKey: 'composer',
-    source: pieces.ttAdapter()
+    display: function(data){ return data.title + ' (' + data.composer + ')' },
+    source: pieces.ttAdapter(),
+
+  }).on('typeahead:select', function(ev, suggestion){
+      
+
+      $('#hidden-input').val(suggestion.slug);
+  }).on('change', function(){
+    $('#hidden-input').val('')
   });
+
+  /*$('.form-inline').submit(function(){
+  });*/
+});
 </script>

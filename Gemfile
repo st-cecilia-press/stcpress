@@ -57,6 +57,9 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_girl_rails"
   gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'phantomjs'
+  gem 'poltergeist'
 end
 group :test do
   gem "database_cleaner"

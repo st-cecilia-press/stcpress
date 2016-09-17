@@ -1,0 +1,35 @@
+<form class="navbar-form navbar-right" action="/search" method="post">
+  <div class="form-group">
+    <input class="form-control" id="search" type="text" name="search" placeholder="Search">
+  </div>
+  <input type="hidden" id="hidden-slug" name="slug" value="">
+  <button type="submit" class="btn btn-default">Submit</button>
+  <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+</form>
+<script type="text/javascript">
+$(document).ready( function () {
+  
+  var pieces = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['title', 'composer']),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: '/json/search.json', 
+  });
+
+  pieces.initialize();
+  
+  $('#search').typeahead(null, {
+    display: function(data){ return data.title + ' (' + data.composer + ')' },
+    source: pieces.ttAdapter(),
+
+  }).on('typeahead:select', function(ev, suggestion){
+      
+
+      $('#hidden-slug').val(suggestion.slug);
+  }).on('change', function(){
+    $('#hidden-slug').val('')
+  });
+
+  /*$('.form-inline').submit(function(){
+  });*/
+});
+</script>

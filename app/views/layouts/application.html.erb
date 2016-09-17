@@ -33,17 +33,24 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><%= link_to 'Pieces', "/pieces" %></li>
+                <li><%= link_to 'Repositories', "/repositories" %></li>
                 <li><%= link_to 'Composers', "/composers" %></li>
                 <li><%= link_to 'Voicings', "/pieces/voicings" %></li>
                 <li><%= link_to 'Books', "/books" %></li>
                 <li><%= link_to 'Manuscripts', "/manuscripts" %></li>
               </ul>
             </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Links <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to 'Psallite', "http://psallite.thedancingmaster.net" %></li>
+                <li><%= link_to 'BlowThyHorn.com', "http://blowthyhorn.com" %></li>
+                <li><%= link_to 'De Bel-Accueil Énamouré', "https://belaccueil.wordpress.com/" %></li>
+              </ul>
+            </li>
             <li><%= link_to 'Contact', "/contact" %></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to 'BlowThyHorn.com', 'http://blowthyhorn.com' %></li>
-          </ul>
+          <%= render "layouts/search" %>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -56,7 +63,9 @@
     <footer class="footer">
       <div class="container">
      <%= link_to image_tag( 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png', height: "40px", class: "pull-right", style:"margin-top:10px"), 'https://creativecommons.org/licenses/by/4.0/' %>
-        <p class="text-muted">All music editions © Monique Rio. <br/>Permission granted for use with attribution. (CC BY 4.0) </p> 
+     <%= link_to image_tag( 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png', height: "40px", class: "pull-right", style:"margin-top:10px"), 'https://creativecommons.org/licenses/by-sa/4.0/' %>
+        <p class="text-muted">For Monique Rio's music editions: Permission granted for use with attribution. (CC BY 4.0) </p> 
+        <p class="text-muted">For Carol Anne Perry Lagemann's translations: Permission granted for use with attribution and SharedAlike. (CC BY-SA 4.0) </p> 
       </div>
     </footer>
 

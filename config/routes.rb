@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     get 'metadata_generator' => 'metadata_generator#new'
   end
   
-  resources :home, only: [:create]
+  resources :search, only: [:create]
   root 'home#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

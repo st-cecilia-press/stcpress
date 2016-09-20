@@ -1,5 +1,6 @@
 require 'yaml'
 require 'find'
+
 namespace :init_db do
   task :gervaise_quart => :environment do
     r = InstrumentalBook.create do |r|
@@ -129,29 +130,28 @@ namespace :init_db do
       r.name = 'bel-accueil'
     end
     Dir.chdir('public/bel-accueil'){ |folder|
-      metadata = YAML.load_file('_metadata.yaml')
-      metadata.each do |piece|
-        puts piece['slug']
-        p = Piece.find_or_create_by(slug: piece['slug'])
-        t = Tag.find_or_create_by(name: 'translation')
-        tagging = Tagging.create(piece: p, tag: t)
+      directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
+      directories.each do |slug|
+        puts slug
+        metadata = YAML.load_file("./#{slug}/metadata.yaml")
+        p = Piece.find_or_create_by(slug: slug)
         if p.title.nil?
-          p.title = piece['title']
-          c = Composer.find_or_create_by(name: piece['composer'])
+          p.title = metadata['title']
+          c = Composer.find_or_create_by(name: metadata['composer'])
           p.composer = c
-          piece['voicings'].each do |voicing|
+          metadata['voicings'].each do |voicing|
               v = Voicing.find_or_create_by(name: voicing)
               sv = SongVoicing.create(piece: p, voicing: v)
           end
           
-          if piece["tags"]
-            piece['tags'].each do |tag|
+          if metadata["tags"]
+            metadata['tags'].each do |tag|
               t = Tag.find_or_create_by(name: tag)
               tagging = Tagging.create(piece: p, tag: t)
             end
           end
-          if piece["language"]
-            piece['language'].each do |lang|
+          if metadata["language"]
+            metadata['language'].each do |lang|
               l = Language.find_or_create_by(name: lang)
               pl = PieceLanguage.create(piece: p, language: l)
             end
@@ -159,6 +159,8 @@ namespace :init_db do
 
         end
         pub = Publicationship.create(piece: p, repository: repo)
+        t = Tag.find_or_create_by(name: 'translation')
+        tagging = Tagging.create(piece: p, tag: t)
       end
     }
   end

@@ -5,10 +5,10 @@
   <% elsif edition[:pdf] =~ /_orig/ %>
     <h4>Original Clefs Edition 
   <% end %>
-   <a href="/<%=instrumental_book.name%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
+   <a href="/<%=instrumental_book.slug%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
   </a>
-   <a href="/<%=instrumental_book.name%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
+   <a href="/<%=instrumental_book.slug%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
    <i class="fa fa-music" aria-hidden="true"></i> MIDI
   </a>
 <% end %>

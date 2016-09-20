@@ -18,16 +18,20 @@ FactoryGirl.define do
     repository 
   end
   factory :translations_collection do
-    name "repo"
+    name "Repo"
+    slug "repo"
   end
   factory :instrumental_book do
-    name "repo"
+    name "Repo"
+    slug "repo"
   end
   factory :vocal_collection do
-    name "repo"
+    name "Repo"
+    slug "repo"
   end
   factory :repository do
-    name "myRepo"
+    name "My Repo"
+    slug "my_repo"
   end
   factory :song_voicing do
     voicing 

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   get 'about' => 'static_pages#about'
 
   resources :repositories, only: [:index]
-  get 'repositories/:name' => 'repositories#show', as: 'repository'
+  get 'repositories/:slug' => 'repositories#show', as: 'repository'
 
   namespace :tools do
     get 'metadata_generator' => 'metadata_generator#new'

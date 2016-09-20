@@ -41,8 +41,8 @@ end
 RSpec.describe Piece, "image_repo" do
   it "returns miscellaneous repository if it exists" do
     piece = create(:piece)
-    other = create(:vocal_collection, name: 'other')
-    misc = create(:vocal_collection, name: 'miscellaneous')
+    other = create(:vocal_collection, slug: 'other')
+    misc = create(:vocal_collection, slug: 'miscellaneous')
     pub1 = create(:publicationship, piece: piece, repository: other)
     pub2 = create(:publicationship, piece: piece, repository: misc)
 
@@ -51,7 +51,7 @@ RSpec.describe Piece, "image_repo" do
   end
   it "returns whatever other repo if miscellaneous doesn't exist" do
     piece = create(:piece)
-    other = create(:vocal_collection, name: 'other')
+    other = create(:vocal_collection, slug: 'other')
     pub1 = create(:publicationship, piece: piece, repository: other)
     image_repo = piece.image_repo
     expect(image_repo).to eq("other")

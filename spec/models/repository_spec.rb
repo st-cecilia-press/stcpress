@@ -6,6 +6,7 @@ RSpec.describe Repository, type: :model do
 end
 RSpec.describe Repository, "validations" do
   it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:slug) }
 end
 
 RSpec.describe Repository, "editions" do
@@ -20,7 +21,7 @@ RSpec.describe Repository, "editions" do
   end
   it "returns not empty hash if pdf there is missing _mute.mid" do
     piece = create(:piece, slug: 'slug')
-    repo = create(:repository, name: 'repo')
+    repo = create(:repository, slug: 'repo')
 
     publicationship = create(:publicationship, piece: piece, repository: repo)
 
@@ -32,7 +33,7 @@ RSpec.describe Repository, "editions" do
   end 
   it "returns hash with pdfs and part midis and mp3s if _mute.mid exists" do
     piece = create(:piece, slug: 'slug')
-    repo = create(:repository, name: 'repo')
+    repo = create(:repository, slug: 'repo')
     publicationship = create(:publicationship, piece: piece, repository: repo)
 
     pdf = File.new("#{@path}/slug.pdf", "w")

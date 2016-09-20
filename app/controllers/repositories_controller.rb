@@ -4,7 +4,7 @@ class RepositoriesController < ApplicationController
   end
 
   def show
-    @repo = Repository.find_by(name: params[:name])
+    @repo = Repository.find_by(slug: params[:slug])
     @pieces = @repo.pieces
   end
 end

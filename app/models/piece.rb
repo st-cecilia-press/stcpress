@@ -25,10 +25,10 @@ class Piece < ActiveRecord::Base
   end
 
   def image_repo
-      if self.repositories.find_by(name: 'miscellaneous')
+      if self.repositories.find_by(slug: 'miscellaneous')
           return 'miscellaneous'
       else
-          return self.repositories.first.name
+          return self.repositories.first.slug
       end
   end
 end

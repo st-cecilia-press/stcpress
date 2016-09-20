@@ -38,7 +38,7 @@ describe "Get /pieces/slug where repo is 'instrumental_book'" do
     FileUtils.rm_r "#{@public_path}/#{@gervaise}" 
   end
   it "Shows Original Clef and Modern Clef Options. Does not show Mp3" do
-      repo = create(:instrumental_book, name: @gervaise)
+      repo = create(:instrumental_book, slug: @gervaise)
       piece = create(:piece, slug: "slug" )
       pub = create(:publicationship, piece: piece, repository: repo)
       `touch #{@public_path}/#{@gervaise}/slug/slug_modern.pdf`

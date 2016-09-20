@@ -1,14 +1,14 @@
 class Repository < ActiveRecord::Base
   has_many :publicationships
   has_many :pieces, through: :publicationships
-  validates :name, presence: true
+  validates :name, :slug, presence: true
 
   scope :individual_pieces, -> {where(type: 'IndividualPieces')}
   scope :instrumental_book, -> {where(type: 'InstrumentalBook')}
 
   def editions(piece)
     public_path = Rails.public_path.to_s 
-    directory = "#{public_path}/#{self.name}/#{piece.slug}"
+    directory = "#{public_path}/#{self.slug}/#{piece.slug}"
     basenames = Dir.glob("#{directory}/*.pdf").map do |pdf|
       File.basename(pdf.split('.')[0])
     end

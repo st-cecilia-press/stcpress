@@ -12,9 +12,9 @@ RSpec.describe TranslationsCollection, "editions" do
   end
   it "returns pdf" do
     piece = create(:piece, slug: 'slug')
-    repo = create(:translations_collection, name: 'repo')
+    repo = create(:translations_collection, slug: 'repo')
     pub = create(:publicationship, piece: piece, repository: repo)
     edition = repo.editions(piece)
-    expect(edition).to eq('/repo/slug.pdf')
+    expect(edition).to eq('/repo/slug/slug.pdf')
   end
 end

@@ -4,7 +4,8 @@ require 'find'
 namespace :init_db do
   task :gervaise_quart => :environment do
     r = InstrumentalBook.create do |r|
-      r.name = 'gervaise_quart_livre_de_danceries'
+      r.slug = 'gervaise_quart_livre_de_danceries'
+      r.name = 'Gervaise Quart Livre De Danceries'
     end
     Dir.chdir('public/gervaise_quart_livre_de_danceries'){ |p|
       metadata = YAML.load_file('metadata.yaml')
@@ -54,7 +55,8 @@ namespace :init_db do
   end
   task :miscellaneous => :environment do
     r = VocalCollection.create do |r|
-      r.name = 'miscellaneous'
+      r.slug = 'miscellaneous'
+      r.name = "Monique's Miscellaneous Editions"
     end
     Dir.chdir('public/miscellaneous'){|p|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
@@ -127,7 +129,8 @@ namespace :init_db do
 
   task :kasha => :environment do
     repo = TranslationsCollection.create do |r|
-      r.name = 'bel-accueil'
+      r.slug = 'bel-accueil'
+      r.name = 'Bel Accueil: Carol\'s Translations'
     end
     Dir.chdir('public/bel-accueil'){ |folder|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}

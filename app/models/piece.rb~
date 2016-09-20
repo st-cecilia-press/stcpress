@@ -11,6 +11,12 @@ class Piece < ActiveRecord::Base
   has_many :publicationships
   has_many :repositories, through: :publicationships
 
+  has_many :taggings
+  has_many :tags, through: :taggings
+
+  has_many :piece_languages
+  has_many :languages, through: :piece_languages
+
   belongs_to :composer
   validates :title, :composer, :slug, presence: true  
 
@@ -19,10 +25,10 @@ class Piece < ActiveRecord::Base
   end
 
   def image_repo
-      if self.repositories.find_by(name: 'miscellaneous')
+      if self.repositories.find_by(slug: 'miscellaneous')
           return 'miscellaneous'
       else
-          return self.repositories.first.name
+          return self.repositories.first.slug
       end
   end
 end

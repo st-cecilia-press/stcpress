@@ -25,5 +25,5 @@ namespace :update do
     invoke 'puma:restart'
   end
 
-  task :all => [:pull_misc, :pull_bel :db]
+  task :all => [:pull_misc, :pull_bel, :db]
 end

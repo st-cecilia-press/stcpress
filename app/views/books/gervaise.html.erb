@@ -14,9 +14,4 @@
   </a></br>
 <% end %>
  <h2> Individual Pieces </h2> 
-<table class="table">
-    <tr><th>Piece</th><th>Composer</th></tr>
-    <% @book.pieces.each do |piece| %>
-        <tr><td><%= link_to piece.title, piece.url %></td><td><%=piece.composer.name%></td></tr>
-    <% end %>
-</table>
+<%= render partial: "pieces/pieces_table" %>

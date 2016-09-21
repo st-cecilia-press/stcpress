@@ -1,0 +1,23 @@
+
+<table class="table">
+<thead>
+<tr><th>Title</th><th>Composer</th><th>Voicings</th><th>Language</th><th>Tags</th></tr>
+</thead>
+<tbody>
+<% for @piece in @pieces %>
+<tr>
+  <td><%= link_to @piece.title, @piece.url %></td>
+  <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
+  <td><%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'tags/tag', collection: @piece.tags%></td>
+</tr>
+<% end %>
+</tbody>
+
+</table>
+<script type="text/javascript">
+$(document).ready( function () {
+    $('.table').DataTable({"pageLength": 25, "saveState": true});
+} );
+</script>

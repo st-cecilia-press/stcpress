@@ -17,4 +17,5 @@
 //= require datatables
 //= require twitter/typeahead.min
 //= require listjs
+//= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .

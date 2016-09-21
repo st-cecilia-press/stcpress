@@ -1,0 +1,17 @@
+<h1>Tags</h1>
+<div id="tag-list">
+<%= render partial: 'shared/list_search' %>
+    <ul class="list">
+        <% @tags.each do |tag| %>
+            <li><%= link_to tag.name, "/tags/#{tag.name}", class: "name"%> <span class="badge"><%= tag.pieces.count %></span></li>
+        <% end %>
+    </ul>
+</div>
+<script type="text/javascript">
+
+  var options = {
+    valueNames: ['name']
+  };
+
+  var tagList = new List('tag-list', options);
+</script>

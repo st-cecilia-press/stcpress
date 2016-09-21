@@ -1,25 +1,3 @@
 
 <h1>Pieces</h1>
-<table class="table">
-<thead>
-    <tr><th>Title</th><th>Composer</th><th>Number of Parts</th><th>Voicings</th><th>Original Language</th><th>tags</th></tr>
-</thead>
-<tbody>
-<% for @piece in @pieces %>
-<tr>
-  <td><%= link_to @piece.title, @piece.url %></td>
-  <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
-  <td><%= @piece.voicings.exists? ? @piece.voicings.first.num_parts : 0 %></td>
-  <td><%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>
-  <td><%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %></td>
-  <td><%= render partial: 'tags/tag', collection: @piece.tags%></td>
-</tr>
-<% end %>
-</tbody>
-
-</table>
-<script type="text/javascript">
-$(document).ready( function () {
-    $('.table').DataTable({"pageLength": 100, "saveState": true});
-} );
-</script>
+<%= render partial: "pieces_table" %>

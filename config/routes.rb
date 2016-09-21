@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   resources :repositories, only: [:index]
   get 'repositories/:slug' => 'repositories#show', as: 'repository'
 
+  resources :tags, only: [:index]
+  get 'tags/:name' => 'tags#show', as: 'tag'
+
   namespace :tools do
     get 'metadata_generator' => 'metadata_generator#new'
   end

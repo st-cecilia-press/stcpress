@@ -1,68 +1,6 @@
 require 'yaml'
 require 'find'
 
-def process_metadata(slug, repository)
-  puts slug
-  metadata = YAML.load_file("#{slug}/metadata.yaml")
-  c = Composer.find_or_create_by(name: metadata['composer'])
-  piece = Piece.create do |p|
-    p.title = metadata['title']
-    p.composer = c
-    p.slug = slug
-  end
-  metadata['voicings'].each do |voicing|
-    v = Voicing.find_or_create_by(name: voicing) 
-    sv = SongVoicing.create(piece: piece, voicing: v) 
-  end
-  if metadata["tags"]
-    metadata['tags'].each do |tag|
-      t = Tag.find_or_create_by(name: tag)
-      tagging = Tagging.create(piece: piece, tag: t)
-    end
-  end
-  if metadata["language"]
-    metadata['language'].each do |lang|
-      l = Language.find_or_create_by(name: lang)
-      pl = PieceLanguage.create(piece: piece, language: l)
-    end
-  end
-  publicationship = Publicationship.create(piece: piece, repository: repository)
-  if metadata["manuscripts"]
-    metadata["manuscripts"].each do |manuscript|
-      m = Manuscript.find_by(name: manuscript["name"]) 
-      mc = ManuscriptContent.create(piece: piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
-      if manuscript["images"]
-        manuscript["images"].each do |image|
-          img = Image.create do |i|
-            i.manuscript_content_id =  mc.id 
-            i.url =  image["url"]  if image["url"]
-            i.filename =  image["filename"] if image["filename"]
-            i.name =  image["name"] if image["name"]
-            i.description =  image["description"] if image["description"]
-          end
-        end
-      end
-    end
-  end
-  if metadata["books"]
-    metadata["books"].each do |book|
-      b = Book.find_by(slug: book["slug"])
-      bc = BookContent.create(piece: piece, book: b)
-      if book["images"]
-        book["images"].each do |image|
-          img = Image.create do |i|
-            i.book_content_id =  bc.id 
-            i.url =  image["url"]  if image["url"]
-            i.filename =  image["filename"] if image["filename"]
-            i.name =  image["name"] if image["name"]
-            i.description =  image["description"] if image["description"]
-          end
-        end
-      end
-    end
-  end
-  return piece
-end
 namespace :init_db do
   task :gervaise_quart => :environment do
     r = InstrumentalBook.create do |r|
@@ -123,9 +61,67 @@ namespace :init_db do
     Dir.chdir('public/miscellaneous'){|p|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
       directories.each do |slug|
-        piece = process_metadata(slug, r)
+        puts slug
+        metadata = YAML.load_file("#{slug}/metadata.yaml")
+        c = Composer.find_or_create_by(name: metadata['composer'])
+        piece = Piece.create do |p|
+          p.title = metadata['title']
+          p.composer = c
+          p.slug = slug
+        end
+        metadata['voicings'].each do |voicing|
+          v = Voicing.find_or_create_by(name: voicing) 
+          sv = SongVoicing.create(piece: piece, voicing: v) 
+        end
+        if metadata["tags"]
+          metadata['tags'].each do |tag|
+            t = Tag.find_or_create_by(name: tag)
+            tagging = Tagging.create(piece: piece, tag: t)
+          end
+        end
         t = Tag.find_or_create_by(name: 'original language')
         tagging = Tagging.create(piece: piece, tag: t)
+        if metadata["language"]
+          metadata['language'].each do |lang|
+            l = Language.find_or_create_by(name: lang)
+            pl = PieceLanguage.create(piece: piece, language: l)
+          end
+        end
+        publicationship = Publicationship.create(piece: piece, repository: r)
+        if metadata["manuscripts"]
+          metadata["manuscripts"].each do |manuscript|
+            m = Manuscript.find_by(name: manuscript["name"]) 
+            mc = ManuscriptContent.create(piece: piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
+            if manuscript["images"]
+              manuscript["images"].each do |image|
+                img = Image.create do |i|
+                  i.manuscript_content_id =  mc.id 
+                  i.url =  image["url"]  if image["url"]
+                  i.filename =  image["filename"] if image["filename"]
+                  i.name =  image["name"] if image["name"]
+                  i.description =  image["description"] if image["description"]
+                end
+              end
+            end
+          end
+        end
+        if metadata["books"]
+          metadata["books"].each do |book|
+            b = Book.find_by(slug: book["slug"])
+            bc = BookContent.create(piece: piece, book: b)
+            if book["images"]
+              book["images"].each do |image|
+                img = Image.create do |i|
+                  i.book_content_id =  bc.id 
+                  i.url =  image["url"]  if image["url"]
+                  i.filename =  image["filename"] if image["filename"]
+                  i.name =  image["name"] if image["name"]
+                  i.description =  image["description"] if image["description"]
+                end
+              end
+            end
+          end
+        end
       end
 
     }
@@ -139,7 +135,33 @@ namespace :init_db do
     Dir.chdir('public/bel-accueil'){ |folder|
       directories = Dir.glob('*').select {|f| File.directory? f and f != "include" and f !=  "test" and f != "metadata"}
       directories.each do |slug|
-        piece = process_metadata(slug, repo)
+        puts slug
+        metadata = YAML.load_file("./#{slug}/metadata.yaml")
+        p = Piece.find_or_create_by(slug: slug)
+        if p.title.nil?
+          p.title = metadata['title']
+          c = Composer.find_or_create_by(name: metadata['composer'])
+          p.composer = c
+          metadata['voicings'].each do |voicing|
+              v = Voicing.find_or_create_by(name: voicing)
+              sv = SongVoicing.create(piece: p, voicing: v)
+          end
+          
+          if metadata["tags"]
+            metadata['tags'].each do |tag|
+              t = Tag.find_or_create_by(name: tag)
+              tagging = Tagging.create(piece: p, tag: t)
+            end
+          end
+          if metadata["language"]
+            metadata['language'].each do |lang|
+              l = Language.find_or_create_by(name: lang)
+              pl = PieceLanguage.create(piece: p, language: l)
+            end
+          end
+
+        end
+        pub = Publicationship.create(piece: p, repository: repo)
         t = Tag.find_or_create_by(name: 'translation')
         tagging = Tagging.create(piece: p, tag: t)
       end
@@ -152,5 +174,8 @@ namespace :init_db do
     Rake::Task['db:seed'].invoke 
   end
   
-  task :all => [:db_reset, :miscellaneous, :gervaise_quart, :kasha]
+  task :json => :environment do
+    Rake::Task["json:search"].invoke
+  end
+  task :all => [:db_reset, :miscellaneous, :gervaise_quart, :kasha, :json]
 end

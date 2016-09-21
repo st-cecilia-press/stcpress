@@ -28,7 +28,7 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml','.env')
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log','public/miscellaneous', 'public/bel-accueil', 'public/gervaise_quart_livre_de_danceries')
+set :linked_dirs, fetch(:linked_dirs, []).push('log','public/json', 'public/miscellaneous', 'public/bel-accueil', 'public/gervaise_quart_livre_de_danceries')
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 
 # Default value for default_env is {}

@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '3.6.0'
 
 set :application, 'stcpress'
 set :repo_url, 'git@github.com:st-cecilia-press/stcpress.git'

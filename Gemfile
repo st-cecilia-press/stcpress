@@ -33,6 +33,7 @@ gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'twitter-typeahead-rails'
 gem 'rails-assets-listjs', source: 'https://rails-assets.org'
+gem 'midilib'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

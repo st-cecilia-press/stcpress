@@ -58,6 +58,8 @@ books = Book.create([
 { slug: 'attaignant_chansons_vieilles_esleves_iii', title: "Tiers livre contenant xxx. Chansons vieilles esleves", date: Date.new(1538)},
 { slug: 'azzaiolo_primo_libro_de_viollotte', title: "Il Primo Libro de Villotte alla Padoana con alcune Napolitane a quatro voci intitolate Villotte del fiore", date: Date.new(1564)},
 { slug: 'morley_canzonettes_to_three_voyces_1606', title: "Canzonets to Three Voyces", date: Date.new(1606)},
+{ slug: 'wilbye_first_set_of_madrigals', title: "The First Set of English Madrigals to 3, 4, 5, and 6 voices: Newly Composed by John Wilbye", date: Date.new(1598)},
+{ slug: 'wilbye_second_set_of_madrigals', title: "The Second Set of English Madrigals to 3, 4, 5, and 6 voices: Newly Composed by John Wilbye", date: Date.new(1609)},
 { slug: 'vecchi_libro_secondo', title: "Canzonette di Oratio Vecchi da Modona Libro Secondo a Quattro Voci", date: Date.new(1585)}
 ])
 

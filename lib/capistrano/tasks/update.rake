@@ -19,6 +19,7 @@ namespace :update do
       within release_path do
         with rails_env: fetch(:rails_env) do
           execute :rake, 'init_db:all'
+          execute :rake, 'json:search'
         end
       end 
     end

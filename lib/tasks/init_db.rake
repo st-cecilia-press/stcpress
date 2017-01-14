@@ -22,9 +22,9 @@ namespace :init_db do
       metadata = YAML.load_file('books.yaml')
       metadata.each do |book|
         Book.create do |b|
-          b.slug = b['slug']
-          b.title = b['title']
-          b.date = b['date']
+          b.slug = book['slug']
+          b.title = book['title']
+          b.date = Date.new(book['date'])
         end
       end
     }    

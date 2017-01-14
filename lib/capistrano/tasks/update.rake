@@ -1,6 +1,9 @@
 namespace :update do
   task :pull_misc do
     on roles(:app) do
+      within '/srv/www/stcpress/shared/public/miscellaneous/include' do
+          execute :git, 'pull'
+      end 
       within '/srv/www/stcpress/shared/public/miscellaneous' do
           execute :git, 'pull'
       end 

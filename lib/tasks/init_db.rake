@@ -2,6 +2,33 @@ require 'yaml'
 require 'find'
 
 namespace :init_db do
+  task :manuscripts => :environment do
+    Dir.chdir('public/miscellaneous/include'){ |pub|
+      metadata = YAML.load_file('manuscripts.yaml')
+      metadata.each do |man|
+        manuscript = Manuscript.create do |m|
+          m.slug = man['slug']
+          m.name = man['name']
+          m.archive = man['archive']
+          m.shelfmark = man['shelfmark']
+          m.diamm = man['diamm']
+          m.description = man['description']
+        end
+      end
+    }    
+  end
+  task :books => :environment do
+    Dir.chdir('public/miscellaneous/include'){ |pub|
+      metadata = YAML.load_file('books.yaml')
+      metadata.each do |book|
+        Book.create do |b|
+          b.slug = b['slug']
+          b.title = b['title']
+          b.date = b['date']
+        end
+      end
+    }    
+  end
   task :gervaise_quart => :environment do
     r = InstrumentalBook.create do |r|
       r.slug = 'gervaise_quart_livre_de_danceries'
@@ -171,11 +198,11 @@ namespace :init_db do
   task :db_reset => :environment do
     Rake::Task['db:reset'].invoke 
     Rake::Task['db:migrate'].invoke 
-    Rake::Task['db:seed'].invoke 
+    #Rake::Task['db:seed'].invoke 
   end
   
   task :json => :environment do
     Rake::Task["json:search"].invoke
   end
-  task :all => [:db_reset, :miscellaneous, :gervaise_quart, :kasha, :json]
+  task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :json]
 end

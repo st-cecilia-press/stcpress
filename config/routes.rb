@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   namespace :tools do
     get 'metadata_generator' => 'metadata_generator#new'
+    get 'cpdl' => 'cpdl#new'
   end
   
   resources :search, only: [:create]

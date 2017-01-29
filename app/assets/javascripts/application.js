@@ -17,5 +17,7 @@
 //= require datatables
 //= require twitter/typeahead.min
 //= require listjs
+//= require pdfjs-dist
+//= require zeroclipboard
 //= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .

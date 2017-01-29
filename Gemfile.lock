@@ -45,6 +45,8 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.3.1)
       execjs
+    better-pdfjs-rails (1.6.422.0)
+      railties (~> 4.1)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.6)
@@ -170,7 +172,6 @@ GEM
       rails-assets-jquery (>= 1.7.0)
     rails-assets-jquery (3.1.0)
     rails-assets-listjs (1.2.0)
-    rails-assets-pdfjs-dist (1.7.231)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -266,6 +267,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better-pdfjs-rails
   bootstrap-sass
   byebug
   capistrano-rails
@@ -289,7 +291,6 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails-assets-datatables!
   rails-assets-listjs!
-  rails-assets-pdfjs-dist!
   recaptcha
   rspec-rails
   sass-rails (~> 5.0)

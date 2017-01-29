@@ -38,7 +38,6 @@ gem 'zeroclipboard-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'
   gem 'rails-assets-listjs'
-  gem 'rails-assets-pdfjs-dist'
 end
 
 # Use ActiveModel has_secure_password

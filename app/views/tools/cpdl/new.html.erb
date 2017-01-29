@@ -43,6 +43,11 @@
 
 <script type="text/javascript">
 $(document).ready( function () {
+      var text = '[http://stcpress.org/miscellaneous/__SLUG__/__SLUG__.pdf {{extpdf}}] [http://stcpress.org/miscellaneous/__SLUG__/__SLUG__.mid {{extmid}}] [http://stcpress.org/miscellaneous/__SLUG__/__SLUG__.mp3 {{extmp3}}] [https://github.com/st-cecilia-press/miscellaneous/blob/master/__SLUG__/__SLUG__.ly {{extly}}] [http://stcpress.org/pieces/__SLUG__ {{net}}] Part Midis and Mp3s Available' + "\n" + 
+      '{{Editor|Monique Rio|__DATE__}}{{ScoreInfo|Letter|__PAGES__|__SIZE__}}{{CopyCC|Attribution 4.0}}' + "\n" + 
+":'''Edition notes:''' "
+
+
   var client_pdf = new ZeroClipboard( document.getElementById("copy-button-pdf") );
   client_pdf.on( "ready", function( readyEvent ) {
     // alert( "ZeroClipboard SWF is ready!" );
@@ -87,38 +92,21 @@ $(document).ready( function () {
     var slug = $('#piece').val()
     var pdf_url = 'http://stcpress.org/miscellaneous/' + slug + '/' + slug + '.pdf';
     var date = new Date().toJSON().substring(0,10)
-   var url = '/miscellaneous/' + slug + '/' + slug + '.pdf';
-   var size  = parseInt(getFileSize(url)/1024)
-
-   PDFJS.getDocument(url).then(function (doc) {
-      var pages = doc.numPages;
-      var text = '[http://stcpress.org/miscellaneous/' + slug + '/' + slug + '.pdf {{extpdf}}] [http://stcpress.org/miscellaneous/' + slug +'/' + slug + '.mid {{extmid}}] [http://stcpress.org/miscellaneous/' + slug +'/' + slug + '.mp3 {{extmp3}}] [https://github.com/st-cecilia-press/miscellaneous/blob/master/' + slug + '/' + slug + '.ly {{extly}}] [http://stcpress.org/pieces/' + slug + ' {{net}}] Part Midis and Mp3s Available' + "\n" + 
-      '{{Editor|Monique Rio|' + date + '}}{{ScoreInfo|Letter|' +  pages + '|'+ size + '}}{{CopyCC|Attribution 4.0}}' + "\n" + 
-":'''Edition notes:''' "
+    var url = '/miscellaneous/' + slug + '/' + slug + '.pdf';
+    
+    $.get(url ).done(function(data,status,jqXHR){
+       var pages = data.match(/\/Type[\s]*\/Page[^s]/g).length;
+       var size = parseInt(jqXHR.getResponseHeader('content-length')/1024)
+       newText = text;
+       newText = newText.replace(/__SLUG__/g,slug).replace(/__PAGES__/g,pages)
+                        .replace(/__SIZE__/g,size).replace(/__DATE__/g,date)   
        $('#pdf').text(pdf_url)
        $('#data').text('Num Pages: ' + pages + '; Size: ' + size + ' kb')
-       $('#display').text(text)
-  });
+       $('#display').text(newText)
+
+    });
+  }
 
 
-}
-
-
-function getFileSize(url)
-{
-    var fileSize = '';
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false); // false = Synchronous
-
-    http.send(null); // it will stop here until this http request is complete
-
-    // when we are here, we already have a response, b/c we used Synchronous XHR
-
-    if (http.status === 200) {
-        fileSize = http.getResponseHeader('content-length');
-    }
-
-    return fileSize;
-}
 });
 </script>

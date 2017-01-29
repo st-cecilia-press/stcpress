@@ -1,0 +1,124 @@
+<style>
+.button-clipboard {
+    position: absolute;
+    top: 0px;
+    right:  0px;
+    z-index: 10;
+    display: block;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #767676;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #e1e1e8;
+    border-radius: 0 4px 0 4px;
+    */
+  }
+</style>
+<div class="col-md-6 col-md-offset-3">
+    <h3 style="text-align:center">CPDL Tool</h3>
+    
+    <%= form_tag request.path, class: 'metadata' do |f| %>
+    
+      <div class="form-group">
+         <%= label_tag 'Piece' %>
+         <%= text_field_tag :piece, nil, class: 'form-control typeahead' %>
+      </div>
+  <% end %>
+      <button class="btn btn-default" onclick="myFunction()">Select</button>
+<br><br>
+      <div style="display:flex;position:relative">
+      <button class='button-clipboard' id="copy-button-pdf" data-clipboard-text="Copy Me!" title="Copy">Copy</button>
+      </div>
+<pre id='pdf'>
+</pre>
+    <div id="data">
+    </div>
+      <div style = "display:flex;position:relative">
+      <button class='button-clipboard' id="copy-button-display" data-clipboard-text="Copy Me!" title="Click to copy me.">Copy</button>
+      </div>
+    <pre id="display">
+    </pre>
+</div>
+
+<script type="text/javascript">
+$(document).ready( function () {
+  var client_pdf = new ZeroClipboard( document.getElementById("copy-button-pdf") );
+  client_pdf.on( "ready", function( readyEvent ) {
+    // alert( "ZeroClipboard SWF is ready!" );
+    client_pdf.on( 'beforecopy', function(event){
+      var text = $('#pdf').html()
+      $('#copy-button-pdf').attr('data-clipboard-text', text)
+    })
+  
+  } );
+
+  var client_display = new ZeroClipboard( document.getElementById("copy-button-display") );
+  client_display.on( "ready", function( readyEvent ) {
+    // alert( "ZeroClipboard SWF is ready!" );
+
+    client_display.on( 'beforecopy', function(event){
+      var text = $('#display').html()
+      $('#copy-button-display').attr('data-clipboard-text', text)
+    })
+  
+  } );
+
+  var pieces = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('piece'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: [
+      <% @pieces.each do |piece| %>
+        { piece: "<%= piece.slug %>" },
+      <% end %>
+    ]
+  });
+  
+  // initialize the bloodhound suggestion engine
+  pieces.initialize();
+  
+  // instantiate the typeahead UI
+  $('#piece').typeahead(null, {
+    displayKey: 'piece',
+    source: pieces.ttAdapter()
+  });
+
+  myFunction = function(){
+    var slug = $('#piece').val()
+    var pdf_url = 'http://stcpress.org/miscellaneous/' + slug + '/' + slug + '.pdf';
+    var date = new Date().toJSON().substring(0,10)
+   var url = '/miscellaneous/' + slug + '/' + slug + '.pdf';
+   var size  = parseInt(getFileSize(url)/1024)
+
+   PDFJS.getDocument(url).then(function (doc) {
+      var pages = doc.numPages;
+      var text = '[http://stcpress.org/miscellaneous/' + slug + '/' + slug + '.pdf {{extpdf}}] [http://stcpress.org/miscellaneous/' + slug +'/' + slug + '.mid {{extmid}}] [http://stcpress.org/miscellaneous/' + slug +'/' + slug + '.mp3 {{extmp3}}] [https://github.com/st-cecilia-press/miscellaneous/blob/master/' + slug + '/' + slug + '.ly {{extly}}] [http://stcpress.org/pieces/' + slug + ' {{net}}] Part Midis and Mp3s Available' + "\n" + 
+      '{{Editor|Monique Rio|' + date + '}}{{ScoreInfo|Letter|' +  pages + '|'+ size + '}}{{CopyCC|Attribution 4.0}}' + "\n" + 
+":'''Edition notes:''' "
+       $('#pdf').text(pdf_url)
+       $('#data').text('Num Pages: ' + pages + '; Size: ' + size + ' kb')
+       $('#display').text(text)
+  });
+
+
+}
+
+
+function getFileSize(url)
+{
+    var fileSize = '';
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false); // false = Synchronous
+
+    http.send(null); // it will stop here until this http request is complete
+
+    // when we are here, we already have a response, b/c we used Synchronous XHR
+
+    if (http.status === 200) {
+        fileSize = http.getResponseHeader('content-length');
+    }
+
+    return fileSize;
+}
+});
+</script>

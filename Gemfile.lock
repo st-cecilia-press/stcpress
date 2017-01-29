@@ -170,6 +170,8 @@ GEM
       rails-assets-jquery (>= 1.7.0)
     rails-assets-jquery (3.1.0)
     rails-assets-listjs (1.2.0)
+    rails-assets-pdfjs-dist (1.7.231)
+    rails-assets-zeroclipboard (2.3.0)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -286,6 +288,8 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails-assets-datatables!
   rails-assets-listjs!
+  rails-assets-pdfjs-dist!
+  rails-assets-zeroclipboard!
   recaptcha
   rspec-rails
   sass-rails (~> 5.0)

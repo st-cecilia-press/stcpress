@@ -33,12 +33,12 @@ gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'twitter-typeahead-rails'
 gem 'midilib'
+gem 'zeroclipboard-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'
   gem 'rails-assets-listjs'
   gem 'rails-assets-pdfjs-dist'
-  gem 'rails-assets-zeroclipboard'
 end
 
 # Use ActiveModel has_secure_password

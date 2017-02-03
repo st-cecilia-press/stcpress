@@ -1,11 +1,12 @@
 <h1><%=@manuscript.name%></h1>
 
 <table class="table">
-    <tr><th>Piece</th><th>Composer</th><th>Position in Manuscript</th><th>DIAMM</th></tr>
+    <tr><th>Piece</th><th>Composer</th><th>Date</th><th>Position in Manuscript</th><th>DIAMM</th></tr>
     <% @manuscript.pieces.each do |piece| %>
         <% mc = ManuscriptContent.find_by(piece: piece, manuscript: @manuscript) %>
         <tr><td><%= link_to piece.title, piece.url %></td>
         <td><%=piece.composer.name%></td>
+        <td><%= piece.date %></td>
         <td><%=mc.position%></td>
         <td><% unless mc.diamm.blank? %>
           <%= link_to 'DIAMM', mc.diamm_link %>

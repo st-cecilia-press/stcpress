@@ -1,9 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "dataTables.bootstrap.min";
+@import 'bootstrap-slider';
 @import 'font-awesome';
 @import "typeaheadjs";
 
+.slider {
+    width: 100% !important;
+}
 body {
   padding-top: 50px;
 }

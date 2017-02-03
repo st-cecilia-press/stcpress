@@ -18,5 +18,6 @@
 //= require twitter/typeahead.min
 //= require listjs
 //= require zeroclipboard
+//= require bootstrap-slider
 //= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .

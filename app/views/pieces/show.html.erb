@@ -5,8 +5,9 @@
 <h2>Info</h2>
 <b>Number of Voices</b>: <%= @piece.voicings.exists? ? @piece.voicings.first.num_parts : 0 %><br>
 <b>Voicings</b>: <%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %><br>
+<b>Date</b>: <%= @piece.date %><br/>
 <% unless @piece.languages.first.nil? %>
-  <b>Language</b>:<%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %><br><% end %>
+  <b>Language</b>: <%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %><br><% end %>
 <b>Tags</b>: <%= render partial: 'tags/tag', collection: @piece.tags%><br>
   
   

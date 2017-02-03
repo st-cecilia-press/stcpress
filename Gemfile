@@ -34,6 +34,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'twitter-typeahead-rails'
 gem 'midilib'
 gem 'zeroclipboard-rails'
+gem 'bootstrap-slider-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

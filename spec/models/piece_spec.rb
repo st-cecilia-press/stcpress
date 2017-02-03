@@ -74,4 +74,9 @@ RSpec.describe Piece, "date_description" do
     date = piece.date
     expect(date).to eq('14th - 15th century')
   end
+  it 'returns empty string if date is 0' do
+    piece = create(:piece, start_date: 0, end_date: 0) 
+    date = piece.date
+    expect(date).to eq('')
+  end
 end

@@ -1,8 +1,8 @@
 <h1><%=@repo.name%></h1>
 <h3> Pieces</h3>
 <br>
-<b>Start Year</b>: <span id="min">0</span> | <b>End Year</b>: <span id="max" >1700</span> <button id="reset-dates" class="btn btn-sm btn-default">Reset Dates</button>
-<input id="dateRange" type="text" class="span2" value="" data-slider-min="1000" data-slider-max="1700" data-slider-step="10" data-slider-value="[1000,1700]"/>
+<b>Start Year</b>: <span id="min">900</span> | <b>End Year</b>: <span id="max" >1700</span> <button id="reset-dates" class="btn btn-sm btn-default">Reset Dates</button>
+<input id="dateRange" type="text" class="span2" value="" data-slider-min="1000" data-slider-max="1700" data-slider-step="10" data-slider-value="[900,1700]"/>
 <br>
 <br>
 <table class="table">
@@ -31,18 +31,12 @@ $.fn.dataTable.ext.search.push(
     function( settings, data, dataIndex ) {
         var min = parseInt( $('#min').text(), 10 );
         var max = parseInt( $('#max').text(), 10 );
-        var start_date = parseFloat( data[3] ) || 1000; // use data for the start_date column
-        var end_date = parseFloat( data[3] ) || 1700; // use data for the end_date column
-        if (start_date == 0){
-          start_date = 1000
-        }
-        if (end_date == 0){
-          end_date = 1700
-        }
+        var start_date = parseFloat( data[3] ) || 900; // use data for the start_date column
+        var end_date = parseFloat( data[4] ) || 1700; // use data for the end_date column
  
         if ( ( isNaN( min ) && isNaN( max ) ) ||
-             ( isNaN( min ) && end_date <= max ) ||
-             ( min <= start_date  && isNaN( max ) ) ||
+             ( isNaN( min ) && start_date <= max ) ||
+             ( min <= end_date  && isNaN( max ) ) ||
              ( min <= start_date   && end_date <= max ) )
         {
             return true;

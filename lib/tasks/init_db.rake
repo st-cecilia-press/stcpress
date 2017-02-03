@@ -37,8 +37,7 @@ namespace :init_db do
     Dir.chdir('public/gervaise_quart_livre_de_danceries'){ |p|
       metadata = YAML.load_file('metadata.yaml')
       composer = Composer.find_or_create_by(name: metadata['composer'])
-      book = Book.create do |b|
-        b.slug = 'gervaise_quart_livre_de_danceries'
+      book = Book.find_or_create_by(slug: 'gervaise_quart_livre_de_danceries') do |b|
         b.title = metadata['title']
         b.date = Date.new(metadata['date'])
       end
@@ -51,6 +50,8 @@ namespace :init_db do
           p.title = title
           p.composer = composer
           p.slug = piece["slug"]
+          p.start_date = metadata['date']
+          p.end_date = metadata['date']
         end
         piece['voicings'].each do |voicing|
           v = Voicing.find_or_create_by(name: voicing) 
@@ -179,9 +180,20 @@ namespace :init_db do
         metadata = YAML.load_file("./#{slug}/metadata.yaml")
         p = Piece.find_or_create_by(slug: slug)
         if p.title.nil?
+          start_date = 0
+          end_date = 0
+          if metadata['dates'].count == 1
+            start_date = metadata['dates'][0]
+            end_date = metadata['dates'][0]
+          else
+            start_date = metadata['dates'][0]
+            end_date = metadata['dates'][1]
+          end
           p.title = metadata['title']
           c = Composer.find_or_create_by(name: metadata['composer'])
           p.composer = c
+          p.start_date = start_date
+          p.end_date = end_date
           metadata['voicings'].each do |voicing|
               v = Voicing.find_or_create_by(name: voicing)
               sv = SongVoicing.create(piece: p, voicing: v)
@@ -218,6 +230,8 @@ namespace :init_db do
     Rake::Task["json:search"].invoke
   end
 
+  task :reset_gervaise => [:db_reset, :manuscripts, :books, :gervaise_quart, :json]
   task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous, :json]
+  task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
   task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :json]
 end

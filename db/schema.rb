@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920205146) do
+ActiveRecord::Schema.define(version: 20170203005144) do
 
   create_table "book_contents", force: :cascade do |t|
     t.integer  "piece_id"
@@ -94,6 +94,8 @@ ActiveRecord::Schema.define(version: 20160920205146) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug"
+    t.integer  "start_date"
+    t.integer  "end_date"
   end
 
   add_index "pieces", ["composer_id"], name: "index_pieces_on_composer_id"

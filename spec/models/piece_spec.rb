@@ -57,3 +57,21 @@ RSpec.describe Piece, "image_repo" do
     expect(image_repo).to eq("other")
   end
 end
+
+RSpec.describe Piece, "date_description" do
+  it 'returns year if single year' do
+    piece = create(:piece, start_date: 1500, end_date: 1500) 
+    date = piece.date
+    expect(date).to eq('1500')
+  end
+  it 'returns single century if dates within a single century' do
+    piece = create(:piece, start_date: 1401, end_date: 1450) 
+    date = piece.date
+    expect(date).to eq('15th century')
+  end
+  it 'returns multiple centuries if dates over multiple centuries' do
+    piece = create(:piece, start_date: 1301, end_date: 1450) 
+    date = piece.date
+    expect(date).to eq('14th - 15th century')
+  end
+end

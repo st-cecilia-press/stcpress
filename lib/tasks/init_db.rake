@@ -91,10 +91,23 @@ namespace :init_db do
         puts slug
         metadata = YAML.load_file("#{slug}/metadata.yaml")
         c = Composer.find_or_create_by(name: metadata['composer'])
+        start_date = 0 
+        end_date = 0
+        if metadata['dates']
+          if metadata['dates'].count == 1
+            start_date = metadata['dates'][0]
+            end_date = metadata['dates'][0]
+          else
+            start_date = metadata['dates'][0]
+            end_date = metadata['dates'][1]
+          end
+        end
         piece = Piece.create do |p|
           p.title = metadata['title']
           p.composer = c
           p.slug = slug
+          p.start_date = start_date
+          p.end_date = end_date
         end
         metadata['voicings'].each do |voicing|
           v = Voicing.find_or_create_by(name: voicing) 
@@ -204,5 +217,7 @@ namespace :init_db do
   task :json => :environment do
     Rake::Task["json:search"].invoke
   end
+
+  task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous, :json]
   task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :json]
 end

@@ -1,8 +1,22 @@
 <h1><%=@repo.name%></h1>
 <h3> Pieces</h3>
 <br>
-<b>Start Year</b>: <span id="min">900</span> | <b>End Year</b>: <span id="max" >1700</span> <button id="reset-dates" class="btn btn-sm btn-default">Reset Dates</button>
-<input id="dateRange" type="text" class="span2" value="" data-slider-min="1000" data-slider-max="1700" data-slider-step="10" data-slider-value="[900,1700]"/>
+<div class="btn-group" role="group" aria-label="...">
+<button type="button" id="reset-dates" class="btn btn-sm btn-primary">Reset Dates</button>
+<button type="button" class="btn btn-sm btn-default" id="tenth">10th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="eleventh">11th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="twelfth">12th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="thirteenth">13th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="fourteenth">14th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="fifteenth">15th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="sixteenth">16th C.</button>
+<button type="button" class="btn btn-sm btn-default" id="seventeenth">17th C.</button>
+
+</div>
+<br>
+<br>
+<p><b>Start Year</b>: <span id="min">900</span> | <b>End Year</b>: <span id="max" >1700</span> </p>
+<input id="dateRange" type="text" class="span2" value="" data-slider-min="900" data-slider-max="1700" data-slider-step="1" data-slider-value="[900,1700]" data-slider-ticks='["900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"]' data-slider-ticks-labels='["900", "1000", "1100", "1200", "1300", "1400", "1500", "1600", "1700"]'/>
 <br>
 <br>
 <table class="table">
@@ -63,6 +77,30 @@ $(document).ready( function () {
 
     $("#reset-dates").click(function(){
       mySlider.slider('setValue', [0,1700],true,true)
+    });
+    $("#tenth").click(function(){
+      mySlider.slider('setValue', [900,999],true,true)
+    });
+    $("#eleventh").click(function(){
+      mySlider.slider('setValue', [1000,1099],true,true)
+    });
+    $("#twelfth").click(function(){
+      mySlider.slider('setValue', [1100,1199],true,true)
+    });
+    $("#thirteenth").click(function(){
+      mySlider.slider('setValue', [1200,1299],true,true)
+    });
+    $("#fourteenth").click(function(){
+      mySlider.slider('setValue', [1300,1399],true,true)
+    });
+    $("#fifteenth").click(function(){
+      mySlider.slider('setValue', [1400,1499],true,true)
+    });
+    $("#sixteenth").click(function(){
+      mySlider.slider('setValue', [1500,1599],true,true)
+    });
+    $("#seventeenth").click(function(){
+      mySlider.slider('setValue', [1600,1699],true,true)
     });
 } );
 </script>

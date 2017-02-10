@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :facsimile_source do
+    name "MyString"
+    url "MyString"
+    manuscript 
+    book 
+  end
   factory :tagging do
     tag
     piece

@@ -14,6 +14,15 @@ namespace :init_db do
           m.diamm = man['diamm']
           m.description = man['description']
         end
+        if man['urls'] 
+          man['urls'].each do |fsource|
+            fs = FacsimileSource.create do |f|
+              f.name = fsource['name']
+              f.url = fsource['url']
+              f.manuscript = manuscript
+            end
+          end
+        end
       end
     }    
   end
@@ -21,10 +30,19 @@ namespace :init_db do
     Dir.chdir('public/miscellaneous/include'){ |pub|
       metadata = YAML.load_file('books.yaml')
       metadata.each do |book|
-        Book.create do |b|
+        bk = Book.create do |b|
           b.slug = book['slug']
           b.title = book['title']
           b.date = Date.new(book['date'])
+        end
+        if book['urls']
+          book['urls'].each do |fsource|
+            fs = FacsimileSource.create do |f|
+              f.name = fsource['name']
+              f.url = fsource['url']
+              f.book = bk
+            end
+          end
         end
       end
     }    

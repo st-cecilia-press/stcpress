@@ -1,7 +1,9 @@
 <h1>Manuscripts</h1>
 <table class="table">
-    <tr><th>Name</th><th>Archive</th><th>Shelfmark</th><th>Diamm</th></tr>
-
+<thead>
+    <tr><th>Name</th><th>Archive</th><th>Shelfmark</th><th>Diamm</th><th>Facsimiles</th></tr>
+</thead>
+<tbody>
 <% for @manuscript in @manuscripts %>
 <tr>
     <td><%= link_to @manuscript.name, manuscript_path(@manuscript.slug) %></a></td>
@@ -9,9 +11,24 @@
   <td><%=@manuscript.shelfmark%></td>
   <td> 
   <% unless @manuscript.diamm.blank? %>
-    <%= link_to 'DIAMM', @manuscript.diamm_link %>
+    <%= link_to 'LINK', @manuscript.diamm_link %>
+  <% end %>
+  </td>
+  <td>
+  <% if @manuscript.facsimile_sources.count > 0 %>
+    <%= render partial: 'facsimile_sources/facsimile_source', collection: @manuscript.facsimile_sources, spacer_template: 'shared/comma' %>
   <% end %>
   </td>
 </tr>
 <% end %>
+</tbody>
 </table>
+<script type="text/javascript">
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>

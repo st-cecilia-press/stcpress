@@ -20,8 +20,14 @@
         <b>Archive:</b> <%= mc.manuscript.archive %> <b>Shelfmark:</b> <%= mc.manuscript.shelfmark %> 
     <b>Position in Manuscript:</b> <%= mc.position %> 
     <% unless mc.diamm.blank? %>
-    <%= link_to 'DIAMM', mc.diamm_link %><br/>
+    <%= link_to 'DIAMM', mc.diamm_link %>
     <% end %><br/>
+  <% if mc.manuscript.facsimile_sources.count > 0 %>
+    <b>Manuscript Facsimiles</b>: 
+<%= render partial: 'facsimile_sources/facsimile_source', collection: mc.manuscript.facsimile_sources, spacer_template: 'shared/comma' %>
+    
+  <% end %>
+    
   
         <% if mc.images.count > 0 %>
             <ul>
@@ -35,7 +41,12 @@
   
   <% if @piece.books.count > 0 %>
     <% @piece.book_contents.each do |bc| %>
-      <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | Publication Year: <%= bc.book.date.strftime('%Y') %><br/>
+      <%= link_to bc.book.title, book_path(slug: bc.book.slug) %> | <b>Publication Year</b>: <%= bc.book.date.strftime('%Y') %><br/>
+  <% if bc.book.facsimile_sources.count > 0 %>
+    <b>Book Facsimile(s)</b>: 
+<%= render partial: 'facsimile_sources/facsimile_source', collection: bc.book.facsimile_sources, spacer_template: 'shared/comma' %>
+    
+  <% end %>
       <% if bc.images.count > 0 %>
           <ul>
               <% bc.images.each do |img| %>

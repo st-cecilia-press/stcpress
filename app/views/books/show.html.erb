@@ -1,2 +1,34 @@
 <h1><%=@book.title%> <small><%= render partial: 'composer', collection: @composers, spacer_template: 'shared/comma'%></small></h1>
-<%= render partial: "pieces/pieces_table" %>
+<ul>
+  <li><b>Publication Year</b>: <%=@book.date.strftime('%Y')%></li>
+  <li><b>Facsimile(s)</b>: 
+<%= render partial: 'facsimile_sources/facsimile_source', collection: @book.facsimile_sources, spacer_template: 'shared/comma' %>
+  </li>
+</ul>
+<br><br>
+<table class="table">
+<thead>
+<tr><th>Title</th><th>Composer</th><th>Voicings</th><th>Language</th><th>Tags</th></tr>
+</thead>
+<tbody>
+<% for @piece in @pieces %>
+<tr>
+  <td><%= link_to @piece.title, @piece.url %></td>
+  <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
+  <td><%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'languages/language', collection: @piece.languages, spacer_template: 'shared/comma' %></td>
+  <td><%= render partial: 'tags/tag', collection: @piece.tags%></td>
+</tr>
+<% end %>
+</tbody>
+
+</table>
+<script type="text/javascript">
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>

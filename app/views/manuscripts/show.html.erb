@@ -1,5 +1,19 @@
 <h1><%=@manuscript.name%></h1>
-
+<ul>
+  <li><b>Archive</b>: <%=@manuscript.archive%></li>
+  <li><b>Shelfmark</b>: <%=@manuscript.shelfmark%></li>
+  <% if @manuscript.description %>
+  <li><b>Description</b>: <%=@manuscript.description%></li>
+  <% end %>
+  <% if @manuscript.diamm %>
+  <li><%= link_to 'DIAMM',@manuscript.diamm_link %></li>
+  <% end %>
+  <% if @manuscript.facsimile_sources.count > 0 %>
+    <li><b>Facsimile(s)</b>: 
+<%= render partial: 'facsimile_sources/facsimile_source', collection: @manuscript.facsimile_sources, spacer_template: 'shared/comma' %>
+    </li>
+  <% end %>
+</ul>
 <table class="table">
     <tr><th>Piece</th><th>Composer</th><th>Date</th><th>Position in Manuscript</th><th>DIAMM</th></tr>
     <% @manuscript.pieces.each do |piece| %>

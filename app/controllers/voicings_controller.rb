@@ -4,6 +4,7 @@ class VoicingsController < ApplicationController
     @number_of_voices =  @voicings.each.map{ |voice| voice.name.length}.uniq.sort
   end
   def show
+    @voicing = params[:voicing]
     if params[:voicing].to_i > 0
       num = params[:voicing].to_i
       v = Voicing.all

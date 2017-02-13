@@ -235,3 +235,93 @@ namespace :init_db do
   task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
   task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :json]
 end
+
+class Metadata
+  def initialize(metadata, slug)
+    @metadata = metadata
+    @slug = slug
+    @composer = Composer.find_or_create_by(name: @metadata['composer'])
+    @start_date = 0
+    @end_date = 0
+    dates
+    @piece 
+  end
+
+  def dates
+    if @metadata['dates']
+      if @metadata['dates'].count == 1
+        @start_date = @metadata['dates'][0]
+        @end_date = @metadata['dates'][0]
+      else
+        @start_date = @metadata['dates'][0]
+        @end_date = @metadata['dates'][1]
+      end
+    end
+  end
+
+  def process
+
+    Piece.create do |p|
+      p.title = @metadata['title']
+      p.composer = @composer
+      p.slug = @slug
+      p.start_date = @start_date
+      p.end_date = @end_date
+    end
+
+    metadata['voicings'].each do |voicing|
+      v = Voicing.find_or_create_by(name: voicing) 
+      sv = SongVoicing.create(piece: piece, voicing: v) 
+    end
+    if metadata["tags"]
+      metadata['tags'].each do |tag|
+        t = Tag.find_or_create_by(name: tag)
+        tagging = Tagging.create(piece: piece, tag: t)
+      end
+    end
+    t = Tag.find_or_create_by(name: 'original language')
+    tagging = Tagging.create(piece: piece, tag: t)
+    if metadata["language"]
+      metadata['language'].each do |lang|
+        l = Language.find_or_create_by(name: lang)
+        pl = PieceLanguage.create(piece: piece, language: l)
+      end
+    end
+    publicationship = Publicationship.create(piece: piece, repository: r)
+    if metadata["manuscripts"]
+      metadata["manuscripts"].each do |manuscript|
+        m = Manuscript.find_by(name: manuscript["name"]) 
+        mc = ManuscriptContent.create(piece: piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
+        if manuscript["images"]
+          manuscript["images"].each do |image|
+            img = Image.create do |i|
+              i.manuscript_content_id =  mc.id 
+              i.url =  image["url"]  if image["url"]
+              i.filename =  image["filename"] if image["filename"]
+              i.name =  image["name"] if image["name"]
+              i.description =  image["description"] if image["description"]
+            end
+          end
+        end
+      end
+    end
+    if metadata["books"]
+      metadata["books"].each do |book|
+        b = Book.find_by(slug: book["slug"])
+        bc = BookContent.create(piece: piece, book: b)
+        if book["images"]
+          book["images"].each do |image|
+            img = Image.create do |i|
+              i.book_content_id =  bc.id 
+              i.url =  image["url"]  if image["url"]
+              i.filename =  image["filename"] if image["filename"]
+              i.name =  image["name"] if image["name"]
+              i.description =  image["description"] if image["description"]
+            end
+          end
+        end
+      end
+    end
+  end
+  
+end

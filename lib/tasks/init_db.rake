@@ -112,6 +112,7 @@ namespace :init_db do
           piece = Metadata.new(metadata, slug, repo)
           piece.set_tag('translation')
         else
+          pub = Publicationship.create(piece: p, repository: repo)
           translation = Tag.find_or_create_by(name: 'translation')
           Tagging.create(piece: p, tag: translation)
           if metadata["tags"] 
@@ -124,47 +125,6 @@ namespace :init_db do
       end
     }
   end
-
-          
-#          start_date = 0
-#          end_date = 0
-#          if metadata['dates'].count == 1
-#            start_date = metadata['dates'][0]
-#            end_date = metadata['dates'][0]
-#          else
-#            start_date = metadata['dates'][0]
-#            end_date = metadata['dates'][1]
-#          end
-#          p.title = metadata['title']
-#          c = Composer.find_or_create_by(name: metadata['composer'])
-#          p.composer = c
-#          p.start_date = start_date
-#          p.end_date = end_date
-#          metadata['voicings'].each do |voicing|
-#              v = Voicing.find_or_create_by(name: voicing)
-#              sv = SongVoicing.create(piece: p, voicing: v)
-#          end
-#          
-#          if metadata["tags"]
-#            metadata['tags'].each do |tag|
-#              t = Tag.find_or_create_by(name: tag)
-#              tagging = Tagging.create(piece: p, tag: t)
-#            end
-#          end
-#          if metadata["language"]
-#            metadata['language'].each do |lang|
-#              l = Language.find_or_create_by(name: lang)
-#              pl = PieceLanguage.create(piece: p, language: l)
-#            end
-#          end
-#
-#        end
-#        pub = Publicationship.create(piece: p, repository: repo)
-#        t = Tag.find_or_create_by(name: 'translation')
-#        tagging = Tagging.create(piece: p, tag: t)
-#      end
-#    }
-#  end
 
   task :db_reset => :environment do
     Rake::Task['db:reset'].invoke 

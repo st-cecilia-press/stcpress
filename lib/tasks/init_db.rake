@@ -82,7 +82,7 @@ namespace :init_db do
     }
   end
   task :miscellaneous => :environment do
-    r = VocalCollection.create do |r|
+    repo = VocalCollection.create do |r|
       r.slug = 'miscellaneous'
       r.name = "Monique's Miscellaneous Editions"
     end
@@ -91,80 +91,9 @@ namespace :init_db do
       directories.each do |slug|
         puts slug
         metadata = YAML.load_file("#{slug}/metadata.yaml")
-        c = Composer.find_or_create_by(name: metadata['composer'])
-        start_date = 0 
-        end_date = 0
-        if metadata['dates']
-          if metadata['dates'].count == 1
-            start_date = metadata['dates'][0]
-            end_date = metadata['dates'][0]
-          else
-            start_date = metadata['dates'][0]
-            end_date = metadata['dates'][1]
-          end
-        end
-        piece = Piece.create do |p|
-          p.title = metadata['title']
-          p.composer = c
-          p.slug = slug
-          p.start_date = start_date
-          p.end_date = end_date
-        end
-        metadata['voicings'].each do |voicing|
-          v = Voicing.find_or_create_by(name: voicing) 
-          sv = SongVoicing.create(piece: piece, voicing: v) 
-        end
-        if metadata["tags"]
-          metadata['tags'].each do |tag|
-            t = Tag.find_or_create_by(name: tag)
-            tagging = Tagging.create(piece: piece, tag: t)
-          end
-        end
-        t = Tag.find_or_create_by(name: 'original language')
-        tagging = Tagging.create(piece: piece, tag: t)
-        if metadata["language"]
-          metadata['language'].each do |lang|
-            l = Language.find_or_create_by(name: lang)
-            pl = PieceLanguage.create(piece: piece, language: l)
-          end
-        end
-        publicationship = Publicationship.create(piece: piece, repository: r)
-        if metadata["manuscripts"]
-          metadata["manuscripts"].each do |manuscript|
-            m = Manuscript.find_by(name: manuscript["name"]) 
-            mc = ManuscriptContent.create(piece: piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
-            if manuscript["images"]
-              manuscript["images"].each do |image|
-                img = Image.create do |i|
-                  i.manuscript_content_id =  mc.id 
-                  i.url =  image["url"]  if image["url"]
-                  i.filename =  image["filename"] if image["filename"]
-                  i.name =  image["name"] if image["name"]
-                  i.description =  image["description"] if image["description"]
-                end
-              end
-            end
-          end
-        end
-        if metadata["books"]
-          metadata["books"].each do |book|
-            b = Book.find_by(slug: book["slug"])
-            bc = BookContent.create(piece: piece, book: b)
-            if book["images"]
-              book["images"].each do |image|
-                img = Image.create do |i|
-                  i.book_content_id =  bc.id 
-                  i.url =  image["url"]  if image["url"]
-                  i.filename =  image["filename"] if image["filename"]
-                  i.name =  image["name"] if image["name"]
-                  i.description =  image["description"] if image["description"]
-                end
-              end
-            end
-          end
-        end
+        piece = Metadata.new(metadata, slug, repo)
+        piece.set_tag('original language')
       end
-
     }
   end
 
@@ -180,45 +109,62 @@ namespace :init_db do
         metadata = YAML.load_file("./#{slug}/metadata.yaml")
         p = Piece.find_or_create_by(slug: slug)
         if p.title.nil?
-          start_date = 0
-          end_date = 0
-          if metadata['dates'].count == 1
-            start_date = metadata['dates'][0]
-            end_date = metadata['dates'][0]
-          else
-            start_date = metadata['dates'][0]
-            end_date = metadata['dates'][1]
-          end
-          p.title = metadata['title']
-          c = Composer.find_or_create_by(name: metadata['composer'])
-          p.composer = c
-          p.start_date = start_date
-          p.end_date = end_date
-          metadata['voicings'].each do |voicing|
-              v = Voicing.find_or_create_by(name: voicing)
-              sv = SongVoicing.create(piece: p, voicing: v)
-          end
-          
-          if metadata["tags"]
-            metadata['tags'].each do |tag|
+          piece = Metadata.new(metadata, slug, repo)
+          piece.set_tag('translation')
+        else
+          translation = Tag.find_or_create_by(name: 'translation')
+          Tagging.create(piece: p, tag: translation)
+          if metadata["tags"] 
+            metadata["tags"].each do |tag|
               t = Tag.find_or_create_by(name: tag)
-              tagging = Tagging.create(piece: p, tag: t)
+              tagging = Tagging.where(piece: p).find_or_create_by(tag: t)
             end
           end
-          if metadata["language"]
-            metadata['language'].each do |lang|
-              l = Language.find_or_create_by(name: lang)
-              pl = PieceLanguage.create(piece: p, language: l)
-            end
-          end
-
         end
-        pub = Publicationship.create(piece: p, repository: repo)
-        t = Tag.find_or_create_by(name: 'translation')
-        tagging = Tagging.create(piece: p, tag: t)
       end
     }
   end
+
+          
+#          start_date = 0
+#          end_date = 0
+#          if metadata['dates'].count == 1
+#            start_date = metadata['dates'][0]
+#            end_date = metadata['dates'][0]
+#          else
+#            start_date = metadata['dates'][0]
+#            end_date = metadata['dates'][1]
+#          end
+#          p.title = metadata['title']
+#          c = Composer.find_or_create_by(name: metadata['composer'])
+#          p.composer = c
+#          p.start_date = start_date
+#          p.end_date = end_date
+#          metadata['voicings'].each do |voicing|
+#              v = Voicing.find_or_create_by(name: voicing)
+#              sv = SongVoicing.create(piece: p, voicing: v)
+#          end
+#          
+#          if metadata["tags"]
+#            metadata['tags'].each do |tag|
+#              t = Tag.find_or_create_by(name: tag)
+#              tagging = Tagging.create(piece: p, tag: t)
+#            end
+#          end
+#          if metadata["language"]
+#            metadata['language'].each do |lang|
+#              l = Language.find_or_create_by(name: lang)
+#              pl = PieceLanguage.create(piece: p, language: l)
+#            end
+#          end
+#
+#        end
+#        pub = Publicationship.create(piece: p, repository: repo)
+#        t = Tag.find_or_create_by(name: 'translation')
+#        tagging = Tagging.create(piece: p, tag: t)
+#      end
+#    }
+#  end
 
   task :db_reset => :environment do
     Rake::Task['db:reset'].invoke 
@@ -237,30 +183,39 @@ namespace :init_db do
 end
 
 class Metadata
-  def initialize(metadata, slug)
+  def initialize(metadata, slug, repo)
     @metadata = metadata
     @slug = slug
     @composer = Composer.find_or_create_by(name: @metadata['composer'])
     @start_date = 0
     @end_date = 0
     dates
-    @piece 
+    @piece = piece
+    Publicationship.create(piece: @piece, repository: repo)
+    voicings
+    tags
+    languages
+    manuscripts
+    books
+  end
+
+  def set_tag(tag)
+    t = Tag.find_or_create_by(name: tag)
+    tagging = Tagging.create(piece: @piece, tag: t)
   end
 
   def dates
     if @metadata['dates']
+      @start_date = @metadata['dates'][0]
       if @metadata['dates'].count == 1
-        @start_date = @metadata['dates'][0]
         @end_date = @metadata['dates'][0]
       else
-        @start_date = @metadata['dates'][0]
         @end_date = @metadata['dates'][1]
       end
     end
   end
 
-  def process
-
+  def piece
     Piece.create do |p|
       p.title = @metadata['title']
       p.composer = @composer
@@ -268,58 +223,68 @@ class Metadata
       p.start_date = @start_date
       p.end_date = @end_date
     end
+  end
 
-    metadata['voicings'].each do |voicing|
+  def voicings
+    @metadata['voicings'].each do |voicing|
       v = Voicing.find_or_create_by(name: voicing) 
-      sv = SongVoicing.create(piece: piece, voicing: v) 
+      sv = SongVoicing.create(piece: @piece, voicing: v) 
     end
-    if metadata["tags"]
-      metadata['tags'].each do |tag|
+  end
+
+  def tags
+    if @metadata["tags"]
+      @metadata['tags'].each do |tag|
         t = Tag.find_or_create_by(name: tag)
-        tagging = Tagging.create(piece: piece, tag: t)
+        tagging = Tagging.create(piece: @piece, tag: t)
       end
     end
-    t = Tag.find_or_create_by(name: 'original language')
-    tagging = Tagging.create(piece: piece, tag: t)
-    if metadata["language"]
-      metadata['language'].each do |lang|
+  end
+
+
+  
+  def languages
+    if @metadata["language"]
+      @metadata['language'].each do |lang|
         l = Language.find_or_create_by(name: lang)
-        pl = PieceLanguage.create(piece: piece, language: l)
+        pl = PieceLanguage.create(piece: @piece, language: l)
       end
     end
-    publicationship = Publicationship.create(piece: piece, repository: r)
-    if metadata["manuscripts"]
-      metadata["manuscripts"].each do |manuscript|
+  end
+
+  def manuscripts
+    if @metadata["manuscripts"]
+      @metadata["manuscripts"].each do |manuscript|
         m = Manuscript.find_by(name: manuscript["name"]) 
-        mc = ManuscriptContent.create(piece: piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
+        mc = ManuscriptContent.create(piece: @piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
         if manuscript["images"]
-          manuscript["images"].each do |image|
-            img = Image.create do |i|
-              i.manuscript_content_id =  mc.id 
-              i.url =  image["url"]  if image["url"]
-              i.filename =  image["filename"] if image["filename"]
-              i.name =  image["name"] if image["name"]
-              i.description =  image["description"] if image["description"]
-            end
-          end
+          images(manuscript["images"], 'manuscript', mc.id)
         end
       end
     end
-    if metadata["books"]
-      metadata["books"].each do |book|
+  end
+
+  def books
+    if @metadata["books"]
+      @metadata["books"].each do |book|
         b = Book.find_by(slug: book["slug"])
-        bc = BookContent.create(piece: piece, book: b)
+        bc = BookContent.create(piece: @piece, book: b)
         if book["images"]
-          book["images"].each do |image|
-            img = Image.create do |i|
-              i.book_content_id =  bc.id 
-              i.url =  image["url"]  if image["url"]
-              i.filename =  image["filename"] if image["filename"]
-              i.name =  image["name"] if image["name"]
-              i.description =  image["description"] if image["description"]
-            end
-          end
+          images(book["images"], 'book', bc.id)
         end
+      end
+    end
+  end
+
+  def images(img_array, content_type, content_id)
+    img_array.each do |image|
+      Image.create do |i|
+        i.manuscript_content_id =  content_id if content_type == 'manuscript'
+        i.book_content_id =  content_id if content_type == 'book'
+        i.url =  image["url"]  if image["url"]
+        i.filename =  image["filename"] if image["filename"]
+        i.name =  image["name"] if image["name"]
+        i.description =  image["description"] if image["description"]
       end
     end
   end

@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   end
   
   resources :search, only: [:create]
+
+  get 'dances/:slug' => 'dances#show', as: 'dance'
+
   root 'home#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

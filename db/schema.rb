@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210184401) do
+ActiveRecord::Schema.define(version: 20170215214229) do
 
   create_table "book_contents", force: :cascade do |t|
     t.integer  "piece_id"
@@ -37,6 +37,24 @@ ActiveRecord::Schema.define(version: 20170210184401) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dance_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dances", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "dance_category_id"
+    t.integer  "person_id"
+  end
+
+  add_index "dances", ["dance_category_id"], name: "index_dances_on_dance_category_id"
+  add_index "dances", ["person_id"], name: "index_dances_on_person_id"
+
   create_table "facsimile_sources", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
@@ -60,6 +78,17 @@ ActiveRecord::Schema.define(version: 20170210184401) do
 
   add_index "images", ["book_content_id"], name: "index_images_on_book_content_id"
   add_index "images", ["manuscript_content_id"], name: "index_images_on_manuscript_content_id"
+
+  create_table "instructions", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "dance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "person_id"
+  end
+
+  add_index "instructions", ["dance_id"], name: "index_instructions_on_dance_id"
+  add_index "instructions", ["person_id"], name: "index_instructions_on_person_id"
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -88,6 +117,12 @@ ActiveRecord::Schema.define(version: 20170210184401) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "piece_languages", force: :cascade do |t|

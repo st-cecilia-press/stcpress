@@ -1,4 +1,18 @@
 FactoryGirl.define do
+  factory :instruction do
+    text "MyText"
+    dance 
+  end
+  factory :person do
+    name "MyString"
+  end
+  factory :dance_category do
+    name "English Country"
+  end
+  factory :dance do
+    title "Gathering Peascods"
+    slug "gathering_peascods"
+  end
   factory :facsimile_source do
     name "MyString"
     url "MyString"

@@ -190,6 +190,7 @@ GEM
       json (~> 1.4)
     recaptcha (3.3.0)
       json
+    redcarpet (3.4.0)
     ref (2.0.0)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
@@ -292,6 +293,7 @@ DEPENDENCIES
   rails-assets-datatables!
   rails-assets-listjs!
   recaptcha
+  redcarpet
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

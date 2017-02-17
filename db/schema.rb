@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217224257) do
+ActiveRecord::Schema.define(version: 20170217230139) do
 
   create_table "audio_recordings", force: :cascade do |t|
     t.integer  "ensemble_id"
@@ -59,9 +59,22 @@ ActiveRecord::Schema.define(version: 20170217224257) do
     t.string   "filename"
     t.string   "description"
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "dance_source_content_id"
   end
+
+  add_index "dance_facsimile_images", ["dance_source_content_id"], name: "index_dance_facsimile_images_on_dance_source_content_id"
+
+  create_table "dance_source_contents", force: :cascade do |t|
+    t.integer  "dance_id"
+    t.integer  "dance_source_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "dance_source_contents", ["dance_id"], name: "index_dance_source_contents_on_dance_id"
+  add_index "dance_source_contents", ["dance_source_id"], name: "index_dance_source_contents_on_dance_source_id"
 
   create_table "dance_sources", force: :cascade do |t|
     t.integer  "start_date"
@@ -76,9 +89,12 @@ ActiveRecord::Schema.define(version: 20170217224257) do
   create_table "dance_translations", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "dance_source_content_id"
   end
+
+  add_index "dance_translations", ["dance_source_content_id"], name: "index_dance_translations_on_dance_source_content_id"
 
   create_table "dances", force: :cascade do |t|
     t.string   "title"
@@ -263,9 +279,12 @@ ActiveRecord::Schema.define(version: 20170217224257) do
   create_table "video_recordings", force: :cascade do |t|
     t.string   "name"
     t.string   "youtube"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "instruction_id"
   end
+
+  add_index "video_recordings", ["instruction_id"], name: "index_video_recordings_on_instruction_id"
 
   create_table "voicings", force: :cascade do |t|
     t.string   "name"

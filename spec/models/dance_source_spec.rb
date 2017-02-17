@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe DanceSource, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:dance_source_contents) }
+  it { should have_many(:dances).through(:dance_source_contents) }
 end

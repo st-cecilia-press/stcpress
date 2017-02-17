@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :dance_source_content do
+    dance nil
+    dance_source nil
+  end
   factory :dance_facsimile_image do
     url "MyString"
     filename "MyString"

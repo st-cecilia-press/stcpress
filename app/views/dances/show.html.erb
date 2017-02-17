@@ -2,4 +2,4 @@
 <h3>Info</h3>
 <b>Category:</b> <%=@dance.dance_category.name%>
 <h3>Instructions</h3>
-<%= @markdown.render(@dance.instructions.first.text) %>
+<%= markdown(@dance.instructions.first.text) %>

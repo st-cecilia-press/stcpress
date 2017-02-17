@@ -1,7 +1,52 @@
 FactoryGirl.define do
+  factory :dance_facsimile_image do
+    url "MyString"
+    filename "MyString"
+    description "MyString"
+    name "MyString"
+  end
+  factory :dance_translation do
+    name "MyString"
+    url "MyString"
+  end
+  factory :dance_source do
+    start_date 1
+    end_date 1
+    name "MyString"
+    title "MyString"
+    slug "MyString"
+  end
+  factory :music_file do
+    filename "MyString"
+    source "MyString"
+    name "MyString"
+    sheet_music nil
+  end
+  factory :sheet_music do
+    
+  end
+  factory :video_recording do
+    name "MyString"
+    youtube "MyString"
+  end
+  factory :audioRecording do
+    ensemble 
+    purchase_url "MyString"
+    youtube "MyString"
+    file "MyString"
+  end
+  factory :ensemble do
+    description "MyString"
+    name "MyString"
+    slug "MyString"
+  end
+  factory :instruction_type do
+    name "MyString"
+  end
   factory :instruction do
     text "MyText"
     dance 
+    instruction_type
   end
   factory :person do
     name "MyString"

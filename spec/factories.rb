@@ -1,4 +1,12 @@
 FactoryGirl.define do
+  factory :instruction_audio do
+    audio_recording nil
+    instruction nil
+  end
+  factory :instruction_sheetmusic do
+    sheet_music nil
+    instruction nil
+  end
   factory :dance_source_content do
     dance nil
     dance_source nil

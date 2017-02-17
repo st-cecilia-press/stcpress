@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217230139) do
+ActiveRecord::Schema.define(version: 20170217230950) do
 
   create_table "audio_recordings", force: :cascade do |t|
     t.integer  "ensemble_id"
@@ -139,6 +139,26 @@ ActiveRecord::Schema.define(version: 20170217230139) do
 
   add_index "images", ["book_content_id"], name: "index_images_on_book_content_id"
   add_index "images", ["manuscript_content_id"], name: "index_images_on_manuscript_content_id"
+
+  create_table "instruction_audios", force: :cascade do |t|
+    t.integer  "audio_recording_id"
+    t.integer  "instruction_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "instruction_audios", ["audio_recording_id"], name: "index_instruction_audios_on_audio_recording_id"
+  add_index "instruction_audios", ["instruction_id"], name: "index_instruction_audios_on_instruction_id"
+
+  create_table "instruction_sheetmusics", force: :cascade do |t|
+    t.integer  "sheet_music_id"
+    t.integer  "instruction_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "instruction_sheetmusics", ["instruction_id"], name: "index_instruction_sheetmusics_on_instruction_id"
+  add_index "instruction_sheetmusics", ["sheet_music_id"], name: "index_instruction_sheetmusics_on_sheet_music_id"
 
   create_table "instruction_types", force: :cascade do |t|
     t.string   "name"

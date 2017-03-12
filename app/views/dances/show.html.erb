@@ -1,11 +1,46 @@
 <h1><%= @dance.title %> <small>By: <%=@dance.person.name%></small></h1>
 <h3>Info</h3>
-<b>Category:</b> <%=@dance.dance_category.name%>
+<b>Category:</b> <%=@dance.dance_category.name%><br>
+<% if @dance.dance_sources.count > 0 %>
+<b>Sources:</b><br>
+  <ul>
+  <% @dance.dance_source_contents.each do |dsc| %>
+    <li><%=dsc.dance_source.title%></li>
+    <ul>
+    <% if dsc.dance_facsimile_images.count > 0 %>
+      <li>Facsimiles</li> 
+      <ul>
+      <% dsc.dance_facsimile_images.each do |img| %>
+        <li><%= link_to img.name, "/sca_dance/#{@dance.slug}/#{img.filename}"%> | <%= link_to 'Source', img.url %> <% if img.description %> | <%= img.descriptions %><%end %></li> 
+      <% end %>
+      </ul>
+    <% end %>
+    <% if dsc.dance_translations.count > 0 %>
+      <li>Translations</li>
+      <ul>
+      <% dsc.dance_translations.each do |tr| %>
+        <li><%= link_to tr.name, tr.url %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </ul>
+  <% end %>
+  </ul>
+<% end %>
 <h3>Instructions</h3>
 <h2>Terp</h2>
 <div class='dance-instructions'>
 <%= markdown(@dance.instructions.first.text) %>
 </div>
+<iframe id="video" width="420" height="315" src="" frameborder="0" allowfullscreen></iframe>
+<% if @dance.instructions.first.video_recordings.count > 0 %>
+<h3>Videos</h3>
+<ul>
+  <% @dance.instructions.first.video_recordings.each do |vid| %>
+    <li><%=link_to vid.name, '#', class: 'play-video', data: {youtube: vid.youtube} %></li>
+  <% end %>
+</ul>
+<% end %>
 <% if @dance.instructions.first.sheet_musics.count > 0 %>
 <h3>Sheet Music</h3>
   <ul>
@@ -24,9 +59,20 @@
   <ul>
   <% @dance.instructions.first.audio_recordings.each do |audio| %>
     <li><%= audio.ensemble.name %> | <% if audio.file %> <%= link_to 'File', audio.file  %> | <% end%>   
-      <% if audio.youtube %> Youtube: <%= audio.youtube %> | <% end %> 
+      <% if audio.youtube %> <%= link_to 'Youtube', '#', class: 'play-video', data: {youtube: audio.youtube } %> | <% end %> 
       <% if audio.purchase_url %> <%= link_to 'Purchase', audio.purchase_url %> <% end %> 
     </li>
   <% end %>
   </ul>
 <% end %>
+<script>
+$(document).ready(function() {
+  $('.play-video').on('click', function(ev) {
+    var src = '//www.youtube.com/embed/###YOUTUBE###?rel=0'
+    var my_src = src.replace(/###YOUTUBE###/, this.dataset.youtube)
+    $("#video")[0].src = my_src + "&autoplay=1";
+    ev.preventDefault();
+ 
+  });
+});
+</script>

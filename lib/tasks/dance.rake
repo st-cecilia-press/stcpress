@@ -2,6 +2,23 @@ require 'yaml'
 require 'find'
 
 namespace :dance do
+  task :sources => :environment do
+    sources = YAML.load_file('public/sca_dance/sources.yaml')
+    sources.each do |source|
+      DanceSource.create do |s|
+        s.slug = source['slug']
+        s.title = source['title']
+        if source['dates']
+          s.start_date = source['dates'][0]
+          if source['dates'].count == 1
+            s.end_date = source['dates'][0]
+          else
+            s.end_date = source['dates'][1]
+          end
+        end 
+      end
+    end
+  end
   task :ensembles => :environment do
     ensembles = YAML.load_file('public/sca_dance/ensembles.yaml')
     ensembles.each do |ens|
@@ -33,7 +50,7 @@ namespace :dance do
     Rake::Task['db:migrate'].invoke 
   end
 
-  task :all => [:db_reset, :ensembles, :dances]
+  task :all => [:db_reset, :sources, :ensembles, :dances]
 end
 class DanceMetadata
   def initialize(metadata, slug, media)
@@ -43,6 +60,7 @@ class DanceMetadata
     sheet_music unless media.nil?
     audio unless media.nil?
     @dance = dance
+    sources
     instructions
     #instructions_sheet_music unless media.nil?
   end
@@ -81,6 +99,42 @@ class DanceMetadata
       d.person = Person.find_or_create_by(name: @metadata['person'])
       d.dance_category = DanceCategory.find_or_create_by(name: @metadata['category'])
     end 
+  end
+  def sources
+    if @metadata['sources']
+      @metadata['sources'].each do |source|
+        s = DanceSource.find_by(slug: source['slug'])
+        sc = DanceSourceContent.create(dance: @dance, dance_source: s)
+        if source['images']
+          images(source['images'], sc.id)
+        end
+        if source['translations']
+          translations(source['translations'], sc.id)
+        end
+      end
+    end
+  end
+
+  def images(img_array, content_id)
+    img_array.each do |image|
+      DanceFacsimileImage.create do |dfi|
+        dfi.dance_source_content_id = content_id
+        dfi.url = image['url'] if image['url']
+        dfi.filename = image['filename'] if image['filename']
+        dfi.name = image['name'] if image['name']
+        dfi.description = image['description'] if image['description']
+      end
+    end
+  end
+
+  def translations (trans_array, content_id)
+    trans_array.each do |tr|
+      DanceTranslation.create do |dt|
+        dt.dance_source_content_id = content_id
+        dt.url = tr['url']
+        dt.name = tr['name']    
+      end
+    end
   end
 
   def instructions

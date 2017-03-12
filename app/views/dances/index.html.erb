@@ -1,0 +1,6 @@
+<h1>Dances</h1>
+<ul>
+<% @dances.each do |dance| %>
+  <li><%= link_to dance.title, "/dances/#{dance.slug}" %></li>
+<%end%>
+</ul>

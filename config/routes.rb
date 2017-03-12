@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :search, only: [:create]
 
   get 'dances/:slug' => 'dances#show', as: 'dance'
+  resources :dances, only: [:index]
 
   root 'home#show'
   # The priority is based upon order of creation: first created -> highest priority.

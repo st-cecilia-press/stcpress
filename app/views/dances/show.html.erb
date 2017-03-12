@@ -2,4 +2,31 @@
 <h3>Info</h3>
 <b>Category:</b> <%=@dance.dance_category.name%>
 <h3>Instructions</h3>
+<h2>Terp</h2>
+<div class='dance-instructions'>
 <%= markdown(@dance.instructions.first.text) %>
+</div>
+<% if @dance.instructions.first.sheet_musics.count > 0 %>
+<h3>Sheet Music</h3>
+  <ul>
+    <% @dance.instructions.first.sheet_musics.each do |sm| %>
+      <li><%=sm.name%></li>
+      <ul>
+      <% sm.music_files.each do |mf| %>
+       <li> <%= link_to mf.name, mf.filename %> | <%= link_to 'Source', mf.source %> </li>
+      <% end %>
+      </ul>
+  <% end %>
+  </ul>
+<% end %>
+<% if @dance.instructions.first.audio_recordings.count > 0 %>
+  <h3>Audio Recordings</h3>
+  <ul>
+  <% @dance.instructions.first.audio_recordings.each do |audio| %>
+    <li><%= audio.ensemble.name %> | <% if audio.file %> <%= link_to 'File', audio.file  %> | <% end%>   
+      <% if audio.youtube %> Youtube: <%= audio.youtube %> | <% end %> 
+      <% if audio.purchase_url %> <%= link_to 'Purchase', audio.purchase_url %> <% end %> 
+    </li>
+  <% end %>
+  </ul>
+<% end %>

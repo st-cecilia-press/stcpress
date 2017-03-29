@@ -20,6 +20,13 @@ class Piece < ActiveRecord::Base
   belongs_to :composer
   validates :title, :composer, :slug, presence: true  
 
+  def lyrics?
+    if File.exists?("./public/bel-accueil/#{self.slug}/lyrics.csv")
+      return true
+    else
+      return false
+    end
+  end
   def url
     return "/pieces/#{self.slug}"
   end

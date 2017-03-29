@@ -1,0 +1,43 @@
+<h3>Lyrics</h3>
+<table class = "table">
+
+<% if @lyrics[1][1] == 'LINK' %>
+  <thead><tr>
+  <th><%=@lyrics[0][0]%></th><th><%=@lyrics[0][2]%></th><th><%=@lyrics[0][1]%></th>
+  </tr></thead>
+  <tbody>
+    <% @lyrics.each_with_index do |row, i| %>
+      <%  if i == 0 %>
+        <% next %>
+      <% elsif i == 1 %> 
+        <tr>
+        <td><%= row[0] %></td><td><%= row[2]%></td><td><%= link_to @lyrics[3][1], @lyrics[2][1] %></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= row[0] %></td><td><%= row[2]%></td><td></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+<% else %>
+
+  <thead><tr>
+  <% @lyrics[0].each do |h| %>
+  <th><%=h%></th> 
+  <% end %> 
+  </tr></thead>
+  <tbody>
+  <% i = 0 %>
+  <% @lyrics.each do |row| %>
+  <%  (i = i+1; next;)  if i == 0 %>
+  <tr>
+    <% row.each do |col| %>
+      <td><%=col%></td>
+    <% end %>
+  </tr>
+  <% end %>
+  </tbody>
+<% end %>
+
+</table>

@@ -2,7 +2,8 @@ require 'rails_helper'
 describe "GET /ensembles/ensemble" do
   it "shows ensemble with dances" do
     ens = create(:ensemble, name: 'Ensemble', slug: 'ensemble')
-    dance = create(:dance, title: 'Gathering Peascods', slug: 'slug')
+    cat = create(:dance_category)
+    dance = create(:dance, title: 'Gathering Peascods', slug: 'slug', dance_category: cat)
     inst = create(:instruction, dance: dance)
     audio_recording = create(:audio_recording, ensemble: ens) 
     instruction_audio = create(:instruction_audio, audio_recording: audio_recording, instruction: inst)

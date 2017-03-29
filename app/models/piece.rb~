@@ -20,6 +20,13 @@ class Piece < ActiveRecord::Base
   belongs_to :composer
   validates :title, :composer, :slug, presence: true  
 
+  def lyrics?
+    if File.exists?("./public/bel-accueil/#{self.slug}/lyrics.csv")
+      return true
+    else
+      return false
+    end
+  end
   def url
     return "/pieces/#{self.slug}"
   end
@@ -33,7 +40,9 @@ class Piece < ActiveRecord::Base
   end
 
   def date
-    if self.start_date == self.end_date
+    if self.start_date == 0
+      return ''  
+    elsif self.start_date == self.end_date
       return self.start_date.to_s
     elsif self.start_date/100 == self.end_date/100
       return "#{ordinal(self.start_date/100 + 1)} century"

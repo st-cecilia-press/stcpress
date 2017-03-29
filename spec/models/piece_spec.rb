@@ -30,6 +30,26 @@ RSpec.describe Piece, "validations" do
   it { is_expected.to validate_presence_of(:slug) }
 end
 
+RSpec.describe Piece, "lyrics?" do
+  before(:each) do
+    @piece = create(:piece, slug: 'slug') 
+    Dir.mkdir "./public/bel-accueil/slug"
+  end
+  after(:each) do
+    FileUtils.rm_r "./public/bel-accueil/slug" if File.directory?("./public/bel-accueil/slug")
+  end
+  it "returns true if lyrics.csv exists in bel-accueil repo" do
+    `touch ./public/bel-accueil/slug/lyrics.csv`    
+     expect(@piece.lyrics?).to be_truthy
+  end
+  it "returns false if lyrics.csv does not exist in bel-accueil repo" do
+     expect(@piece.lyrics?).to be_falsey
+  end
+  it "returns false if no bel-accueil repo for piece" do
+     FileUtils.rm_r "./public/bel-accueil/slug" 
+     expect(@piece.lyrics?).to be_falsey
+  end
+end
 RSpec.describe Piece, "url" do
   it "returns url with slug" do
     piece = create(:piece)

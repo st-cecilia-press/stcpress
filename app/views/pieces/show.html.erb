@@ -58,3 +58,6 @@
   <% end %>
 
 <% end %>
+<% if @piece.lyrics? %>
+<%= render partial: 'lyrics' %>
+<% end %>

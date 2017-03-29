@@ -51,6 +51,7 @@ namespace :dance do
   end
 
   task :all => [:db_reset, :sources, :ensembles, :dances]
+  task :init => [:sources, :ensembles, :dances]
 end
 class DanceMetadata
   def initialize(metadata, slug, media)

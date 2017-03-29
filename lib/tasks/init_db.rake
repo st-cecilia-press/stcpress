@@ -161,7 +161,7 @@ namespace :init_db do
   task :reset_gervaise => [:db_reset, :manuscripts, :books, :gervaise_quart, :json]
   task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous, :json]
   task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
-  task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance :json]
+  task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance, :json]
 end
 
 class Metadata

@@ -30,3 +30,15 @@ html {
 .container .text-muted {
   margin-top: 10px;
 }
+.dance-instructions {
+  table {
+    tr > td:last-of-type{
+      text-align: right;  
+    }
+    tr >td {
+      padding: 0px 10px;
+    }
+    tr:nth-child(even) {background: #CCC}
+    tr:nth-child(odd) {background: #FFF}
+  }
+}

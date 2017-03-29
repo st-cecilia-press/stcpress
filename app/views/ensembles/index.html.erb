@@ -1,0 +1,6 @@
+<h1>Ensembles</h1>
+<ul>
+  <% @ensembles.each do |ens| %>
+  <li><%= link_to ens.name, "/ensembles/#{ens.slug}" %></li>
+  <%end%>
+</ul>

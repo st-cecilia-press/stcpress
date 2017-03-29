@@ -1,4 +1,78 @@
 FactoryGirl.define do
+  factory :audio_recording do
+    slug 'audio' 
+    ensemble
+  end
+  factory :instruction_audio do
+    audio_recording 
+    instruction 
+  end
+  factory :instruction_sheetmusic do
+    sheet_music 
+    instruction 
+  end
+  factory :dance_source_content do
+    dance 
+    dance_source 
+  end
+  factory :dance_facsimile_image do
+    url "MyString"
+    filename "MyString"
+    description "MyString"
+    name "MyString"
+  end
+  factory :dance_translation do
+    name "MyString"
+    url "MyString"
+  end
+  factory :dance_source do
+    start_date 1651 
+    end_date 1651
+    title "Earliest Dance Source"
+    slug "earliest_dance_source"
+  end
+  factory :music_file do
+    filename "MyString"
+    source "MyString"
+    name "MyString"
+    sheet_music nil
+  end
+  factory :sheet_music do
+    
+  end
+  factory :video_recording do
+    name "MyString"
+    youtube "MyString"
+  end
+  factory :audioRecording do
+    ensemble 
+    purchase_url "MyString"
+    youtube "MyString"
+    file "MyString"
+  end
+  factory :ensemble do
+    description "MyString"
+    name "MyString"
+    slug "MyString"
+  end
+  factory :instruction_type do
+    name "MyString"
+  end
+  factory :instruction do
+    text "MyText"
+    dance 
+    instruction_type
+  end
+  factory :person do
+    name "MyString"
+  end
+  factory :dance_category do
+    name "English Country"
+  end
+  factory :dance do
+    title "Gathering Peascods"
+    slug "gathering_peascods"
+  end
   factory :facsimile_source do
     name "MyString"
     url "MyString"

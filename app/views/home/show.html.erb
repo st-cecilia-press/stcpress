@@ -20,7 +20,10 @@ $(document).ready( function () {
   var pieces = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['title', 'composer']),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '/json/search.json', 
+    remote: 
+      { url: '/api/pieces?q=%QUERY',
+        wildcard: '%QUERY',
+      } 
   });
 
   pieces.initialize();
@@ -33,9 +36,9 @@ $(document).ready( function () {
       
 
       $('#hidden-home-slug').val(suggestion.slug);
-  }).on('change', function(){
-    $('#hidden-home-slug').val('')
-  });
+  })//.on('change', function(){
+    //$('#hidden-home-slug').val('')
+  //});
 
 });
 </script>

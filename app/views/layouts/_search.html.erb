@@ -12,22 +12,31 @@ $(document).ready( function () {
   var pieces = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['title', 'composer']),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '/json/search.json', 
+    //prefetch: '/json/search.json', 
+    remote: 
+      { url: '/api/pieces?q=%QUERY',
+        wildcard: '%QUERY',
+      } 
   });
 
   pieces.initialize();
   
   $('#search').typeahead(null, {
-    display: function(data){ return data.title + ' (' + data.composer + ')' },
+    name: 'pieces',
+    display: function(data){ 
+      return data.title + ' (' + data.composer + ')' 
+    },
     source: pieces.ttAdapter(),
 
+  }).on('typeahead:active',function(){
+    console.log('work?')
   }).on('typeahead:select', function(ev, suggestion){
       
 
       $('#hidden-slug').val(suggestion.slug);
-  }).on('change', function(){
-    $('#hidden-slug').val('')
-  });
+  })//.on('change', function(){
+    //$('#hidden-slug').val('')
+  //});
 
   /*$('.form-inline').submit(function(){
   });*/

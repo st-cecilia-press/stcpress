@@ -35,6 +35,7 @@ gem 'twitter-typeahead-rails'
 gem 'midilib'
 gem 'zeroclipboard-rails'
 gem 'bootstrap-slider-rails'
+gem 'redcarpet'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

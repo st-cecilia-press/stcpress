@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210184401) do
+ActiveRecord::Schema.define(version: 20170311233710) do
+
+  create_table "audio_recordings", force: :cascade do |t|
+    t.integer  "ensemble_id"
+    t.string   "purchase_url"
+    t.string   "youtube"
+    t.string   "file"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "slug"
+  end
+
+  add_index "audio_recordings", ["ensemble_id"], name: "index_audio_recordings_on_ensemble_id"
 
   create_table "book_contents", force: :cascade do |t|
     t.integer  "piece_id"
@@ -37,6 +49,74 @@ ActiveRecord::Schema.define(version: 20170210184401) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dance_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dance_facsimile_images", force: :cascade do |t|
+    t.string   "url"
+    t.string   "filename"
+    t.string   "description"
+    t.string   "name"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "dance_source_content_id"
+  end
+
+  add_index "dance_facsimile_images", ["dance_source_content_id"], name: "index_dance_facsimile_images_on_dance_source_content_id"
+
+  create_table "dance_source_contents", force: :cascade do |t|
+    t.integer  "dance_id"
+    t.integer  "dance_source_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "dance_source_contents", ["dance_id"], name: "index_dance_source_contents_on_dance_id"
+  add_index "dance_source_contents", ["dance_source_id"], name: "index_dance_source_contents_on_dance_source_id"
+
+  create_table "dance_sources", force: :cascade do |t|
+    t.integer  "start_date"
+    t.integer  "end_date"
+    t.string   "name"
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "dance_translations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "dance_source_content_id"
+  end
+
+  add_index "dance_translations", ["dance_source_content_id"], name: "index_dance_translations_on_dance_source_content_id"
+
+  create_table "dances", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "dance_category_id"
+    t.integer  "person_id"
+  end
+
+  add_index "dances", ["dance_category_id"], name: "index_dances_on_dance_category_id"
+  add_index "dances", ["person_id"], name: "index_dances_on_person_id"
+
+  create_table "ensembles", force: :cascade do |t|
+    t.string   "description"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "facsimile_sources", force: :cascade do |t|
     t.string   "name"
     t.string   "url"
@@ -60,6 +140,45 @@ ActiveRecord::Schema.define(version: 20170210184401) do
 
   add_index "images", ["book_content_id"], name: "index_images_on_book_content_id"
   add_index "images", ["manuscript_content_id"], name: "index_images_on_manuscript_content_id"
+
+  create_table "instruction_audios", force: :cascade do |t|
+    t.integer  "audio_recording_id"
+    t.integer  "instruction_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "instruction_audios", ["audio_recording_id"], name: "index_instruction_audios_on_audio_recording_id"
+  add_index "instruction_audios", ["instruction_id"], name: "index_instruction_audios_on_instruction_id"
+
+  create_table "instruction_sheetmusics", force: :cascade do |t|
+    t.integer  "sheet_music_id"
+    t.integer  "instruction_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "instruction_sheetmusics", ["instruction_id"], name: "index_instruction_sheetmusics_on_instruction_id"
+  add_index "instruction_sheetmusics", ["sheet_music_id"], name: "index_instruction_sheetmusics_on_sheet_music_id"
+
+  create_table "instruction_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "instructions", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "dance_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "person_id"
+    t.integer  "instruction_type_id"
+  end
+
+  add_index "instructions", ["dance_id"], name: "index_instructions_on_dance_id"
+  add_index "instructions", ["instruction_type_id"], name: "index_instructions_on_instruction_type_id"
+  add_index "instructions", ["person_id"], name: "index_instructions_on_person_id"
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
@@ -88,6 +207,23 @@ ActiveRecord::Schema.define(version: 20170210184401) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug"
+  end
+
+  create_table "music_files", force: :cascade do |t|
+    t.string   "filename"
+    t.string   "source"
+    t.string   "name"
+    t.integer  "sheet_music_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "music_files", ["sheet_music_id"], name: "index_music_files_on_sheet_music_id"
+
+  create_table "people", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "piece_languages", force: :cascade do |t|
@@ -130,6 +266,13 @@ ActiveRecord::Schema.define(version: 20170210184401) do
     t.string   "slug"
   end
 
+  create_table "sheet_musics", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "slug"
+    t.string   "name"
+  end
+
   create_table "song_voicings", force: :cascade do |t|
     t.integer  "voicing_id"
     t.integer  "piece_id"
@@ -155,6 +298,16 @@ ActiveRecord::Schema.define(version: 20170210184401) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "video_recordings", force: :cascade do |t|
+    t.string   "name"
+    t.string   "youtube"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "instruction_id"
+  end
+
+  add_index "video_recordings", ["instruction_id"], name: "index_video_recordings_on_instruction_id"
 
   create_table "voicings", force: :cascade do |t|
     t.string   "name"

@@ -9,6 +9,13 @@ namespace :update do
       end 
     end
   end
+  task :pull_dance do
+    on roles(:app) do
+      within '/srv/www/stcpress/shared/public/sca_dance' do
+          execute :git, 'pull'
+      end 
+    end
+  end
   task :pull_bel do
     on roles(:app) do
       within '/srv/www/stcpress/shared/public/miscellaneous/include' do
@@ -32,5 +39,5 @@ namespace :update do
     invoke 'puma:restart'
   end
 
-  task :all => [:pull_misc, :pull_bel, :db]
+  task :all => [:pull_misc, :pull_bel, :pull_dance, :db]
 end

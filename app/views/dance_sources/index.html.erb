@@ -1,0 +1,6 @@
+<h1>Dance Sources</h1>
+<ul>
+  <% @sources.each do |source| %>
+  <li><%= link_to source.title, "/dance_sources/#{source.slug}" %></li>
+  <%end%>
+</ul>

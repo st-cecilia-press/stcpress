@@ -1,5 +1,6 @@
 require 'redcarpet'
 class DancesController < ApplicationController
+  layout 'dance'
   def index
     @dances = Dance.all
   end

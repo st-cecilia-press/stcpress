@@ -32,8 +32,8 @@ namespace :dance do
   end
   task :dances => :environment do
     Dir.chdir('public/sca_dance/'){ |d|
-      directories = Dir.glob('*').select{|f| File.directory? f }      
-      directories.each do |slug|
+      directories = Dir.glob('*').select{|f| File.directory? f and f != "metadata" and f!= "test"}      
+      directories.sort.each do |slug|
         puts slug
         metadata = YAML.load_file("#{slug}/metadata.yaml")
         media = nil
@@ -57,8 +57,10 @@ class DanceMetadata
     @metadata = metadata
     @media = media
     @slug = slug
-    sheet_music unless media.nil?
-    audio unless media.nil?
+    unless media.nil?
+      sheet_music if media.key?('sheet_music')
+      audio if media.key?('audio')
+    end
     @dance = dance
     sources
     instructions

@@ -1,43 +1,15 @@
 <h1><%= @dance.title %> <small>By: <%=@dance.person.name%></small></h1>
-<h3>Info</h3>
-<b>Category:</b> <%=@dance.dance_category.name%><br>
-<% if @dance.dance_sources.count > 0 %>
-<b>Sources:</b><br>
-  <ul>
-  <% @dance.dance_source_contents.each do |dsc| %>
-    <li><%=dsc.dance_source.title%></li>
-    <ul>
-    <% if dsc.dance_facsimile_images.count > 0 %>
-      <li>Facsimiles</li> 
-      <ul>
-      <% dsc.dance_facsimile_images.each do |img| %>
-        <li><%= link_to img.name, "/sca_dance/#{@dance.slug}/#{img.filename}"%> | <%= link_to 'Source', img.url %> <% if img.description %> | <%= img.descriptions %><%end %></li> 
-      <% end %>
-      </ul>
-    <% end %>
-    <% if dsc.dance_translations.count > 0 %>
-      <li>Translations</li>
-      <ul>
-      <% dsc.dance_translations.each do |tr| %>
-        <li><%= link_to tr.name, tr.url %></li>
-      <% end %>
-      </ul>
-    <% end %>
-    </ul>
-  <% end %>
-  </ul>
-<% end %>
+<div class='col-md-6'>
 <h3>Instructions</h3>
 <h2>Terp</h2>
 <div class='dance-instructions'>
 <%= markdown(@dance.instructions.first.text) %>
 </div>
-<iframe id="video" width="420" height="315" src="" frameborder="0" allowfullscreen></iframe>
 <% if @dance.instructions.first.video_recordings.count > 0 %>
 <h3>Videos</h3>
 <ul>
   <% @dance.instructions.first.video_recordings.each do |vid| %>
-    <li><%=link_to vid.name, '#', class: 'play-video', data: {youtube: vid.youtube} %></li>
+    <li><%=link_to vid.name, '#', class: 'play-video', data: {youtube: vid.youtube, toggle: 'modal', target: '#video-modal', title: vid.name} %></li>
   <% end %>
 </ul>
 <% end %>
@@ -59,20 +31,68 @@
   <ul>
   <% @dance.instructions.first.audio_recordings.each do |audio| %>
     <li><%= audio.ensemble.name %> | <% if audio.file %> <%= link_to 'File', audio.file  %> | <% end%>   
-      <% if audio.youtube %> <%= link_to 'Youtube', '#', class: 'play-video', data: {youtube: audio.youtube } %> | <% end %> 
+      <% if audio.youtube %> <%= link_to 'Youtube', '#', class: 'play-video', data: {youtube: audio.youtube, toggle: 'modal', target: '#video-modal', title: audio.ensemble.name } %> | <% end %> 
       <% if audio.purchase_url %> <%= link_to 'Purchase', audio.purchase_url %> <% end %> 
     </li>
   <% end %>
   </ul>
 <% end %>
+</div>
+<div class='col-md-6'>
+<h3>Info</h3>
+<b>Category:</b> <%=link_to @dance.dance_category.name, @dance.dance_category.url%><br>
+<% if @dance.dance_sources.count > 0 %>
+<b>Sources:</b><br>
+  <ul>
+  <% @dance.dance_source_contents.each do |dsc| %>
+    <li><%= link_to dsc.dance_source.title, "/dance_sources/#{dsc.dance_source.slug}"%></li>
+    <ul>
+    <% if dsc.dance_facsimile_images.count > 0 %>
+      <li>Facsimiles</li> 
+      <ul>
+      <% dsc.dance_facsimile_images.each do |img| %>
+        <li><%= link_to img.name, "/sca_dance/#{@dance.slug}/#{img.filename}"%> | <%= link_to 'Source', img.url %> <% if img.description %> | <%= img.descriptions %><%end %></li> 
+      <% end %>
+      </ul>
+    <% end %>
+    <% if dsc.dance_translations.count > 0 %>
+      <li>Translations</li>
+      <ul>
+      <% dsc.dance_translations.each do |tr| %>
+        <li><%= link_to tr.name, tr.url %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </ul>
+  <% end %>
+  </ul>
+<% end %>
+</div>
+<div id='video-modal' class="modal fade">
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class='modal-body'>
+        <iframe id="video" width="100%" height="320" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 $(document).ready(function() {
   $('.play-video').on('click', function(ev) {
     var src = '//www.youtube.com/embed/###YOUTUBE###?rel=0'
     var my_src = src.replace(/###YOUTUBE###/, this.dataset.youtube)
+    $('#myModalLabel').text(this.dataset.title) 
     $("#video")[0].src = my_src + "&autoplay=1";
     ev.preventDefault();
  
   });
+$('#video-modal').on('hidden.bs.modal', function () {
+    $('#video').removeAttr('src');
+})
 });
 </script>

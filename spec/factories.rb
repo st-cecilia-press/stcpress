@@ -1,15 +1,19 @@
 FactoryGirl.define do
+  factory :audio_recording do
+    slug 'audio' 
+    ensemble
+  end
   factory :instruction_audio do
-    audio_recording nil
-    instruction nil
+    audio_recording 
+    instruction 
   end
   factory :instruction_sheetmusic do
-    sheet_music nil
-    instruction nil
+    sheet_music 
+    instruction 
   end
   factory :dance_source_content do
-    dance nil
-    dance_source nil
+    dance 
+    dance_source 
   end
   factory :dance_facsimile_image do
     url "MyString"
@@ -22,11 +26,10 @@ FactoryGirl.define do
     url "MyString"
   end
   factory :dance_source do
-    start_date 1
-    end_date 1
-    name "MyString"
-    title "MyString"
-    slug "MyString"
+    start_date 1651 
+    end_date 1651
+    title "Earliest Dance Source"
+    slug "earliest_dance_source"
   end
   factory :music_file do
     filename "MyString"

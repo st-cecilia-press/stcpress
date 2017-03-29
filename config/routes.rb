@@ -32,9 +32,23 @@ Rails.application.routes.draw do
   end
   
   resources :search, only: [:create]
-
+  namespace :api, defaults: { format: 'json' } do
+    get 'pieces' => 'pieces#search'
+  end 
+  post '/dance_search' => 'home#search'
+  
+  get 'dance' => 'home#dance', as: 'dance_home'
   get 'dances/:slug' => 'dances#show', as: 'dance'
   resources :dances, only: [:index]
+
+  get 'dance_sources' => 'dance_sources#index'
+  get 'dance_sources/:slug' => 'dance_sources#show', as: 'dance_source'
+
+  resources :ensembles, only: [:index]
+  get 'ensembles/:slug' => 'ensembles#show', as: 'ensemble'
+
+  resources :dance_categories, only: [:index]
+  get 'dance_categories/:name' => 'dance_categories#show', as: 'dance_category'
 
   root 'home#show'
   # The priority is based upon order of creation: first created -> highest priority.

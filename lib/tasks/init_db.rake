@@ -154,8 +154,8 @@ namespace :init_db do
     Rake::Task["json:search"].invoke
   end
 
-  task :dance => :enfornment do
-    Rake::Task["dance:init"]
+  task :dance => :environment do
+    Rake::Task["dance:init"].invoke
   end
 
   task :reset_gervaise => [:db_reset, :manuscripts, :books, :gervaise_quart, :json]

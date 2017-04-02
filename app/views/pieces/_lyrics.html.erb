@@ -3,7 +3,7 @@
 
 <% if @lyrics[1][1] == 'LINK' %>
   <thead><tr>
-  <th><%=@lyrics[0][0]%></th><th><%=@lyrics[0][2]%></th><th><%=@lyrics[0][1]%></th>
+  <th><%=@lyrics[0][0]%></th><th><%=@lyrics[0][2]%></th>
   </tr></thead>
   <tbody>
     <% @lyrics.each_with_index do |row, i| %>
@@ -11,7 +11,7 @@
         <% next %>
       <% elsif i == 1 %> 
         <tr>
-        <td><%= row[0] %></td><td><%= row[2]%></td><td><%= link_to @lyrics[3][1], @lyrics[2][1] %></td>
+        <td><%= row[0] %></td><td><%= row[2]%></td>
         </tr>
       <% else %>
         <tr>
@@ -40,6 +40,10 @@
   </tbody>
 <% end %>
 </table>
+<% if @lyrics[1][1] == 'LINK' %>
+  <h4>Direct Translation</h4>
+<p><%= link_to @lyrics[3][1], @lyrics[2][1] %></p>
+<% end %>
 <% if @lyrics[0].count == 4 %>
   <h4>Notes about Lyrics</h4>
   <p><%= @lyrics[1][3] %></p>

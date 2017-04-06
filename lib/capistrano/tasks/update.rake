@@ -36,7 +36,7 @@ namespace :update do
         end
       end 
     end
-    invoke 'puma:restart'
+    execute :sudo, '/bin/systemctl', 'restart', 'stcpress'
   end
 
   task :all => [:pull_misc, :pull_bel, :pull_dance, :db]

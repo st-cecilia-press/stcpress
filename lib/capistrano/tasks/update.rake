@@ -35,8 +35,8 @@ namespace :update do
           execute :rake, 'json:search'
         end
       end 
+      execute :sudo, '/bin/systemctl', 'restart', 'stcpress'
     end
-    execute :sudo, '/bin/systemctl', 'restart', 'stcpress'
   end
 
   task :all => [:pull_misc, :pull_bel, :pull_dance, :db]

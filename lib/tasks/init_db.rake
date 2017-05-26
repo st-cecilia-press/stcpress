@@ -145,9 +145,55 @@ namespace :init_db do
   end
 
   task :db_reset => :environment do
-    Rake::Task['db:reset'].invoke 
-    Rake::Task['db:migrate'].invoke 
+    #Rake::Task['db:reset'].invoke 
+    #Rake::Task['db:migrate'].invoke 
     #Rake::Task['db:seed'].invoke 
+
+    #clear music tables 
+    Book.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='books'") 
+
+    BookContent.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='book_contents'") 
+
+    Manuscript.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='manuscripts'") 
+    
+    ManuscriptContent.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='manuscript_contents'") 
+
+    Composer.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='composers'") 
+
+    Image.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='images'") 
+
+    Publicationship.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='publicationships'") 
+
+    Tag.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='tags'") 
+
+    Tagging.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='taggins'") 
+
+    Piece.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='pieces'") 
+
+    Voicing.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='voicings'") 
+
+    SongVoicing.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='song_voicings'") 
+
+    Language.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='languages'") 
+
+    PieceLanguage.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='piece_languages'") 
+
+    Repository.delete_all
+    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='repositories'") 
   end
   
   task :json => :environment do
@@ -155,11 +201,11 @@ namespace :init_db do
   end
 
   task :dance => :environment do
-    Rake::Task["dance:init"].invoke
+    Rake::Task["dance:all"].invoke
   end
 
   task :reset_gervaise => [:db_reset, :manuscripts, :books, :gervaise_quart, :json]
-  task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous, :json]
+  task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous]
   task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
   task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance, :json]
 end

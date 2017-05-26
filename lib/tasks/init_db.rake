@@ -208,6 +208,8 @@ namespace :init_db do
   task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous]
   task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
   task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance, :json]
+
+  task :reset_music => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha]
 end
 
 class Metadata

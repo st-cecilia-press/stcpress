@@ -27,17 +27,35 @@ namespace :update do
     end
   end
 
-  task :db do
+  task :music_db do
     on roles(:app) do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :rake, 'init_db:all'
+          execute :rake, 'init_db:music'
+        end
+      end 
+    end
+  end
+
+  task :dance_db do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'dance:all'
           execute :rake, 'json:search'
         end
       end 
+    end
+  end 
+
+  task :restart do
+    on roles(:app) do
       execute :sudo, '/bin/systemctl', 'restart', 'stcpress'
     end
   end
 
-  task :all => [:pull_misc, :pull_bel, :pull_dance, :db]
+  task :all => [:pull_misc, :pull_bel, :pull_dance, :music_db, 'dance_db', :restart]
+  task :misc => [:pull_misc, :music_db, :restart]
+  task :bel => [:pull_bel, :music_db, :restart]
+  task :dance => [:pull_dance, :dance_db, :restart]
 end

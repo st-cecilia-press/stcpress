@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526130238) do
+ActiveRecord::Schema.define(version: 20170526212203) do
 
   create_table "audio_recordings", force: :cascade do |t|
     t.integer  "ensemble_id"
@@ -219,6 +219,14 @@ ActiveRecord::Schema.define(version: 20170526130238) do
   end
 
   add_index "music_files", ["sheet_music_id"], name: "index_music_files_on_sheet_music_id"
+
+  create_table "pages", force: :cascade do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "people", force: :cascade do |t|
     t.string   "name"

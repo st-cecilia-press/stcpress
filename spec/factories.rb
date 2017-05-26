@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :page do
+    slug "MyString"
+    title "MyString"
+    body "MyText"
+  end
   sequence :email do |n|
     "person#{n}@example.com"
   end

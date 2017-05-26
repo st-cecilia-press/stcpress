@@ -19,5 +19,6 @@
 //= require listjs
 //= require zeroclipboard
 //= require bootstrap-slider
+//= require simplemde
 //= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .

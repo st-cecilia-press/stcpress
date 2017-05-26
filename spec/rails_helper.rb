@@ -57,6 +57,7 @@ RSpec.configure do |config|
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
+  config.include RequestSpecHelper, type: :request
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.before(:suite) do
@@ -72,6 +73,17 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+end
+RSpec.shared_context 'when signed in through capybara' do
+  def sign_in(user)
+    visit '/users/sign_in'
+    fill_in 'user_email', with: user.email
+    fill_in 'user_password', with: user.password
+    click_on 'Log in'
+  end
+
+  def sign_out(user)
   end
 end
 Shoulda::Matchers.configure do |config|

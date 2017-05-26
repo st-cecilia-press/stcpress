@@ -1,0 +1,12 @@
+<h1>Add New User</h1>
+<div class="container">
+  <div class="col-md-4">
+    <%= semantic_form_for @user, url: admin_users_path do |f| %>
+      <%= f.inputs do %>
+        <%= f.input :name %>
+        <%= f.input :email %>
+      <% end %>
+      <%= f.action :submit, as: :button,  label: 'Create User', button_html: {class: 'btn btn-default'}, id: 'submit'%>
+    <%end%> 
+  </div>
+</div>

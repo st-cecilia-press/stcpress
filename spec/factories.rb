@@ -1,4 +1,13 @@
 FactoryGirl.define do
+  sequence :email do |n|
+    "person#{n}@example.com"
+  end
+  factory :user do
+    email {generate :email}
+    password Devise.friendly_token.first(8)  
+    name 'Mundungus'
+    admin false
+  end
   factory :audio_recording do
     slug 'audio' 
     ensemble

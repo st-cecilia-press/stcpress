@@ -36,6 +36,10 @@ gem 'midilib'
 gem 'zeroclipboard-rails'
 gem 'bootstrap-slider-rails'
 gem 'redcarpet'
+gem 'devise'
+gem 'cancancan'
+gem 'formtastic'
+gem 'formtastic-bootstrap'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'

@@ -45,6 +45,7 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.3.1)
       execjs
+    bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.3.6)
@@ -54,6 +55,7 @@ GEM
       railties (>= 3.2, < 6.0)
     builder (3.2.2)
     byebug (9.0.5)
+    cancancan (1.16.0)
     capistrano (3.6.0)
       airbrussh (>= 1.0.0)
       capistrano-harrow
@@ -94,6 +96,12 @@ GEM
     concurrent-ruby (1.0.2)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
+    devise (4.2.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0, < 5.1)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
@@ -108,6 +116,10 @@ GEM
       railties (>= 3.0.0)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
+    formtastic (3.1.5)
+      actionpack (>= 3.2.13)
+    formtastic-bootstrap (3.1.1)
+      formtastic (>= 3.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashery (2.1.2)
@@ -141,6 +153,7 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    orm_adapter (0.5.0)
     pdf-reader (1.4.0)
       Ascii85 (~> 1.0.0)
       afm (~> 0.2.1)
@@ -172,6 +185,7 @@ GEM
       rails-assets-jquery (>= 1.7.0)
     rails-assets-jquery (3.1.0)
     rails-assets-listjs (1.2.0)
+    rails-assets-simplemde (1.10.0)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -192,6 +206,8 @@ GEM
       json
     redcarpet (3.4.0)
     ref (2.0.0)
+    responders (2.3.0)
+      railties (>= 4.2.0, < 5.1)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -251,6 +267,8 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    warden (1.2.6)
+      rack (>= 1.0)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -271,6 +289,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-slider-rails
   byebug
+  cancancan
   capistrano-rails
   capistrano-rbenv
   capistrano3-puma
@@ -278,9 +297,12 @@ DEPENDENCIES
   capybara-webkit
   coffee-rails (~> 4.1.0)
   database_cleaner
+  devise
   dotenv-rails
   factory_girl_rails
   font-awesome-rails
+  formtastic
+  formtastic-bootstrap
   jbuilder (~> 2.0)
   jquery-rails
   mail_form
@@ -292,6 +314,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   rails-assets-datatables!
   rails-assets-listjs!
+  rails-assets-simplemde!
   recaptcha
   redcarpet
   rspec-rails

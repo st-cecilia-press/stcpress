@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
 
-  resources :pieces, only: [:index] do
+  devise_for :users
+  namespace :admin do
+    resources :users
   end
+
+  get '/dashboard' => 'dashboard#index'
+  resources :pages, only: [:new, :edit, :create, :update]
+  get '/pages/:slug' => 'pages#show'
+  
+  resources :pieces, only: [:index] 
   get 'pieces/voicings' => 'voicings#index'
   get 'pieces/voicings/:voicing' => 'voicings#show'
   get 'pieces/:slug' => 'pieces#show', as: 'piece'

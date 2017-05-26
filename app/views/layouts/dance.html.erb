@@ -42,6 +42,7 @@
             </li>
             <li><%= link_to 'Music Editions', '/' %></li>
             <li><%= link_to 'Contact', "/contact" %></li>
+            <%= render "/layouts/login_dropdown" %>
           </ul>
           <%= render "layouts/search_dance" %>
         </div><!--/.nav-collapse -->
@@ -49,6 +50,10 @@
     </nav>
 
     <div class="container">
+      <% if notice || alert %>
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+     <% end %>
 <%= yield %>
    </div>
 <script>

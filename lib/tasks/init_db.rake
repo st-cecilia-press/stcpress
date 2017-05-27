@@ -151,49 +151,34 @@ namespace :init_db do
 
     #clear music tables 
     Book.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='books'") 
 
     BookContent.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='book_contents'") 
 
     Manuscript.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='manuscripts'") 
     
     ManuscriptContent.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='manuscript_contents'") 
 
     Composer.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='composers'") 
 
     Image.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='images'") 
 
     Publicationship.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='publicationships'") 
 
     Tag.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='tags'") 
 
     Tagging.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='taggins'") 
 
     Piece.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='pieces'") 
 
     Voicing.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='voicings'") 
 
     SongVoicing.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='song_voicings'") 
 
     Language.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='languages'") 
 
     PieceLanguage.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='piece_languages'") 
 
     Repository.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='repositories'") 
   end
   
   task :json => :environment do
@@ -209,7 +194,7 @@ namespace :init_db do
   task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
   task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance, :json]
 
-  task :reset_music => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha]
+  task :music => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha]
 end
 
 class Metadata

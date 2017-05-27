@@ -47,43 +47,30 @@ namespace :dance do
 
   task :db_reset => :environment do
     DanceSource.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='dance_sources'") 
 
     Ensemble.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='ensembles'") 
 
     AudioRecording.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='audio_recordings'") 
 
     SheetMusic.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='sheet_musics'") 
 
     MusicFile.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='music_files'") 
 
     Dance.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='dances'") 
 
     DanceFacsimileImage.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='dance_facsimile_images'") 
 
     DanceTranslation.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='dance_translations'") 
 
     Instruction.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='instructions'") 
 
     Person.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='persons'") 
 
     InstructionSheetmusic.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='instruction_sheetmusics'") 
 
     InstructionAudio.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='instruction_audios'") 
 
     VideoRecording.delete_all
-    ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name ='video_recordings'") 
 
   end
 

@@ -46,31 +46,31 @@ namespace :dance do
   end
 
   task :db_reset => :environment do
-    DanceSource.delete_all
+    DanceSource.destroy_all
 
-    Ensemble.delete_all
+    Ensemble.destroy_all
 
-    AudioRecording.delete_all
+    AudioRecording.destroy_all
 
-    SheetMusic.delete_all
+    SheetMusic.destroy_all
 
-    MusicFile.delete_all
+    MusicFile.destroy_all
 
-    Dance.delete_all
+    Dance.destroy_all
 
-    DanceFacsimileImage.delete_all
+    DanceFacsimileImage.destroy_all
 
-    DanceTranslation.delete_all
+    DanceTranslation.destroy_all
 
-    Instruction.delete_all
+    Instruction.destroy_all
 
-    Person.delete_all
+    Person.destroy_all
 
-    InstructionSheetmusic.delete_all
+    InstructionSheetmusic.destroy_all
 
-    InstructionAudio.delete_all
+    InstructionAudio.destroy_all
 
-    VideoRecording.delete_all
+    VideoRecording.destroy_all
 
   end
 

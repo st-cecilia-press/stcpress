@@ -150,6 +150,9 @@ namespace :init_db do
     #Rake::Task['db:seed'].invoke 
 
     #clear music tables 
+    Piece.delete_all
+    Repository.delete_all
+
     Book.delete_all
 
     BookContent.delete_all
@@ -168,8 +171,6 @@ namespace :init_db do
 
     Tagging.delete_all
 
-    Piece.delete_all
-
     Voicing.delete_all
 
     SongVoicing.delete_all
@@ -178,7 +179,6 @@ namespace :init_db do
 
     PieceLanguage.delete_all
 
-    Repository.delete_all
   end
   
   task :json => :environment do

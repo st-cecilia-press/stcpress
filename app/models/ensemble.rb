@@ -1,5 +1,5 @@
 class Ensemble < ActiveRecord::Base
-  has_many :audio_recordings
+  has_many :audio_recordings, dependent: :destroy
 
   def dances
     dances = []

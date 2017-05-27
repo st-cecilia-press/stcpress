@@ -1,7 +1,7 @@
 class ManuscriptContent < ActiveRecord::Base
   belongs_to :manuscript
   belongs_to :piece
-  has_many :images
+  has_many :images, dependent: :destroy
 
   
   validates :manuscript, :piece, presence: true  

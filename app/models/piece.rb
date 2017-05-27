@@ -1,20 +1,20 @@
 class Piece < ActiveRecord::Base
-  has_many :manuscript_contents
+  has_many :manuscript_contents, dependent: :destroy
   has_many :manuscripts, through: :manuscript_contents
 
-  has_many :book_contents
+  has_many :book_contents, dependent: :destroy
   has_many :books, through: :book_contents
 
-  has_many :song_voicings
+  has_many :song_voicings, dependent: :destroy
   has_many :voicings, through: :song_voicings
 
-  has_many :publicationships
+  has_many :publicationships, dependent: :destroy
   has_many :repositories, through: :publicationships
 
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
-  has_many :piece_languages
+  has_many :piece_languages, dependent: :destroy
   has_many :languages, through: :piece_languages
 
   belongs_to :composer

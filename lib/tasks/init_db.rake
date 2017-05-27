@@ -150,34 +150,34 @@ namespace :init_db do
     #Rake::Task['db:seed'].invoke 
 
     #clear music tables 
-    Piece.delete_all
-    Repository.delete_all
+    Piece.destroy_all
+    Repository.destroy_all
 
-    Book.delete_all
+    Book.destroy_all
 
-    BookContent.delete_all
+    BookContent.destroy_all
 
-    Manuscript.delete_all
+    Manuscript.destroy_all
     
-    ManuscriptContent.delete_all
+    ManuscriptContent.destroy_all
 
-    Composer.delete_all
+    Composer.destroy_all
 
-    Image.delete_all
+    Image.destroy_all
 
-    Publicationship.delete_all
+    Publicationship.destroy_all
 
-    Tag.delete_all
+    Tag.destroy_all
 
-    Tagging.delete_all
+    Tagging.destroy_all
 
-    Voicing.delete_all
+    Voicing.destroy_all
 
-    SongVoicing.delete_all
+    SongVoicing.destroy_all
 
-    Language.delete_all
+    Language.destroy_all
 
-    PieceLanguage.delete_all
+    PieceLanguage.destroy_all
 
   end
   

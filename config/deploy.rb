@@ -112,7 +112,6 @@ namespace :deploy do
     on primary fetch(:migration_role) do
       within release_path do
         with rails_env: fetch(:rails_env)  do
-          execute :rake, 'db:migrate'
           execute :rake, 'init_db:all'
         end
       end

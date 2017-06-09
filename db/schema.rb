@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526212203) do
+ActiveRecord::Schema.define(version: 20170609191341) do
 
   create_table "audio_recordings", force: :cascade do |t|
     t.integer  "ensemble_id"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20170526212203) do
   add_index "dances", ["person_id"], name: "index_dances_on_person_id"
 
   create_table "ensembles", force: :cascade do |t|
-    t.string   "description"
+    t.text     "description"
     t.string   "name"
     t.string   "slug"
     t.datetime "created_at",  null: false

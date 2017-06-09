@@ -92,8 +92,12 @@ class DanceMetadata
   end
   def audio
     @media['audio'].each do |audio|
+      myAudioFile = ''
+      if audio['file'].present?
+        myAudioFile = "/sca_dance/#{@slug}/#{audio['file']}"
+      end
       myAudio = AudioRecording.create do |a|
-        a.file = "/sca_dance/#{@slug}/#{audio['file']}"
+        a.file = myAudioFile
         a.ensemble_id = Ensemble.find_by(slug: audio['ensemble']).id
         a.purchase_url = audio['purchase_url']
         a.youtube = audio['youtube']

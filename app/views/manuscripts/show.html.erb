@@ -15,10 +15,21 @@
   <% end %>
 </ul>
 <table class="table">
-    <tr><th>Piece</th><th>Composer</th><th>Date</th><th>Position in Manuscript</th><th>DIAMM</th></tr>
+<thead>
+<tr>
+  <% if ManuscriptContent.where(manuscript_id: @manuscript.id).any?{|x| x.order.present?}%>
+    <th>Order</th>
+  <% end %>
+    <th>Piece</th><th>Composer</th><th>Date</th><th>Position in Manuscript</th><th>DIAMM</th></tr>
+</thead>
+<tbody>
     <% @manuscript.pieces.each do |piece| %>
         <% mc = ManuscriptContent.find_by(piece: piece, manuscript: @manuscript) %>
-        <tr><td><%= link_to piece.title, piece.url %></td>
+        <tr>
+        <% if ManuscriptContent.where(manuscript_id: @manuscript.id).any?{|x| x.order.present?}%>
+          <td><%=piece.manuscript_contents.find_by(manuscript_id = @manuscript.id).order %></td>
+        <% end %>
+        <td><%= link_to piece.title, piece.url %></td>
         <td><%=piece.composer.name%></td>
         <td><%= piece.date %></td>
         <td><%=mc.position%></td>
@@ -28,4 +39,14 @@
         </td> </tr>
 
     <% end %>
+</tbody>
 </table>
+<script type="text/javascript">
+$(document).ready( function () {
+    var table = $('.table').DataTable(
+      {
+        "pageLength": 25, 
+        "saveState": true,
+      });
+});
+</script>

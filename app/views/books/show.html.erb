@@ -8,11 +8,18 @@
 <br><br>
 <table class="table">
 <thead>
-<tr><th>Title</th><th>Composer</th><th>Voicings</th><th>Language</th><th>Tags</th></tr>
+<tr>
+<% if BookContent.where(book_id: @book.id).any?{|x| x.order.present?}%>
+<th>Order</th>
+<% end %>
+<th>Title</th><th>Composer</th><th>Voicings</th><th>Language</th><th>Tags</th></tr>
 </thead>
 <tbody>
 <% for @piece in @pieces %>
 <tr>
+<% if BookContent.where(book_id: @book.id).any?{|x| x.order.present?}%>
+<td><%=@piece.book_contents.find_by(book_id = @book.id).order %></td>
+<% end %>
   <td><%= link_to @piece.title, @piece.url %></td>
   <td><%= link_to @piece.composer.name, "/composers/#{@piece.composer.slug}"%></td>
   <td><%= render partial: 'shared/voicing', collection: @piece.voicings.sort{ |a,b| a.weigh_voicing <=> b.weigh_voicing}, spacer_template: 'shared/comma' %></td>

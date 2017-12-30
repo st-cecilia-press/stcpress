@@ -1,5 +1,7 @@
 require 'open-uri'
 class SearchController < ApplicationController
+  def index
+  end
   def create
     slug = params[:slug]
     search = params[:search]
@@ -7,8 +9,7 @@ class SearchController < ApplicationController
     count = Piece.where(title: title).count
     if slug.blank? or count < 1
         search = URI::encode(search)
-        url = "https://cse.google.com/cse?as_q=#{search}&client=google-csbe&cx=005631129422479805654:q04zkci2lz4"
-        redirect_to(url)
+        redirect_to search_index_path(q: search)  
     else
         redirect_to piece_url(:slug => slug)
     end

@@ -271,7 +271,7 @@ class Metadata
     if @metadata["manuscripts"]
       @metadata["manuscripts"].each do |manuscript|
         m = Manuscript.find_by(name: manuscript["name"]) 
-        mc = ManuscriptContent.create(piece: @piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"])
+        mc = ManuscriptContent.create(piece: @piece, manuscript: m, position: manuscript["position"], diamm: manuscript["diamm"], order: manuscript["order"])
         if manuscript["images"]
           images(manuscript["images"], 'manuscript', mc.id)
         end
@@ -283,7 +283,7 @@ class Metadata
     if @metadata["books"]
       @metadata["books"].each do |book|
         b = Book.find_by(slug: book["slug"])
-        bc = BookContent.create(piece: @piece, book: b)
+        bc = BookContent.create(piece: @piece, book: b, order: book["order"])
         if book["images"]
           images(book["images"], 'book', bc.id)
         end

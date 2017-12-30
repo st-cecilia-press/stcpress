@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get 'cpdl' => 'cpdl#new'
   end
   
-  resources :search, only: [:create]
+  resources :search, only: [:index, :create]
   namespace :api, defaults: { format: 'json' } do
     get 'pieces' => 'pieces#search'
   end 

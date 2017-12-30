@@ -7,7 +7,7 @@ class Manuscript < ActiveRecord::Base
 
   def diamm_link
     unless diamm.blank?
-      return "http://www.diamm.ac.uk/jsp/Descriptions?op=SOURCE&sourceKey=#{self.diamm}"
+      return "https://www.diamm.ac.uk/sources/#{self.diamm}"
     end
   end
 end

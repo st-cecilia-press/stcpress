@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.0'
+lock '3.10.1'
 
 set :application, 'stcpress'
 set :repo_url, 'git@github.com:st-cecilia-press/stcpress.git'
@@ -53,7 +53,7 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-set :rbenv_ruby, '2.3.0'
+set :rbenv_ruby, '2.4.2'
 set :rbenv_path, '/home/aelkiss/.rbenv'
 
 ## Defaults:
@@ -67,17 +67,17 @@ set :rbenv_path, '/home/aelkiss/.rbenv'
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-    end
-  end
-
-  before :start, :make_dirs
-end
+#namespace :puma do
+#  desc 'Create Directories for Puma Pids and Socket'
+#  task :make_dirs do
+#    on roles(:app) do
+#      execute "mkdir #{shared_path}/tmp/sockets -p"
+#      execute "mkdir #{shared_path}/tmp/pids -p"
+#    end
+#  end
+#
+#  before :start, :make_dirs
+#end
 
 namespace :deploy do
 

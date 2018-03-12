@@ -14,7 +14,7 @@ RSpec.describe ManuscriptContent, "diamm_link" do
   it "returns expected if link exists link" do
     man = create(:manuscript_content, diamm: '8888')
     link = man.diamm_link
-    expect(link).to eq('http://www.diamm.ac.uk/jsp/Descriptions?op=ITEM&itemKey=8888')
+    expect(link).to eq('https://www.diamm.ac.uk/compositions/8888')
   end
   it "returns nil if diamm is nil" do
     man = create(:manuscript_content, diamm: nil)

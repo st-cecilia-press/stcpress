@@ -5,7 +5,7 @@ describe "put /pages/:id" do
     pg = create(:page)
     sign_in(user)
 
-    put "/pages/#{pg.id}", :page => {title: 'New Title', slug: 'newslug', body: 'New Body'}
+    put "/pages/#{pg.id}", params: { page: {title: 'New Title', slug: 'newslug', body: 'New Body'} } 
     expect(Page.first.title).to eq('New Title')
     expect(Page.first.slug).to eq('newslug')
     expect(Page.first.body).to eq('New Body')
@@ -16,13 +16,13 @@ describe "put /pages/:id" do
     pg = create(:page, title: 'Old Title')
     sign_in(user)
 
-    put "/pages/#{pg.id}", :page => {title: 'New Title', slug: '', body: 'New Body'}
+    put "/pages/#{pg.id}", params: { page: {title: 'New Title', slug: '', body: 'New Body'} }
     expect(Page.last.title).to eq('Old Title')
     
   end
   it "redirects if not logged in" do
     pg = create(:page)
-    put "/pages/#{pg.id}", :page => {title: 'New Title', slug: 'newslug', body: 'New Body'} 
+    put "/pages/#{pg.id}", params: { page: {title: 'New Title', slug: 'newslug', body: 'New Body'}  }
     expect(response).to have_http_status(:found)
     expect(response.body).to include('redirected')
   end

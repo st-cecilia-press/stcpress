@@ -52,7 +52,7 @@ gem 'formtastic-bootstrap'
 source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'
   gem 'rails-assets-listjs'
-  gem 'rails-assets-simplemde'
+  #gem 'rails-assets-simplemde'
 end
 
 # Use ActiveModel has_secure_password

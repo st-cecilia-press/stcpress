@@ -2,7 +2,8 @@
   "dependencies": {
     "@rails/webpacker": "^3.3.0",
     "datatables.net-bs": "^1.10.16",
-    "jquery": "^3.3.1"
+    "jquery": "^3.3.1",
+    "simplemde": "https://github.com/Ionaru/simplemde-markdown-editor.git#development"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.1.1"

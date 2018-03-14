@@ -222,7 +222,6 @@ GEM
       rails-assets-jquery (>= 1.7.0)
     rails-assets-jquery (3.3.1)
     rails-assets-listjs (1.5.0)
-    rails-assets-simplemde (1.11.2)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -370,7 +369,6 @@ DEPENDENCIES
   rails (= 5.1.5)
   rails-assets-datatables!
   rails-assets-listjs!
-  rails-assets-simplemde!
   recaptcha
   redcarpet
   rspec-rails

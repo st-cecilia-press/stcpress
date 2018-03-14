@@ -4,6 +4,6 @@ export default (() => {
       {
         "pageLength": 25, 
         "saveState": true,
+//        "order": [[1,'asc'],[0,'asc']],
       });
-
 })()

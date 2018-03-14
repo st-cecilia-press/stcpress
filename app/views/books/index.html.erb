@@ -1,27 +1,22 @@
 <h1>Books</h1>
-<table class="table">
-<thead>
-    <tr><th>Title</th><th>Composers</th><th>Year</th><th>Facsimiles</th></tr>
-</thead>
-<tbody>
-
-<% for @book in @books %>
-  <% composers = @book.pieces.map { |p| p.composer}.uniq %>
-<tr>
-    <td><%= link_to @book.title, book_path(@book.slug) %></a></td>
-    <td><%= render partial: 'composer', collection: composers, spacer_template: 'shared/comma'%></td>
-  <td><%=@book.date.strftime('%Y')%></td>
-  <td>
-  <% if @book.facsimile_sources.count > 0 %>
-    <%= render partial: 'facsimile_sources/facsimile_source', collection: @book.facsimile_sources, spacer_template: 'shared/comma' %>
+<table class="table" data-behavior='dtable'>
+  <thead>
+      <tr><th>Title</th><th>Composers</th><th>Year</th><th>Facsimiles</th></tr>
+  </thead>
+  <tbody>
+  
+  <% for @book in @books %>
+    <% composers = @book.pieces.map { |p| p.composer}.uniq %>
+  <tr>
+      <td><%= link_to @book.title, book_path(@book.slug) %></a></td>
+      <td><%= render partial: 'composer', collection: composers, spacer_template: 'shared/comma'%></td>
+    <td><%=@book.date.strftime('%Y')%></td>
+    <td>
+    <% if @book.facsimile_sources.count > 0 %>
+      <%= render partial: 'facsimile_sources/facsimile_source', collection: @book.facsimile_sources, spacer_template: 'shared/comma' %>
+    <% end %>
+    </td>
+  </tr>
   <% end %>
-  </td>
-</tr>
-<% end %>
-</tbody>
+  </tbody>
 </table>
-<script type="text/javascript">
-$(document).ready( function () {
-    $('.table').DataTable({"pageLength": 100, "order": [1, 'asc'], "saveState": true});
-} );
-</script>

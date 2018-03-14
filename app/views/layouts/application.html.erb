@@ -3,7 +3,8 @@
 <head>
   <title>St Cecilia Press</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%=  javascript_include_tag 'application', 'data-turbolinks-track' => true 
+  %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tags %>
 </head>
@@ -81,5 +82,6 @@
   ga('send', 'pageview');
 
 </script>
+<%= javascript_pack_tag 'application' %>
 </body>
 </html>

@@ -11,6 +11,9 @@ end
 group :development, :test do
   gem 'sqlite3'
 end
+
+gem 'webpacker'
+
 # Use SCSS for stylesheets
 gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets

@@ -21,28 +21,28 @@
   <%= form_tag request.path, class: 'metadata' do |f| %>
     <div class="form-group">
        <%= label_tag 'Piece' %>
-       <%= text_field_tag :piece, nil, class: 'form-control typeahead' %>
+       <%= text_field_tag 'cpdl-piece', nil, class: 'form-control typeahead' %>
     </div>
   <% end %>
-  <button class="btn btn-default" onclick="myFunction()">Select</button>
+  <button id="cpdl-select" class="btn btn-default">Select</button>
   <br><br>
     
   <div data-behavior='copy'>
     <div style="display:flex;position:relative">
       <button class='button-clipboard' title="Click to copy me">Copy</button>
     </div>
-    <pre id='pdf'>
+    <pre id='cpdl-pdf'>
     </pre>
   </div>
 
-  <div id="data">
+  <div id="cpdl-data">
   </div>
 
   <div data-behavior='copy'>
     <div style = "display:flex;position:relative">
       <button class='button-clipboard' title="Click to copy me.">Copy</button>
     </div>
-    <pre id="display">
+    <pre id="cpdl-display">
     </pre>
   </div>
 </div>
@@ -50,9 +50,6 @@
 <script type="text/javascript">
 $(document).ready( function () {
 
-      var text = '[http://stcpress.org/miscellaneous/__SLUG__/__SLUG__.pdf {{extpdf}}] [http://stcpress.org/miscellaneous/__SLUG__/__SLUG__.mid {{extmid}}] [http://stcpress.org/miscellaneous/__SLUG__/__SLUG__.mp3 {{extmp3}}] [https://github.com/st-cecilia-press/miscellaneous/blob/master/__SLUG__/__SLUG__.ly {{extly}}] [http://stcpress.org/pieces/__SLUG__ {{net}}] Part Midis and Mp3s Available' + "\n" + 
-      '{{Editor|Monique Rio|__DATE__}}{{ScoreInfo|Letter|__PAGES__|__SIZE__}}{{CopyCC|Attribution 4.0}}' + "\n" + 
-":'''Edition notes:''' "
   var pieces = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('piece'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -67,29 +64,10 @@ $(document).ready( function () {
   pieces.initialize();
   
   // instantiate the typeahead UI
-  $('#piece').typeahead(null, {
+  $('#cpdl-piece').typeahead(null, {
     displayKey: 'piece',
     source: pieces.ttAdapter()
   });
-
-  myFunction = function(){
-    var slug = $('#piece').val()
-    var pdf_url = 'http://stcpress.org/miscellaneous/' + slug + '/' + slug + '.pdf';
-    var date = new Date().toJSON().substring(0,10)
-    var url = '/miscellaneous/' + slug + '/' + slug + '.pdf';
-    
-    $.get(url ).done(function(data,status,jqXHR){
-       var pages = data.match(/\/Type[\s]*\/Page[^s]/g).length;
-       var size = parseInt(jqXHR.getResponseHeader('content-length')/1024)
-       newText = text;
-       newText = newText.replace(/__SLUG__/g,slug).replace(/__PAGES__/g,pages)
-                        .replace(/__SIZE__/g,size).replace(/__DATE__/g,date)   
-       $('#pdf').text(pdf_url)
-       $('#data').text('Num Pages: ' + pages + '; Size: ' + size + ' kb')
-       $('#display').text(newText)
-
-    });
-  }
 
 
 });

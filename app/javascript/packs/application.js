@@ -13,4 +13,4 @@ import 'modules/datatable'
 import 'modules/simplemde'
 import 'modules/list'
 import 'modules/copy'
-
+import 'modules/cpdl'

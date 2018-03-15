@@ -11,4 +11,5 @@ import 'styles/application.scss'
 import * as $ from 'jquery'
 import 'modules/datatable'
 import 'modules/simplemde'
+import 'modules/list'
 

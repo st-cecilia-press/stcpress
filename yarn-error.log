@@ -1,8 +1,8 @@
 Arguments: 
-  /home/mrio/.nvm/versions/node/v9.5.0/bin/node /home/mrio/.nvm/versions/node/v9.5.0/bin/yarn
+  /home/mrio/.nvm/versions/node/v9.5.0/bin/node /home/mrio/.nvm/versions/node/v9.5.0/bin/yarn remove list.js
 
 PATH: 
-  ./bin:/home/mrio/.yarn/bin:/home/mrio/.rbenv/shims:/home/mrio/.rbenv/bin:/home/mrio/.nvm/versions/node/v9.5.0/bin:/home/mrio/.yarn/bin:/home/mrio/.rbenv/shims:/home/mrio/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/mrio/.fzf/bin
+  ./bin:/home/mrio/.nvm/versions/node/v9.5.0/bin:/home/mrio/.yarn/bin:/home/mrio/.rbenv/shims:/home/mrio/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/mrio/.fzf/bin
 
 Yarn version: 
   1.5.1
@@ -1263,6 +1263,16 @@ Lockfile:
   code-point-at@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+  
+  codemirror-spell-checker@^1.1.2:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/codemirror-spell-checker/-/codemirror-spell-checker-1.1.2.tgz#1c660f9089483ccb5113b9ba9ca19c3f4993371e"
+    dependencies:
+      typo-js "*"
+  
+  codemirror@^5.32.0:
+    version "5.35.0"
+    resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.35.0.tgz#280653d495455bc66aa87e6284292b02775ba878"
   
   collection-visit@^1.0.0:
     version "1.0.0"
@@ -3351,6 +3361,10 @@ Lockfile:
     dependencies:
       object-visit "^1.0.0"
   
+  marked@^0.3.7:
+    version "0.3.17"
+    resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.17.tgz#607f06668b3c6b1246b28f13da76116ac1aa2d2b"
+  
   math-expression-evaluator@^1.2.14:
     version "1.2.17"
     resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
@@ -5196,6 +5210,14 @@ Lockfile:
     dependencies:
       is-arrayish "^0.3.1"
   
+  "simplemde@https://github.com/Ionaru/simplemde-markdown-editor.git#development":
+    version "1.11.2"
+    resolved "https://github.com/Ionaru/simplemde-markdown-editor.git#7e4c2aa019bdcd0091163ae47d063f45515e5178"
+    dependencies:
+      codemirror "^5.32.0"
+      codemirror-spell-checker "^1.1.2"
+      marked "^0.3.7"
+  
   slash@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -5658,6 +5680,10 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   
+  typo-js@*:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/typo-js/-/typo-js-1.0.3.tgz#54d8ebc7949f1a7810908b6002c6841526c99d5a"
+  
   uglify-es@^3.3.4:
     version "3.3.9"
     resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.3.9.tgz#0c1c4f0700bed8dbc124cdb304d2592ca203e677"
@@ -6107,12 +6133,10 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Refusing to download the git repo {"hostname":"github.com","protocol":"https:","repository":"https://github.com/Ionaru/simplemde-markdown-editor.git"} over HTTPS without a commit hash - possible certificate error?
-      at SecurityError.MessageError (/home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:186:110)
-      at new SecurityError (/home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:215:113)
-      at Function.<anonymous> (/home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:51972:17)
+  Error: This module isn't specified in a manifest.
+      at new MessageError (/home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:186:110)
+      at Object.<anonymous> (/home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:60445:15)
       at Generator.next (<anonymous>)
       at step (/home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:98:30)
       at /home/mrio/.nvm/versions/node/v9.5.0/lib/node_modules/yarn/lib/cli.js:109:13
       at <anonymous>
-      at process._tickCallback (internal/process/next_tick.js:160:7)

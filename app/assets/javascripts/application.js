@@ -16,7 +16,6 @@
 //= require turbolinks
 //= require datatables
 //= require twitter/typeahead.min
-//= require zeroclipboard
 //= require bootstrap-slider
 //= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .

@@ -12,4 +12,5 @@ import * as $ from 'jquery'
 import 'modules/datatable'
 import 'modules/simplemde'
 import 'modules/list'
+import 'modules/copy'
 

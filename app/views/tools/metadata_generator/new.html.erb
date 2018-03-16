@@ -3,71 +3,20 @@
     
     <%= form_tag request.path, class: 'metadata' do |f| %>
     
-      <div class="form-group">
+      <div class="form-group" data-behavior='typeahead'>
          <%= label_tag 'Composer' %>
          <%= text_field_tag :composer, nil, class: 'form-control typeahead' %>
+         <div class="hidden data"><%=@composers.map{|x| x.name }.join(';')%></div>
       </div>
-      <div class="form-group">
+      <div class="form-group" data-behavior='typeahead'>
          <%= label_tag 'Manuscripts' %>
          <%= text_field_tag :manuscript, nil, class: 'form-control typeahead' %>
+         <div class="hidden data"><%=@manuscripts.map{|x| x.name }.join(';') %></div>
       </div>
-      <div class="form-group">
+      <div class="form-group" data-behavior='typeahead'>
          <%= label_tag 'Books' %>
          <%= text_field_tag :book, nil, class: 'form-control typeahead' %>
+         <div class="hidden data"> <%=@books.map{|x| x.slug }.join(';') %></div>
       </div>
   <% end %>
 </div>
-
-<script type="text/javascript">
-$(document).ready( function () {
-  var composers = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('composer'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: [
-      <% @composers.each do |composer| %>
-        { composer: "<%= composer.name %>" },
-      <% end %>
-    ]
-  });
-  
-  var manuscripts = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('manuscript'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: [
-      <% @manuscripts.each do |manuscript| %>
-        { manuscript: "<%= manuscript.name %>" },
-      <% end %>
-    ]
-  });
-
-  var books = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('book'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: [
-      <% @books.each do |book| %>
-        { book: "<%= book.slug %>" },
-      <% end %>
-    ]
-  });
-  // initialize the bloodhound suggestion engine
-  books.initialize();
-  manuscripts.initialize();
-  composers.initialize();
-  
-  // instantiate the typeahead UI
-  $('#book').typeahead(null, {
-    displayKey: 'book',
-    source: books.ttAdapter()
-  });
-  $('#composer').typeahead(null, {
-    displayKey: 'composer',
-    source: composers.ttAdapter()
-  });
-  // instantiate the typeahead UI
-  $('#manuscript').typeahead(null, {
-    displayKey: 'manuscript',
-    source: manuscripts.ttAdapter()
-  });
-
-});
-</script>

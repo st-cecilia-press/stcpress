@@ -19,9 +19,10 @@
   <h3 style="text-align:center">CPDL Tool</h3>
   
   <%= form_tag request.path, class: 'metadata' do |f| %>
-    <div class="form-group">
+    <div class="form-group" data-behavior='typeahead'>
        <%= label_tag 'Piece' %>
        <%= text_field_tag 'cpdl-piece', nil, class: 'form-control typeahead' %>
+       <div class="hidden data"><%=@pieces.map{|x| x.slug }.join(';') %></div>
     </div>
   <% end %>
   <button id="cpdl-select" class="btn btn-default">Select</button>
@@ -46,29 +47,3 @@
     </pre>
   </div>
 </div>
-
-<script type="text/javascript">
-$(document).ready( function () {
-
-  var pieces = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('piece'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    local: [
-      <% @pieces.each do |piece| %>
-        { piece: "<%= piece.slug %>" },
-      <% end %>
-    ]
-  });
-  
-  // initialize the bloodhound suggestion engine
-  pieces.initialize();
-  
-  // instantiate the typeahead UI
-  $('#cpdl-piece').typeahead(null, {
-    displayKey: 'piece',
-    source: pieces.ttAdapter()
-  });
-
-
-});
-</script>

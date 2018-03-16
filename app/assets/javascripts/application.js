@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require datatables
-//= require twitter/typeahead.min
 //= require bootstrap-slider
 //= require_tree ../../../vendor/assets/javascripts/
 //= require_tree .

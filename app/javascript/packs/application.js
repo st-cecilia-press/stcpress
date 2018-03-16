@@ -8,9 +8,16 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import 'styles/application.scss'
+import 'styles/typeaheadjs.css'
+
 import * as $ from 'jquery'
+
 import 'modules/datatable'
 import 'modules/simplemde'
 import 'modules/list'
 import 'modules/copy'
 import 'modules/cpdl'
+import 'modules/typeahead/home-search'
+import 'modules/typeahead/dance-search'
+import 'modules/typeahead/pieces-search'
+import 'modules/typeahead/simple'

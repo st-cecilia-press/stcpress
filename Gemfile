@@ -21,26 +21,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'guard-rspec'
 gem 'pdf-reader'
-#gem "font-awesome-rails"
-#gem 'bootstrap-sass'
 gem 'mail_form'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', require: 'recaptcha/rails'
-#gem 'twitter-typeahead-rails'
 gem 'midilib'
-#gem 'zeroclipboard-rails'
-#gem 'bootstrap-slider-rails'
 gem 'redcarpet'
 gem 'devise'
 gem 'cancancan'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
-
-source 'https://rails-assets.org' do
-#  gem 'rails-assets-datatables'
-  #gem 'rails-assets-listjs'
-  #gem 'rails-assets-simplemde'
-end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

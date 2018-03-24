@@ -33,7 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'guard-rspec'
 gem 'pdf-reader'
 gem "font-awesome-rails"
-gem 'bootstrap-sass'
+#gem 'bootstrap-sass'
 gem 'mail_form'
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', require: 'recaptcha/rails'

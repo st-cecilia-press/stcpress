@@ -1,1 +1,43 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
 @import "~simplemde/dist/simplemde.min";
+@import "~bootstrap-slider/dist/css/bootstrap-slider.min";
+@import "~datatables.net-bs/css/dataTables.bootstrap";
+
+.slider {
+    width: 100% !important;
+}
+body {
+  padding-top: 50px;
+}
+.base {
+  margin-bottom: 70px;
+}
+html {
+  position: relative; 
+  min-height: 100%;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 70px;
+  background-color: #f5f5f5;
+}
+
+.container .text-muted {
+  margin-top: 10px;
+}
+.dance-instructions {
+  table {
+    tr > td:last-of-type{
+      text-align: right;  
+    }
+    tr >td {
+      padding: 0px 10px;
+    }
+    tr:nth-child(even) {background: #CCC}
+    tr:nth-child(odd) {background: #FFF}
+  }
+}

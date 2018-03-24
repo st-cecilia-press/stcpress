@@ -10,8 +10,10 @@
 import 'styles/application.scss'
 import 'styles/typeaheadjs.css'
 
-import * as $ from 'jquery'
+import Rails from 'rails-ujs';
+Rails.start();
 
+import 'bootstrap-sass'
 import 'modules/datatable'
 import 'modules/simplemde'
 import 'modules/list'

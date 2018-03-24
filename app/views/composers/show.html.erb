@@ -1,6 +1,6 @@
 <h1><%=@composer.name%></h1>
 <h3>Pieces</h3>
-<div id="pieces-list">
+<div id="pieces-list" data-behavior="list" data-valuename="title">
 <%= render partial: 'shared/list_search' %>
   <ul class="list">
   <% @composer.pieces.sort_by(&:title).each do |piece| %>
@@ -8,12 +8,3 @@
   <% end %>
   </ul>
 </div>
-
-<script type="text/javascript">
-
-  var options = {
-    valueNames: ['title']
-  };
-
-  var piecesList = new List('pieces-list', options);
-</script>

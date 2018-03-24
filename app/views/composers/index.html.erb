@@ -1,5 +1,5 @@
 <h1>Composers</h1>
-<div id="composer-list">
+<div id="composer-list" data-behavior='list' data-valuename='name'>
 <%= render partial: 'shared/list_search' %>
 <ul class="list">
 <% @composers.each do |composer| %>
@@ -7,13 +7,3 @@
 <% end %>
 </ul>
 </div>
-
-
-<script type="text/javascript">
-
-  var options = {
-    valueNames: ['name']
-  };
-
-  var composerList = new List('composer-list', options);
-</script>

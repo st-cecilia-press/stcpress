@@ -1,33 +1,8 @@
 <form class="navbar-form navbar-right" action="/dance_search" method="post">
   <div class="form-group">
-    <input class="form-control" id="search" type="text" name="search" placeholder="Search Dances">
+    <input class="form-control" id="dance-search" type="text" name="search" placeholder="Search Dances">
   </div>
   <input type="hidden" id="hidden-slug" name="slug" value="">
   <button type="submit" class="btn btn-default">Submit</button>
   <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
 </form>
-<script type="text/javascript">
-$(document).ready( function () {
-  
-  var dances = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['title']),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: '/json/dance_search.json', 
-  });
-
-  dances.initialize();
-  
-  $('#search').typeahead(null, {
-    name: 'dances',
-    display: function(data){ return data.title},
-    source: dances.ttAdapter(),
-  }).on('typeahead:select', function(ev, suggestion){
-      $('#hidden-slug').val(suggestion.slug);
-  })//.on('focus', function(){
-    //$('#hidden-slug').val('')
-  //});
-
-  /*$('.form-inline').submit(function(){
-  });*/
-});
-</script>

@@ -14,7 +14,7 @@
     </li>
   <% end %>
 </ul>
-<table class="table">
+<table class="table" data-behavior='dtable'>
 <thead>
 <tr>
   <% if ManuscriptContent.where(manuscript_id: @manuscript.id).any?{|x| x.order.present?}%>
@@ -41,12 +41,3 @@
     <% end %>
 </tbody>
 </table>
-<script type="text/javascript">
-$(document).ready( function () {
-    var table = $('.table').DataTable(
-      {
-        "pageLength": 25, 
-        "saveState": true,
-      });
-});
-</script>

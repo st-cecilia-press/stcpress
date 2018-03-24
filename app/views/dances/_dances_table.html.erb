@@ -1,23 +1,13 @@
-<table class="table">
-<thead>
-<tr><th>Title</th><th>Category</th></tr>
-</thead>
-<tbody>
-<% for @dance in @dances %>
-<tr>
-<td><%= link_to @dance.title, "/dances/#{@dance.slug}" %></td>
-<td><%= @dance.dance_category.name %></td>
-</tr>
-<% end %>
-</tbody>
+<table class="table" data-behavior='dtable'>
+  <thead>
+    <tr><th>Title</th><th>Category</th></tr>
+  </thead>
+  <tbody>
+    <% for @dance in @dances %>
+    <tr>
+      <td><%= link_to @dance.title, "/dances/#{@dance.slug}" %></td>
+      <td><%= @dance.dance_category.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
 </table>
-<script type="text/javascript">
-$(document).ready( function () {
-    var table = $('.table').DataTable(
-      {
-        "pageLength": 25, 
-        "saveState": true,
-        "order": [[1,'asc'],[0,'asc']],
-      });
-});
-</script>

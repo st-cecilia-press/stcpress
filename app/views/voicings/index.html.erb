@@ -1,20 +1,12 @@
 <h1>Voicings</h1>
-<div id="voicing-list">
-<%= render partial: 'shared/list_search' %>
-<ul class="list">
-<% @number_of_voices.each do |v| %>
-  <li><%= link_to v, "/pieces/voicings/#{v}", class: 'voicing' %></li>
-<% end %>
-<% @voicings.each do |v| %>
-  <li><%= link_to v.name, "/pieces/voicings/#{v.name}", class: 'voicing' %></li>
-<% end %>
-</ul>
+<div id="voicing-list" data-behavior='list' data-valuename='voicing'>
+  <%= render partial: 'shared/list_search' %>
+  <ul class="list">
+  <% @number_of_voices.each do |v| %>
+    <li><%= link_to v, "/pieces/voicings/#{v}", class: 'voicing' %></li>
+  <% end %>
+  <% @voicings.each do |v| %>
+    <li><%= link_to v.name, "/pieces/voicings/#{v.name}", class: 'voicing' %></li>
+  <% end %>
+  </ul>
 </div>
-<script type="text/javascript">
-
-  var options = {
-    valueNames: ['voicing']
-  };
-
-  var voicingList = new List('voicing-list', options);
-</script>

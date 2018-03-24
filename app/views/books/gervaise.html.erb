@@ -4,13 +4,13 @@
 <h3>Modern Clef Editions</h3>
 <% @compilations["modern"].each do |modern| %>
   <%=modern['title']%> <a href="<%=path%>/<%=modern['filename']%>" class="btn btn-default btn-md">
-   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+   <i class="far fa-file-pdf" aria-hidden="true"></i> PDF
   </a></br>
 <% end %>
 <h3>Original Clef Editions</h3>
 <% @compilations['original'].each do |original| %>
   <%=original['title']%> <a href="<%=path%>/<%=original['filename']%>" class="btn btn-default btn-md">
-   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+   <i class="far fa-file-pdf" aria-hidden="true"></i> PDF
   </a></br>
 <% end %>
  <h2> Individual Pieces </h2> 

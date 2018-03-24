@@ -7,13 +7,13 @@
     <h4>Original Key Edition 
   <% end %>
    <a href="/<%=vocal_collection.slug%>/<%=@piece.slug%>/<%=edition[:pdf]%>" class="btn btn-default btn-md">
-   <i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF
+   <i class="far fa-file-pdf" aria-hidden="true"></i> PDF
   </a>
    <a href="/<%=vocal_collection.slug%>/<%=@piece.slug%>/<%=edition[:midi]%>" class="btn btn-default btn-md">
-   <i class="fa fa-music" aria-hidden="true"></i> MIDI
+   <i class="fas fa-music" aria-hidden="true"></i> MIDI
   </a>
    <a href="/<%=vocal_collection.slug%>/<%=@piece.slug%>/<%=edition[:mp3]%>" class="btn btn-default btn-md">
-   <i class="fa fa-volume-up" aria-hidden="true"></i> MP3
+   <i class="fas fa-volume-up" aria-hidden="true"></i> MP3
   </a></h4>
   <% if edition[:parts] %>
     <% directory = "/#{vocal_collection.slug}/#{@piece.slug}" %>

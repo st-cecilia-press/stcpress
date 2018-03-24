@@ -1,11 +1,9 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "dataTables.bootstrap.min";
-@import 'bootstrap-slider';
-@import 'font-awesome';
-@import "typeaheadjs";
-@import "formtastic-bootstrap";
-@import "simplemde";
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
+//@import "~@fortawesome/fontawesome/styles";
+@import "~simplemde/dist/simplemde.min";
+@import "~bootstrap-slider/dist/css/bootstrap-slider.min";
+@import "~datatables.net-bs/css/dataTables.bootstrap";
 
 .slider {
     width: 100% !important;

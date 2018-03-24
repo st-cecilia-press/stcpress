@@ -6,7 +6,7 @@
   </li>
 </ul>
 <br><br>
-<table class="table">
+<table class="table" data-behavior='dtable'>
 <thead>
 <tr>
 <% if BookContent.where(book_id: @book.id).any?{|x| x.order.present?}%>
@@ -30,12 +30,3 @@
 </tbody>
 
 </table>
-<script type="text/javascript">
-$(document).ready( function () {
-    var table = $('.table').DataTable(
-      {
-        "pageLength": 25, 
-        "saveState": true,
-      });
-});
-</script>

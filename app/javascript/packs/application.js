@@ -25,3 +25,9 @@ import 'modules/typeahead/dance-search'
 import 'modules/typeahead/pieces-search'
 import 'modules/typeahead/simple'
 import 'modules/datesort/main'
+
+import fontawesome from '@fortawesome/fontawesome';
+import solid from '@fortawesome/fontawesome-free-solid';
+import faPdf from '@fortawesome/fontawesome-free-regular/faFilePdf';
+fontawesome.library.add(solid)
+fontawesome.library.add(faPdf)

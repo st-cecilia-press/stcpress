@@ -13,7 +13,6 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require turbolinks
 //= require datatables
 //= require bootstrap-slider
 //= require_tree ../../../vendor/assets/javascripts/

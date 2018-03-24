@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@rails/webpacker": "^3.3.0",
+    "bootstrap-slider": "^10.0.0",
     "copy-to-clipboard": "^3.0.8",
     "datatables.net-bs": "^1.10.16",
     "jquery": "^3.3.1",

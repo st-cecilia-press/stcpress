@@ -18,7 +18,7 @@
 <br>
 <br>
 
-<table class="table">
+<table class="table" data-behavior="tabledatesort">
 <thead>
 <tr><th>Title</th><th>Composer</th><th>Date</th><th>start_date</th><th>end_date</th><th>Voicings</th><th>Language</th><th>Tags</th></tr>
 </thead>
@@ -38,72 +38,3 @@
 </tbody>
 
 </table>
-
-<script type="text/javascript">
-$.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var min = parseInt( $('#min').text(), 10 );
-        var max = parseInt( $('#max').text(), 10 );
-        var start_date = parseFloat( data[3] ) || 900; // use data for the start_date column
-        var end_date = parseFloat( data[4] ) || 1700; // use data for the end_date column
- 
-        if ( ( isNaN( min ) && isNaN( max ) ) ||
-             ( isNaN( min ) && start_date <= max ) ||
-             ( min <= end_date  && isNaN( max ) ) ||
-             ( min <= end_date   && max >= start_date ) )
-        {
-            return true;
-        }
-        return false;
-    }
-);
-$(document).ready( function () {
-    var table = $('.table').DataTable(
-      {
-        "pageLength": 25, 
-        "saveState": true,
-        "columnDefs": [
-            {
-              "targets": [3, 4],
-              "visible": false,
-              //"searchable: false,
-            }
-          ]
-      });
-      var mySlider = $("#dateRange").slider({}).on('change',function(){
-        var val = this.value.split(',')
-        $('#min').text(val[0])
-        $('#max').text(val[1])
-        table.draw();
-      });
-
-      $("#reset-dates").click(function(){
-        mySlider.slider('setValue', [900,1700],true,true)
-      });
-      $("#tenth").click(function(){
-        mySlider.slider('setValue', [900,999],true,true)
-      });
-      $("#eleventh").click(function(){
-        mySlider.slider('setValue', [1000,1099],true,true)
-      });
-      $("#twelfth").click(function(){
-        mySlider.slider('setValue', [1100,1199],true,true)
-      });
-      $("#thirteenth").click(function(){
-        mySlider.slider('setValue', [1200,1299],true,true)
-      });
-      $("#fourteenth").click(function(){
-        mySlider.slider('setValue', [1300,1399],true,true)
-      });
-      $("#fifteenth").click(function(){
-        mySlider.slider('setValue', [1400,1499],true,true)
-      });
-      $("#sixteenth").click(function(){
-        mySlider.slider('setValue', [1500,1599],true,true)
-      });
-      $("#seventeenth").click(function(){
-        mySlider.slider('setValue', [1600,1699],true,true)
-      });
-
-} );
-</script>

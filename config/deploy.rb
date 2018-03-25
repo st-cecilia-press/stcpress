@@ -125,18 +125,6 @@ namespace :deploy do
     end
   end
 
-#  desc 'Run rake webpack_deploy'
-#  task :webpack_deploy do
-#    on roles(:app) do
-#      within release_path do
-#        execute("cd #{release_path} && rails webpacker:compile")
-#      end
-#    end
-#  end
-
-#  after :updating, 'yarn:install'
-#  after :updating, :webpack_deploy
-
   before :starting,     :check_revision
   before :finishing,    :init_db
   after  :finishing,    :cleanup

@@ -3,6 +3,9 @@ lock '3.10.1'
 
 set :application, 'stcpress'
 set :repo_url, 'git@github.com:st-cecilia-press/stcpress.git'
+# set :default_env, {
+#   "PATH" => "/home/mrio/.nvm/versions/node/v6.9.5/bin:$PATH"
+# }
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -36,7 +39,6 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log','public/json', 'public/misc
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
 set :puma_threads,    [2, 8]
 set :puma_workers,    0
 
@@ -55,6 +57,11 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 set :rbenv_ruby, '2.4.2'
 set :rbenv_path, '/home/aelkiss/.rbenv'
+
+# set :nvm_custom_path, "$HOME/.nvm/versions/node"
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, 'v9.5.0'
+set :nvm_map_bins, %w{node npm yarn}
 
 ## Defaults:
 # set :scm,           :git
@@ -117,6 +124,18 @@ namespace :deploy do
       end
     end
   end
+
+#  desc 'Run rake webpack_deploy'
+#  task :webpack_deploy do
+#    on roles(:app) do
+#      within release_path do
+#        execute("cd #{release_path} && rails webpacker:compile")
+#      end
+#    end
+#  end
+
+#  after :updating, 'yarn:install'
+#  after :updating, :webpack_deploy
 
   before :starting,     :check_revision
   before :finishing,    :init_db

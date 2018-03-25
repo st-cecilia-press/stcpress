@@ -1,6 +1,5 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     Ascii85 (1.0.3)
     actioncable (5.1.5)
@@ -60,12 +59,16 @@ GEM
     capistrano-bundler (1.3.0)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-nvm (0.0.7)
+      capistrano (~> 3.1)
     capistrano-rails (1.3.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano-rbenv (2.1.3)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
+    capistrano-yarn (2.0.2)
+      capistrano (~> 3.0)
     capistrano3-puma (3.1.1)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -288,8 +291,10 @@ PLATFORMS
 DEPENDENCIES
   byebug
   cancancan
+  capistrano-nvm
   capistrano-rails
   capistrano-rbenv
+  capistrano-yarn
   capistrano3-puma
   capybara
   capybara-webkit

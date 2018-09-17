@@ -3,7 +3,7 @@ require 'find'
 
 namespace :init_db do
   task :manuscripts => :environment do
-    Dir.chdir('public/miscellaneous/include'){ |pub|
+    Dir.chdir('public/stcpress-data'){ |pub|
       metadata = YAML.load_file('manuscripts.yaml')
       metadata.each do |man|
         manuscript = Manuscript.create do |m|
@@ -27,7 +27,7 @@ namespace :init_db do
     }    
   end
   task :books => :environment do
-    Dir.chdir('public/miscellaneous/include'){ |pub|
+    Dir.chdir('public/stcpress-data'){ |pub|
       metadata = YAML.load_file('books.yaml')
       metadata.each do |book|
         bk = Book.create do |b|

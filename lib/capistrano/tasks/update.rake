@@ -1,7 +1,7 @@
 namespace :update do
   task :pull_misc do
     on roles(:app) do
-      within '/srv/www/stcpress/shared/public/miscellaneous/include' do
+      within '/srv/www/stcpress/shared/public/stcpress-data' do
           execute :git, 'pull'
       end 
       within '/srv/www/stcpress/shared/public/miscellaneous' do
@@ -18,7 +18,7 @@ namespace :update do
   end
   task :pull_bel do
     on roles(:app) do
-      within '/srv/www/stcpress/shared/public/miscellaneous/include' do
+      within '/srv/www/stcpress/shared/public/stcpress-data' do
           execute :git, 'pull'
       end 
       within '/srv/www/stcpress/shared/public/bel-accueil' do

@@ -42,6 +42,7 @@ gem 'formtastic-bootstrap'
 
 gem 'puma'
 group :development, :test do
+	gem 'foreman'
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-rbenv'

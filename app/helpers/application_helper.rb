@@ -20,4 +20,10 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+  def nav_link_to(name, url)
+    "<li class='nav-item'>#{link_to(name, url, class: 'nav-link')}</li>".html_safe
+  end
+  def nav_dropdown_link_to(name, url)
+    link_to(name, url, class: 'dropdown-item')
+  end
 end

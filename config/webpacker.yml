@@ -34,12 +34,11 @@ development:
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
     https: false
-    host: localhost
+    host: 192.168.56.101
     port: 3035
-    public: localhost:3035
+    public: 192.168.56.101:3035
     hmr: false
-    # Inline should be set to true if using HMR
-    inline: true
+    # Inline should be set to true if using HMR inline: true
     overlay: true
     compress: true
     disable_host_check: true

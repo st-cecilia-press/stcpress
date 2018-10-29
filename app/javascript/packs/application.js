@@ -6,23 +6,27 @@
 //
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
-
+require('jquery-ui/themes/base/core.css');
+require('jquery-ui/themes/base/menu.css');
+require('jquery-ui/themes/base/autocomplete.css');
+require('jquery-ui/themes/base/theme.css');
+import "jquery-ui/ui/widgets/autocomplete";
 import 'styles/application.scss'
-import 'styles/typeaheadjs.css'
+//import 'styles/typeaheadjs.css'
 
 import Rails from 'rails-ujs';
 Rails.start();
 
-import 'bootstrap-sass'
+import 'bootstrap'
 import 'modules/datatable'
 import 'modules/simplemde'
 import 'modules/list'
 import 'modules/copy'
 import 'modules/cpdl'
 import 'modules/video'
-import 'modules/typeahead/home-search'
+import 'modules/autocomplete/home-search'
 import 'modules/typeahead/dance-search'
-import 'modules/typeahead/pieces-search'
+import 'modules/autocomplete/pieces-search'
 import 'modules/typeahead/simple'
 import 'modules/datesort/main'
 

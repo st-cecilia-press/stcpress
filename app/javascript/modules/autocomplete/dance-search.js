@@ -3,7 +3,7 @@ export default(() => {
 
   if($('#dance-search').length > 0){
     var thing = $('#dance-search').autocomplete({
-      source: '/json/dance_search.json',
+      source: '/api/dances',
       minLength: 2,
       focus: function(event, ui){
         $('#dance-search').val(ui.item.title)

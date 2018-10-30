@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :search, only: [:index, :create]
   namespace :api, defaults: { format: 'json' } do
     get 'pieces' => 'pieces#search'
+    get 'dances' => 'dances#search'
   end 
   post '/dance_search' => 'home#search'
   

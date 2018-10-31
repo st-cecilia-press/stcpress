@@ -1,12 +1,19 @@
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" >
-	<div class="container d-none d-md-block" style="width:450px">
-		<%= image_tag('stcpress.png', style: "height:120px", class:"float-left") %>
-		<h1>Welcome to <br>St. Cecilia Press</h1>
-  	<p>Pre-1700 Music Editions and Translations</p>
-	</div>
-	<div class="d-md-none">
-	<h1>St. Cecilia Press</h1>
-	</div>
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" >
+  <div class="row justify-content-center">
+	  <div class="media d-none d-sm-flex"> 
+	  	<%= image_tag('stcpress.png', style: "height:120px", class:"mr-3 align-self-center") %>
+      <div class="media-body text-center">
+	  	    <h1 class="mt-0">Welcome to <br>St. Cecilia Press</h1>
+    	    <p>Pre-1700 Music Editions and Translations</p>
+      </div>
+	  </div>
+	  <div class="media d-sm-none">
+	  	<%= image_tag('stcpress.png', style: "height:120px", class:"mr-3 align-self-center") %>
+      <div class="media-body text-center align-self-center">
+	      <h2 class="mt-0">St. Cecilia Press</h1>
+      </div>
+	  </div>
+  </div>
   <form class="form" style="width:100%;max-width:450px;padding:15px;margin:0 auto" action="/search" method="post">
     <input class="form-control form-control-lg" id="home-search" type="text" name="search" placeholder="Search">
     <input type="hidden" id="hidden-home-slug" name="slug" value=""><br>

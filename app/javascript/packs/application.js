@@ -27,7 +27,7 @@ import 'modules/video'
 import 'modules/autocomplete/home-search'
 import 'modules/autocomplete/dance-search'
 import 'modules/autocomplete/pieces-search'
-import 'modules/typeahead/simple'
+import 'modules/autocomplete/simple'
 import 'modules/datesort/main'
 
 import fontawesome from '@fortawesome/fontawesome';

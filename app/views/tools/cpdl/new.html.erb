@@ -15,35 +15,39 @@
     */
   }
 </style>
-<div class="col-md-6 col-md-offset-3">
-  <h3 style="text-align:center">CPDL Tool</h3>
-  
-  <%= form_tag request.path, class: 'metadata' do |f| %>
-    <div class="form-group" data-behavior='typeahead'>
-       <%= label_tag 'Piece' %>
-       <%= text_field_tag 'cpdl-piece', nil, class: 'form-control typeahead' %>
-       <div class="hidden data"><%=@pieces.map{|x| x.slug }.join(';') %></div>
-    </div>
-  <% end %>
-  <button id="cpdl-select" class="btn btn-default">Select</button>
-  <br><br>
-    
-  <div data-behavior='copy'>
-    <div style="display:flex;position:relative">
-      <button class='button-clipboard' title="Click to copy me">Copy</button>
-    </div>
-    <pre id='cpdl-pdf'>
-    </pre>
-  </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-md-8">
+      <h3 style="text-align:center">CPDL Tool</h3>
+      
+      <%= form_tag request.path, class: 'metadata' do |f| %>
+        <div class="form-group" data-behavior='typeahead'>
+           <%= label_tag 'Piece' %>
+           <%= text_field_tag 'cpdl-piece', nil, class: 'form-control typeahead' %>
+           <div class="d-none data"><%=@pieces.map{|x| x.slug }.join(';') %></div>
+        </div>
+      <% end %>
+      <button id="cpdl-select" class="btn btn-default">Select</button>
+      <br><br>
+        
+      <div class="border border-dark bg-light mb-3" style="height:85px" data-behavior='copy'>
+        <div style="display:flex;position:relative">
+          <button class='button-clipboard' title="Click to copy me">Copy</button>
+        </div>
+        <pre id='cpdl-pdf'>
+        </pre>
+      </div>
 
-  <div id="cpdl-data">
-  </div>
+      <div id="cpdl-data">
+      </div>
 
-  <div data-behavior='copy'>
-    <div style = "display:flex;position:relative">
-      <button class='button-clipboard' title="Click to copy me.">Copy</button>
+      <div class="border border-dark bg-light" data-behavior='copy' style="height:85px">
+        <div style = "display:flex;position:relative">
+          <button class='button-clipboard' title="Click to copy me.">Copy</button>
+        </div>
+        <pre id="cpdl-display">
+        </pre>
+      </div>
     </div>
-    <pre id="cpdl-display">
-    </pre>
   </div>
 </div>

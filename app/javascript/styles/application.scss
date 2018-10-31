@@ -1,15 +1,10 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap";
-//@import "~@fortawesome/fontawesome/styles";
-@import "~simplemde/dist/simplemde.min";
-@import "~bootstrap-slider/dist/css/bootstrap-slider.min";
-@import "~datatables.net-bs/css/dataTables.bootstrap";
+@import url("../../../node_modules/bootstrap/dist/css/bootstrap.css");
+@import url("../../../node_modules/simplemde/dist/simplemde.min.css");
+@import url("../../../node_modules/bootstrap-slider/dist/css/bootstrap-slider.min.css");
+@import url("../../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css");
 
 .slider {
     width: 100% !important;
-}
-body {
-  padding-top: 50px;
 }
 .base {
   margin-bottom: 70px;
@@ -41,4 +36,49 @@ html {
     tr:nth-child(even) {background: #CCC}
     tr:nth-child(odd) {background: #FFF}
   }
+}
+.ui-widget.ui-widget-content{
+  border: 1px solid rgba(0,0,0,0.15);
+}
+.ui-menu .ui-menu-item-wrapper{
+	padding: 3px 24px 3px 24px;
+}
+.ui-menu .ui-state-active{
+	margin: 0px;
+	border: none;
+}
+.ui-autocomplete {
+	color: #495057;
+  position: absolute;
+  z-index: 99999 !important;
+  cursor: default;
+  padding: 0;
+  margin-top: 2px;
+  list-style: none;
+  background-color: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+//.ui-autocomplete>li {
+//  padding: 3px 20px;
+//}
+
+.ui-state-active, .ui-widget-content .ui-state-active{
+  border-color: #eff0f1;
+	background-color: #eff0f1;
+	color: #495057
+}
+//Bootstrap formatting
+.dropdown .dropdown-menu a:hover
+{
+  background-color: #eff0f1;
+}
+
+.ui-helper-hidden-accessible {
+  display: none;
 }

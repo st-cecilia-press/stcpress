@@ -1,15 +1,23 @@
-<div  class="jumbotron" style="margin-top:40px;text-align:center">
-<div class="container">
-<h1>Welcome to<br>St. Cecilia Press</h1>
-  <p>Medieval and Renaissance Music Editions and Translations</p>
-  <p>
-  <form class="form col-xs-6 col-xs-offset-3" action="/search" method="post">
-  <div>
-    <input class="form-control input-lg" id="home-search" type="text" name="search" placeholder="Search">
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" >
+  <div class="row justify-content-center">
+	  <div class="media d-none d-sm-flex"> 
+	  	<%= image_tag('stcpress.png', style: "height:120px", class:"mr-3 align-self-center") %>
+      <div class="media-body text-center">
+	  	    <h1 class="mt-0">Welcome to <br>St. Cecilia Press</h1>
+    	    <p>Pre-1700 Music Editions and Translations</p>
+      </div>
+	  </div>
+	  <div class="media d-sm-none">
+	  	<%= image_tag('stcpress.png', style: "height:120px", class:"mr-3 align-self-center") %>
+      <div class="media-body text-center align-self-center">
+	      <h2 class="mt-0">St. Cecilia Press</h1>
+      </div>
+	  </div>
   </div>
-  <input type="hidden" id="hidden-home-slug" name="slug" value="">
-  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-  <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+  <form class="form" style="width:100%;max-width:450px;padding:15px;margin:0 auto" action="/search" method="post">
+    <input class="form-control form-control-lg" id="home-search" type="text" name="search" placeholder="Search">
+    <input type="hidden" id="hidden-home-slug" name="slug" value=""><br>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+    <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
   </form>
-</div>
 </div>

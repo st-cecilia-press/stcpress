@@ -1,5 +1,13 @@
 #cecilia ignore
-/public/
+/public/bel-accueil/
+/public/embellishments_vol1/
+/public/gervaise_quart_livre_de_danceries/
+/public/instrumental_pile/
+/public/json/
+/public/miscellaneous/
+/public/sca_dance/
+/public/packs/
+/public/packs-test/
 /storage/
 .byebug_history
 #Related to getting email to work
@@ -85,8 +93,6 @@ Temporary Items
 
 
 coverage
-/public/packs
-/public/packs-test
 /node_modules
 yarn-debug.log*
 .yarn-integrity

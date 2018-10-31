@@ -1,8 +1,11 @@
 <div class="container">
   <div class="col-md-9">
     <h3>About St. Cecilia Press</h3>
-    <p> St. Cecilia Press houses the transcriptions of Renaissance and Medieval music made by Monique Rio as well as the singable translations of Carol Anne Perry Lagemann.
-        All of Monique's transcriptions are done in <%= link_to "Lilypond", "http://lilypond.org" %>.</p>
+    <p> St. Cecilia Press houses the transcriptions of Renaissance and Medieval music made by Monique Rio as well as the singable translations of Carol Anne Perry Lagemann.</p>
+     <p><%= link_to image_tag( 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png', height: "30px", class: "pull-right", style:"margin-top:0px"), 'https://creativecommons.org/licenses/by-sa/4.0/' %>
+        Monique's transcriptions are done in <%= link_to "Lilypond", "http://lilypond.org" %>, and may be used with attribution. (CC By 4.0)</p>
+     <p><%= link_to image_tag( 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png', height: "30px", class: "pull-right", style:"margin-top:0px"), 'https://creativecommons.org/licenses/by/4.0/' %>
+        Carol's editions may be used with attribution and SharedAlike. (CC BY-SA 4.0)</p>
     <p>All collections can be found on <%= link_to 'Github', 'https://github.com/st-cecilia-press/' %>.</p>
     <p> If you want to help with their transcription projects or 
         let them know about errors in the music, <%= link_to "send them a message", '/contact/' %>.</p>

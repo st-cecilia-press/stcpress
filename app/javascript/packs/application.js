@@ -12,7 +12,6 @@ require('jquery-ui/themes/base/autocomplete.css');
 require('jquery-ui/themes/base/theme.css');
 import "jquery-ui/ui/widgets/autocomplete";
 import 'styles/application.scss'
-//import 'styles/typeaheadjs.css'
 
 import Rails from 'rails-ujs';
 Rails.start();

@@ -49,14 +49,14 @@
     </div><!--/.nav-collapse -->
   </nav>
 
-    <div class="container">
+    <div class="container mt-3">
       <div class ="base">
-      <% if notice || alert %>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-     <% end %>
-<%= yield %>
-</div>
+         <% if notice || alert %>
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+        <% end %>
+        <%= yield %>
+      </div>
    </div>
     <footer class="footer">
     </footer>

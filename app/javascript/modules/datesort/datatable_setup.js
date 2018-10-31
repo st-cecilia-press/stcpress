@@ -1,4 +1,4 @@
-import 'datatables.net-bs'
+import 'datatables.net-bs4'
 export default (() => {
   $.fn.dataTable.ext.search.push(
       function( settings, data, dataIndex ) {

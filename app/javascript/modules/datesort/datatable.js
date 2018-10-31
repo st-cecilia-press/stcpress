@@ -1,4 +1,4 @@
-import 'datatables.net-bs'
+import 'datatables.net-bs4'
 var dtable = $("table[data-behavior='tabledatesort']").DataTable({
   "pageLength": 25, 
   "saveState": true,

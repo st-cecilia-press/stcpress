@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
-ruby "2.4.2"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.5'
+gem 'rails', '~>5.1'
 
 group :production do
   gem 'mysql2'

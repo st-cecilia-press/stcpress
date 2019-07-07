@@ -60,7 +60,7 @@ set :rbenv_path, '/home/aelkiss/.rbenv'
 
 # set :nvm_custom_path, "$HOME/.nvm/versions/node"
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, 'v9.5.0'
+set :nvm_node, 'v10.16.0'
 set :nvm_map_bins, %w{node npm yarn}
 
 ## Defaults:

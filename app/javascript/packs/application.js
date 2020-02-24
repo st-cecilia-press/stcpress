@@ -29,8 +29,9 @@ import 'modules/autocomplete/pieces-search'
 import 'modules/autocomplete/simple'
 import 'modules/datesort/main'
 
-import fontawesome from '@fortawesome/fontawesome';
-import solid from '@fortawesome/fontawesome-free-solid';
-import faPdf from '@fortawesome/fontawesome-free-regular/faFilePdf';
-fontawesome.library.add(solid)
-fontawesome.library.add(faPdf)
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import {fas} from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf} from '@fortawesome/free-regular-svg-icons/faFilePdf';
+library.add(fas)
+library.add(faFilePdf)
+dom.watch();

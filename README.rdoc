@@ -1,28 +1,29 @@
-== README
+live site: http://stcpress.org
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Setting up stcpress for development
 
-Things you may want to cover:
+git clone git@github.com:st-cecilia-press/stcpress.git
+cd stcpress
+bundle
+dependencies: libsqlite3-dev, libmysqlclient-dev, g++,
 
-* Ruby version
+capybara-webkit needs quicktime. I installed: 
+libqt*5-dev, qt*5-dev, qml-module-qtquick-*, qt*5-doc-html, qt5-default, qt5-qmake
 
-* System dependencies
+bundle exec rake db:setup
 
-* Configuration
+make sure node and yarn are at versions in package.json
 
-* Database creation
+I use nvm to install node, so to get node to the correct version -->
+nvm install [version]
 
-* Database initialization
+for yarn: 
+curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version [version]
+source .bashrc
 
-* How to run the test suite
+bundle exec rails assets:precompile
 
-* Services (job queues, cache servers, search engines, etc.)
+set up music repositories
+bundle exec rake git_pull
+bundle exec rake init_db:all
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.

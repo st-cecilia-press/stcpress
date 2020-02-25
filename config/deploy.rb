@@ -55,12 +55,12 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-set :rbenv_ruby, '2.4.2'
+set :rbenv_ruby, '2.4.5'
 set :rbenv_path, '/home/aelkiss/.rbenv'
 
 # set :nvm_custom_path, "$HOME/.nvm/versions/node"
 set :nvm_type, :user # or :system, depends on your nvm setup
-set :nvm_node, 'v10.16.0'
+set :nvm_node, 'v13.6.0'
 set :nvm_map_bins, %w{node npm yarn}
 
 ## Defaults:

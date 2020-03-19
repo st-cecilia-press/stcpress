@@ -17,9 +17,6 @@ Make sure dependencies are installed
 capybara-webkit needs Qt. I installed: 
 * qt5-default
 * libqt*5-dev
-* qt*5-dev
-* qml-module-qtquick-*
-* qt*5-doc-html
 
 Set up database
 ```

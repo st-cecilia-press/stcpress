@@ -15,7 +15,6 @@ Make sure dependencies are installed
 * libsqlite3-dev
 
 capybara-webkit needs Qt. I installed: 
-* qt5-make
 * qt5-default
 * libqt*5-dev
 * qt*5-dev

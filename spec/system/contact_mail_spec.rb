@@ -2,7 +2,7 @@ require 'rails_helper'
 
 include ERB::Util
 
-RSpec.feature "Contact email" do
+RSpec.describe "Contact email", type: :system do
 
   def send_email
     subject = 'TEST SUBJECT'

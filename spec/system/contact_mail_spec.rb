@@ -2,7 +2,7 @@ require 'rails_helper'
 
 include ERB::Util
 
-RSpec.describe "Contact email", type: :system do
+RSpec.describe "Contact email" do
 
   def send_email
     subject = 'TEST SUBJECT'
@@ -28,19 +28,19 @@ RSpec.describe "Contact email", type: :system do
     expect(page.current_path).to eq expected_back
   end
 
- # scenario "sends email to Nique" do
- #   visit '/'
- #   click_on 'Contact' 
- #   send_email
- #   expect_email('nique.rio@gmail.com','/')
- # end
+  it "sends email to Nique" do
+    visit '/'
+    click_on 'Contact' 
+    send_email
+    expect_email('nique.rio@gmail.com','/')
+  end
 
- # scenario 'does not send email without recaptcha' do
- #   Recaptcha.configuration.skip_verify_env.delete("test")
- #   visit '/'
- #   click_on 'Contact'
- #   expect { send_email }.not_to change(ActionMailer::Base.deliveries, :count)
- # end
+  #it 'does not send email without recaptcha' do
+  #  Recaptcha.configuration.skip_verify_env.delete("test")
+  #  visit '/'
+  #  click_on 'Contact'
+  #  expect { send_email }.not_to change(ActionMailer::Base.deliveries, :count)
+  #end
 
 
 end

@@ -17,7 +17,7 @@
   <form class="form" style="width:100%;max-width:450px;padding:15px;margin:0 auto" action="/search" method="post">
     <input class="form-control form-control-lg" id="home-search" type="text" name="search" placeholder="Search">
     <input type="hidden" id="hidden-home-slug" name="slug" value=""><br>
-    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+    <button type="submit" id="home-submit" class="btn btn-primary btn-lg btn-block">Submit</button>
     <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
   </form>
 </div>

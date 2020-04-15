@@ -27,4 +27,9 @@ test:
   database: stcpress_test
 
 production:
-  <<: *default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: stcpress
+  username: stcpress
+  password: <%= ENV['STCPRESS_DATABASE_PASSWORD'] %>

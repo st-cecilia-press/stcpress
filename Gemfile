@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~>5.1'
+gem 'rails', '~>5.2'
 
 group :production do
   gem 'mysql2'
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'
 end
-group :development, :test do
-  gem 'sqlite3'
-end
+
+gem 'pg'
 
 gem 'webpacker'
 
@@ -18,10 +18,8 @@ gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'guard-rspec'
 gem 'pdf-reader'
 gem 'mail_form'
-gem 'dotenv-rails', :require => 'dotenv/rails-now'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'midilib'
 gem 'redcarpet'
@@ -41,7 +39,6 @@ gem 'formtastic-bootstrap'
 
 gem 'puma'
 group :development, :test do
-	gem 'foreman'
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-rbenv'
@@ -52,10 +49,9 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem 'capybara'
-  gem 'capybara-webkit'
-  gem 'phantomjs'
-  gem 'poltergeist'
+  gem 'selenium-webdriver'
 end
+
 group :test do
   gem "database_cleaner"
   gem "shoulda-matchers"

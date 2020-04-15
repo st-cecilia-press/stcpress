@@ -14,7 +14,7 @@ set :repo_url, 'git@github.com:st-cecilia-press/stcpress.git'
  set :deploy_to, '/srv/www/stcpress'
 
 # Default value for :scm is :git
- set :scm, :git
+# set :scm, :git
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh

@@ -1,0 +1,6 @@
+{ 
+  "add-field": 
+    { "name":"composer", "type":"text_general", "stored":true, "indexed":true},
+  "add-copy-field":
+    { "source":"composer", "dest":"text"}
+} 

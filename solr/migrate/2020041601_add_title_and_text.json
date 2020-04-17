@@ -1,0 +1,12 @@
+{ 
+  "add-field": 
+    { "name":"title", "type":"text_general", "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"composer", "type":"text_general", "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"text", "type":"text_general", "stored":false, "indexed":true},
+  "add-copy-field":
+    { "source":"title", "dest":"text"},
+  "add-copy-field":
+    { "source":"composer", "dest":"text"}
+} 

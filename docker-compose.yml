@@ -38,6 +38,16 @@ services:
     ports:
       - "5900:5900"
 
+  solr:
+    image: solr:8
+    ports:
+     - "8983:8983"
+    volumes:
+      - solr_data:/var/solr
+    command:
+      - solr-precreate
+      - earlymusic
+
   database:
     image: postgres
     env_file:
@@ -48,3 +58,4 @@ services:
 volumes:
   db_data:
   gem_cache:
+  solr_data:

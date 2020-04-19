@@ -1,0 +1,11 @@
+{ 
+  "add-field": 
+    { "name":"url", "type":"text_general", "stored":true, "indexed":false },
+  "add-field": 
+    { "name":"model", "type":"text_general", "stored":true, "indexed":false },
+  "add-field": 
+    { "name":"lyrics", "type":"text_general", "stored":true, "indexed":true, "multiValued":true},
+  "add-field": 
+    { "name":"pieces", "type":"text_general", "stored":true, "indexed":true, "multiValued":true}
+  
+} 

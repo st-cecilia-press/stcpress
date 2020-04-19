@@ -1,0 +1,24 @@
+{ 
+  "add-field": 
+    { "name":"slug", "type":"text_general", "stored":true, "indexed":false },
+  "replace-field": 
+    { "name":"text", "type":"text_general", "stored":false, "indexed":true, "multiValued":true},
+  "add-field": 
+    { "name":"book", "type":"text_general", "stored":true, "indexed":true, "multiValued":true},
+  "add-copy-field":
+    { "source":"book", "dest":"text"},
+  "add-field": 
+    { "name":"manuscript", "type":"text_general", "stored":true, "indexed":true, "multiValued":true},
+  "add-copy-field":
+    { "source":"manuscript", "dest":"text"},
+  "add-field": 
+    { "name":"voicing", "type":"text_general", "stored":true, "indexed":true, "multiValued":true},
+  "add-field": 
+    { "name":"language", "type":"text_general", "stored":true, "indexed":true, "multiValued":true},
+  "add-copy-field":
+    { "source":"language", "dest":"text"},
+  "add-field": 
+    { "name":"tag", "type":"text_general", "stored":true, "indexed":true, "multiValued":true},
+  "add-copy-field":
+    { "source":"tag", "dest":"text"}
+} 

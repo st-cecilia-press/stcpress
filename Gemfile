@@ -27,7 +27,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
-
+gem 'rsolr'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

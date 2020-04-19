@@ -13,7 +13,13 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
   nodejs \
-  yarn
+  yarn \
+  locales \
+  locales-all
+
+ENV LC_ALL en_US.UTF-8 
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en   
 
 COPY Gemfile* /usr/src/app/
 WORKDIR /usr/src/app

@@ -1,0 +1,7 @@
+{
+  "update-requesthandler": {
+    "name": "/select",
+    "class": "solr.SearchHandler",
+    "defaults": {"df": "text", "echoParams": "explicit", "rows": 10}
+  }
+}

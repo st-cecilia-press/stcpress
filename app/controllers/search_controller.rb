@@ -1,6 +1,7 @@
 require 'open-uri'
 class SearchController < ApplicationController
   def index
+    @results = Search.new(params[:q]).search
   end
   def create
     slug = params[:slug]

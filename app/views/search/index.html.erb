@@ -1,7 +1,23 @@
 <h1>Search Results</h1>
-<% @results.each do |piece| %>
-  <h3><%= link_to piece["title"][0], piece["url"][0] %></h3>
-  <% if piece["composer"] %>
-  by: <%= piece["composer"][0] %>
-    <% end %>
+<%=@results.numFound %> Results for <%=@results.q%><br/>
+<% @results.docs.each do |doc| %>
+  <div class="mb-5">
+    <h3><%= link_to doc.title, doc.url %></h3>
+    <%= truncate(doc.snippet, length: 300, separator: ' ', escape: false) %>
+   </div> 
 <% end %>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item <%= "disabled" unless @results.prev_page.active %>" >
+      <%=link_to "Previous", search_index_path(q: @results.q, start: @results.prev_page.start), class: 'page-link' %>
+    </li>
+    <% @results.pages.each do |page| %>
+      <li class="page-item <%= "disabled" unless page.active %>" >
+        <%=link_to page.page_number, search_index_path(q: @results.q, start: page.start), class: 'page-link' %>
+      </li>
+    <% end %>
+    <li class="page-item <%= "disabled" unless @results.next_page.active %>" >
+      <%=link_to "Next", search_index_path(q: @results.q, start: @results.next_page.start), class: 'page-link' %>
+    </li>
+  </ul>
+</nav>

@@ -1,7 +1,7 @@
 require 'open-uri'
 class SearchController < ApplicationController
   def index
-    @results = Search.new(params[:q]).search
+    @results = Search.new(search_params).search
   end
   def create
     slug = params[:slug]
@@ -14,5 +14,9 @@ class SearchController < ApplicationController
     else
         redirect_to piece_url(:slug => slug)
     end
+  end
+  private
+  def search_params
+      params.permit(:q, :start)
   end
 end

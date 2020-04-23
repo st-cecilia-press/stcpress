@@ -13,7 +13,11 @@
 .byebug_history
 #Related to getting email to work
 .env
+.env/
 Procfile
+
+/solr/docs.json
+
 
 *.gem
 *.rbc

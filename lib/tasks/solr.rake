@@ -1,7 +1,7 @@
 require 'csv'
 task :solr => :environment do
   docs = Array.new
-  Piece.first(100).each do |piece|
+  Piece.all.each do |piece|
     hash = {
       'id' => "piece_#{piece.id}",
       'title' => piece.title,
@@ -33,6 +33,7 @@ task :solr => :environment do
       'title' => c.name,
       'pieces' => c.pieces.map{|p| p.title },
       'url' => "/composers/#{c.slug}",
+      'slug' => c.slug,
       'model' => 'composer',
     }
     docs.push(hash)
@@ -44,6 +45,7 @@ task :solr => :environment do
       'composer' => b.pieces.map{|p| p.composer.name}.uniq,
       'pieces' => b.pieces.map{|p| p.title },
       'dates' => b.date,
+      'slug' => b.slug,
       'url' => "/books/#{b.slug}",
       'model' => 'book',
     }
@@ -57,6 +59,7 @@ task :solr => :environment do
       'pieces' => m.pieces.map{|p| p.title },
       'archive' => "#{m.archive} #{m.shelfmark}",
       'url' => "/manuscripts/#{m.slug}",
+      'slug' => m.slug,
       'model' => 'manuscript',
     }
     docs.push(hash)

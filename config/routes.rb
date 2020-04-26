@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'contact' => 'contact#create'
 
   get 'about' => 'static_pages#about'
+  get 'publications' => 'static_pages#publications'
 
   resources :repositories, only: [:index]
   get 'repositories/:slug' => 'repositories#show', as: 'repository'

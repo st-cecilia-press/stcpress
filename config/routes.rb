@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  namespace :admin do
-    resources :users
-  end
-
-  get '/dashboard' => 'dashboard#index'
   resources :pages, only: [:new, :edit, :create, :update]
   get '/pages/:slug' => 'pages#show'
   

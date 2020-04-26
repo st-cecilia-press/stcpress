@@ -62,7 +62,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include RequestSpecHelper, type: :request
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
@@ -90,17 +89,6 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.shared_context 'when signed in through capybara' do
-  def sign_in(user)
-    visit '/users/sign_in'
-    fill_in 'user_email', with: user.email
-    fill_in 'user_password', with: user.password
-    click_on 'Log in'
-  end
-
-  def sign_out(user)
-  end
-end
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec

@@ -1,6 +1,0 @@
-<% if can? :manage, :all %>
-  <%= link_to 'Edit Page', edit_page_path(@page.id) %>
-<% end %>
-<h1><%=@page.title%></h1>
-<p>Last updated: <%=@page.updated_at.strftime("%b %d, %Y") %>
-<%= markdown(@page.body) %>

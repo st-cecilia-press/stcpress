@@ -8,3 +8,11 @@ describe "GET /about" do
     expect(response.body).to include('About St. Cecilia Press')
   end
 end
+describe "GET /publications" do
+  it "shows publications page" do
+
+    get "/publications"
+    expect(response).to have_http_status(:success)
+    expect(response.body).to include('Publications')
+  end
+end

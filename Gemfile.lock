@@ -49,12 +49,10 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     arel (9.0.0)
-    bcrypt (3.1.13)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     builder (3.2.4)
     byebug (11.1.1)
-    cancancan (3.1.0)
     capistrano (3.13.0)
       airbrussh (>= 1.0.0)
       i18n
@@ -89,12 +87,6 @@ GEM
     crass (1.0.6)
     database_cleaner (1.8.4)
     debug_inspector (0.0.3)
-    devise (4.7.1)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
-      responders
-      warden (~> 1.2.3)
     diff-lcs (1.3)
     dotenv (2.7.5)
     dotenv-rails (2.7.5)
@@ -144,7 +136,6 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
-    orm_adapter (0.5.0)
     pdf-reader (2.4.0)
       Ascii85 (~> 1.0.0)
       afm (~> 0.2.1)
@@ -190,9 +181,6 @@ GEM
       json
     redcarpet (3.5.0)
     regexp_parser (1.7.0)
-    responders (3.0.0)
-      actionpack (>= 5.0)
-      railties (>= 5.0)
     rsolr (2.3.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
@@ -240,8 +228,6 @@ GEM
     ttfunk (1.6.2.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    warden (1.2.8)
-      rack (>= 2.0.6)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -263,7 +249,6 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  cancancan
   capistrano-nvm
   capistrano-rails
   capistrano-rbenv
@@ -271,7 +256,6 @@ DEPENDENCIES
   capistrano3-puma
   capybara
   database_cleaner
-  devise
   dotenv-rails
   factory_bot_rails
   formtastic

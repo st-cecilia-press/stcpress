@@ -5,14 +5,17 @@ task :solr => :environment do
     hash = {
       'id' => "piece_#{piece.id}",
       'title' => piece.title,
-      'composer' => piece.composer.name,
+      'composer' => [piece.composer.name],
+      'composer_text' => piece.composer.name,
       'slug' => piece.slug,
       'url' => "/pieces/#{piece.slug}",
       'model' => "piece"
     }
     hash['tag'] = piece.tags.map{|x| x.name} if piece.tags.count > 0
     hash['book'] = piece.books.map{|x| x.title} if piece.books.count > 0
+    hash['book_text'] = hash['book']
     hash['manuscript'] = piece.manuscripts.map{|x| x.name} if piece.manuscripts.count > 0
+    hash['manuscript_text'] = hash['manuscript']
     hash['voicing'] = piece.voicings.map{|x| x.name} if piece.voicings.count > 0
     hash['language'] = piece.languages.map{|x| x.name} if piece.languages.count > 0
     if piece.start_date == piece.end_date
@@ -31,6 +34,7 @@ task :solr => :environment do
     hash = {
       'id' => "composer_#{c.id}",
       'title' => c.name,
+      'composer' => [c.name],
       'pieces' => c.pieces.map{|p| p.title },
       'url' => "/composers/#{c.slug}",
       'slug' => c.slug,
@@ -42,6 +46,7 @@ task :solr => :environment do
     hash = {
       'id' => "book_#{b.id}",
       'title' => b.title,
+      'book' => [b.title],
       'composer' => b.pieces.map{|p| p.composer.name}.uniq,
       'pieces' => b.pieces.map{|p| p.title },
       'dates' => b.date,
@@ -49,12 +54,14 @@ task :solr => :environment do
       'url' => "/books/#{b.slug}",
       'model' => 'book',
     }
+    hash["composer_text"] = hash["composer"]
     docs.push(hash)
   end
   Manuscript.all.each do |m|
     hash = {
       'id' => "manuscript_#{m.id}",
       'title' => m.name,
+      'manuscript' => m.name,
       'composer' => m.pieces.map{|p| p.composer.name}.uniq,
       'pieces' => m.pieces.map{|p| p.title },
       'archive' => "#{m.archive} #{m.shelfmark}",
@@ -62,6 +69,7 @@ task :solr => :environment do
       'slug' => m.slug,
       'model' => 'manuscript',
     }
+    hash["composer_text"] = hash["composer"]
     docs.push(hash)
   end
   File.open('./solr/docs.json', 'w'){ |file| file.write(docs.to_json) }

@@ -1,0 +1,58 @@
+{ 
+  "add-field-type": 
+    { "name":"date_range", "class": "solr.DateRangeField" },
+  "add-field": 
+    { "name":"archive", "type":"string", "multiValued":false, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"archive_text", "type":"text_general", "multiValued":false, "stored":false, "indexed":true},
+  "add-field": 
+    { "name":"book", "type":"string", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"book_text", "type":"text_general", "multiValued":true, "stored":false, "indexed":true},
+  "add-field": 
+    { "name":"composer", "type":"string", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"composer_text", "type":"text_general", "multiValued":true, "stored":false, "indexed":true},
+  "add-field": 
+    { "name":"dates", "type":"date_range", "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"language", "type":"string", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"lyrics", "type":"text_general", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"manuscript", "type":"string", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"manuscript_text", "type":"text_general", "multiValued":true, "stored":false, "indexed":true},
+  "add-field": 
+    { "name":"model", "type":"string", "multiValued":false, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"pieces", "type":"text_general", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"slug", "type":"string", "multiValued":false, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"tag", "type":"string", "multiValued":true, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"text", "type":"text_general", "multiValued":true, "stored":false, "indexed":true},
+  "add-field": 
+    { "name":"title", "type":"text_general", "multiValued":false, "stored":true, "indexed":true},
+  "add-field": 
+    { "name":"url", "type":"string", "multiValued":false, "stored":true, "indexed":false},
+  "add-field": 
+    { "name":"voicing", "type":"string", "multiValued":true, "stored":true, "indexed":true},
+  "add-copy-field":
+    { "source":"archive_text", "dest":"text"},
+  "add-copy-field":
+    { "source":"book_text", "dest":"text"},
+  "add-copy-field":
+    { "source":"language", "dest":"text"},
+  "add-copy-field":
+    { "source":"lyrics", "dest":"text"},
+  "add-copy-field":
+    { "source":"manuscript_text", "dest":"text"},
+  "add-copy-field":
+    { "source":"pieces", "dest":"text"},
+  "add-copy-field":
+    { "source":"tag", "dest":"text"},
+  "add-copy-field":
+    { "source":"title", "dest":"text"}
+} 

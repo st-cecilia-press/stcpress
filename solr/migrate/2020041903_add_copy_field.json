@@ -1,6 +1,0 @@
-{
- "add-copy-field":
-    { "source":"lyrics", "dest":"text"},
- "add-copy-field":
-    { "source":"pieces", "dest":"text"}
-}

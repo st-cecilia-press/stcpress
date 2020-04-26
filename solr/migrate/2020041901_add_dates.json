@@ -1,6 +1,0 @@
-{ 
-  "add-field-type": 
-    { "name":"date_range", "class": "solr.DateRangeField" },
-  "add-field": 
-    { "name":"dates", "type":"date_range", "stored":true, "indexed":true}
-} 

@@ -12,4 +12,10 @@ describe "Get /repositories" do
     expect(response.body).to include("<a href=\"/repositories/#{repo1.slug}\">#{repo1.name}</a>")
     expect(response.body).to include("<a href=\"/repositories/#{repo1.slug}\">#{repo1.name}</a>")
   end
+  it "does not show dance repository" do
+    repo1 = create(:dance_repository, slug: 'repo1', name: 'Repo1')   
+    get '/repositories'
+    expect(response).to have_http_status(:success)
+    expect(response.body).not_to include("<a href=\"/repositories/#{repo1.slug}\">#{repo1.name}</a>")
+  end
 end

@@ -10,4 +10,8 @@ describe "Get /repositories/name" do
     expect(response.body).to include(repo.name)
     expect(response.body).to include(piece.title)
   end
+  it "404s if it's a dance repository" do
+    repo1 = create(:dance_repository, slug: 'repo1', name: 'Repo1')   
+    expect{get "/repositories/#{repo1.slug}"}.to raise_error(ActionController::RoutingError)
+  end
 end

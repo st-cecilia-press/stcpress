@@ -97,6 +97,10 @@ FactoryBot.define do
     piece 
     repository 
   end
+  factory :dance_repository do
+    name { "Repo" }
+    slug { "repo" }
+  end
   factory :translations_collection do
     name { "Repo" }
     slug { "repo" }

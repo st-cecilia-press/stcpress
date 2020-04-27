@@ -1,0 +1,1 @@
+class DanceRepository < Repository; end

@@ -1,6 +1,7 @@
 # stcpress ~ a repository for pre-1700 music
 live site: http://stcpress.org
 
+
 ## Setting up stcpress for development
 
 Clone the repo
@@ -9,39 +10,29 @@ git clone git@github.com:st-cecilia-press/stcpress.git
 cd stcpress
 bundle
 ```
-Make sure dependencies are installed
-* g++
-* libmysqlclient-dev
-* libsqlite3-dev
-
-capybara-webkit needs Qt. I installed: 
-* qt5-default
-* libqt*5-dev
-
-Set up database
+copy .env-example directory to .env
 ```
-bundle exec rake db:setup
+cp -r .env-example .env
 ```
 
-make sure node and yarn are at versions in package.json
-
-I use nvm to install node, so to get node to the correct version 
+build web container
 ```
-nvm install [version]
+docker-compose build web
 ```
 
-for yarn: 
+precompile assets
 ```
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version [version]
-source .bashrc
+docker-compose run web bundle exec rails assets:precompile
 ```
 
-compile javascript and css
+start containers
 ```
-bundle exec rails assets:precompile
+docker-compose up -d
 ```
-set up music repositories
+
+set up database and music repositories
 ```
-bundle exec rake git_pull
-bundle exec rake init_db:all
+docker-compose exec web bundle exec rake git_pull
+docker-compose exec web bundle exec rails db:setup
+docker-compose exec web bundle exec rake init_db:all
 ```

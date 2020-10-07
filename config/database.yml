@@ -8,11 +8,11 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: <%= ENV.fetch('DATABASE_HOST') %>
-  username: <%= ENV.fetch('POSTGRES_USER') %>
-  password: <%= ENV.fetch('POSTGRES_PASSWORD') %>
-  database: <%= ENV.fetch('POSTGRES_DB') %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: <%= ENV['POSTGRES_DB'] %>
+  pool: <%= ENV["RAILS_MAX_THREADS"] { 5 } %>
   variables:
     statement_timeout: 5000
 
@@ -26,10 +26,14 @@ test:
   <<: *default
   database: stcpress_test
 
-production:
-  adapter: mysql2
-  encoding: utf8
-  pool: 5
-  database: stcpress
-  username: stcpress
-  password: <%= ENV['STCPRESS_DATABASE_PASSWORD'] %>
+test:
+  <<: *default
+  database: stcpress_production
+
+#production:
+#  adapter: mysql2
+#  encoding: utf8
+#  pool: 5
+#  database: stcpress
+#  username: stcpress
+#  password: <%= ENV['STCPRESS_DATABASE_PASSWORD'] %>

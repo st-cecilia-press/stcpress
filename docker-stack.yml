@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  web:
+    image: niquerio/stcpress_web:prod
+    ports:
+      - "31001:3000"
+    env_file:
+      - .env/production/database
+      - .env/production/web
+    volumes:
+      - repos:/usr/src/shared
+
+  db-migrator:  
+    image: niquerio/stcpress_web:prod
+    command: ["./wait-for", "--timeout=300", "database:5432", "--",
+    "bin/rails", "init_db:all"]
+    env_file:
+      - .env/production/database
+      - .env/production/web
+    volumes:
+      - repos:/usr/src/shared
+    deploy:
+      restart_policy:
+        condition: none
+
+  database:
+    image: postgres
+    env_file:
+      - .env/production/database
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  repos:

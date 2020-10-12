@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/usr/src/app
       - gem_cache:/gems
+      - repos:/usr/src/shared
     env_file:
       - .env/development/database
       - .env/development/web
@@ -23,6 +24,7 @@ services:
     volumes:
       - .:/usr/src/app
       - gem_cache:/gems
+      - repos:/usr/src/shared
     env_file:
       - .env/development/database
       - .env/development/web
@@ -59,3 +61,4 @@ volumes:
   db_data:
   gem_cache:
   solr_data:
+  repos:

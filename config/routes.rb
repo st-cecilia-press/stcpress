@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :pages, only: [:new, :edit, :create, :update]
-  get '/pages/:slug' => 'pages#show'
-  
   resources :pieces, only: [:index] 
   get 'pieces/voicings' => 'voicings#index'
   get 'pieces/voicings/:voicing' => 'voicings#show'

@@ -1,11 +1,11 @@
 #cecilia ignore
 /public/stcpress-data
-/public/bel-accueil/
-/public/gervaise_quart_livre_de_danceries/
-/public/instrumental_pile/
-/public/json/
-/public/miscellaneous/
-/public/sca_dance/
+/public/bel-accueil
+/public/gervaise_quart_livre_de_danceries
+/public/instrumental_pile
+/public/json
+/public/miscellaneous
+/public/sca_dance
 /public/packs/
 /public/packs-test/
 /storage/

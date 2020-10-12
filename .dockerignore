@@ -4,9 +4,9 @@ public/bel-accueil/
 public/embellishments_vol1/
 public/gervaise_quart_livre_de_danceries/
 public/instrumental_pile/
-public/json/
 public/miscellaneous/
 public/sca_dance/
+public/json/
 #Git
 .git
 .gitignore

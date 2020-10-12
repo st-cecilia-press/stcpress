@@ -9,11 +9,10 @@ services:
     volumes:
       - .:/usr/src/app
       - gem_cache:/gems
-      - ../shared:/usr/src/shared
+      - repos:/usr/src/shared
     env_file:
       - .env/development/database
       - .env/development/web
-    entrypoint: ./docker-entrypoint.sh
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack-dev-server
   
@@ -25,6 +24,7 @@ services:
     volumes:
       - .:/usr/src/app
       - gem_cache:/gems
+      - repos:/usr/src/shared
     env_file:
       - .env/development/database
       - .env/development/web
@@ -50,3 +50,4 @@ services:
 volumes:
   db_data:
   gem_cache:
+  repos:

@@ -12,6 +12,7 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | \
   tee /etc/apt/sources.list.d/yarn.list
 
 RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends \
+  netcat \
   nodejs \
   yarn
 
@@ -26,6 +27,12 @@ RUN bundle install
 
 COPY . /usr/src/app/
 
-RUN bin/rails assets:precompile
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+RUN ["chmod", "+x", "/usr/src/app/wait-for"]
+
+ENV SECRET_KEY_BASE='1' 
+
+RUN ["bin/rails", "assets:precompile", "RAILS_ENV=production"]
 
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]

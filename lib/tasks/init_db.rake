@@ -145,40 +145,7 @@ namespace :init_db do
   end
 
   task :db_reset => :environment do
-    #Rake::Task['db:reset'].invoke 
-    #Rake::Task['db:migrate'].invoke 
-    #Rake::Task['db:seed'].invoke 
-
-    #clear music tables 
-    Piece.destroy_all
-    Repository.destroy_all
-
-    Book.destroy_all
-
-    BookContent.destroy_all
-
-    Manuscript.destroy_all
-    
-    ManuscriptContent.destroy_all
-
-    Composer.destroy_all
-
-    Image.destroy_all
-
-    Publicationship.destroy_all
-
-    Tag.destroy_all
-
-    Tagging.destroy_all
-
-    Voicing.destroy_all
-
-    SongVoicing.destroy_all
-
-    Language.destroy_all
-
-    PieceLanguage.destroy_all
-
+    Rake::Task['db:reset'].invoke 
   end
   
   task :json => :environment do
@@ -188,13 +155,21 @@ namespace :init_db do
   task :dance => :environment do
     Rake::Task["dance:all"].invoke
   end
+  
+  task :git_pull => :environment do
+    Rake::Task["git_pull"].invoke
+  end
+
+  task :link_repos => :environment do
+    `./docker-entrypoint.sh`
+  end
 
   task :reset_gervaise => [:db_reset, :manuscripts, :books, :gervaise_quart, :json]
   task :reset_misc => [:db_reset, :manuscripts, :books, :miscellaneous]
   task :reset_kasha => [:db_reset, :manuscripts, :books, :kasha, :json]
-  task :all => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance, :json]
-
   task :music => [:db_reset, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha]
+
+  task :all => [:db_reset, :git_pull, :link_repos, :manuscripts, :books, :miscellaneous, :gervaise_quart, :kasha, :dance, :json]
 end
 
 class Metadata

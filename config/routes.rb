@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  namespace :admin do
-    resources :users
-  end
-
-  get '/dashboard' => 'dashboard#index'
-  resources :pages, only: [:new, :edit, :create, :update]
-  get '/pages/:slug' => 'pages#show'
-  
   resources :pieces, only: [:index] 
   get 'pieces/voicings' => 'voicings#index'
   get 'pieces/voicings/:voicing' => 'voicings#show'
@@ -27,6 +18,7 @@ Rails.application.routes.draw do
   post 'contact' => 'contact#create'
 
   get 'about' => 'static_pages#about'
+  get 'publications' => 'static_pages#publications'
 
   resources :repositories, only: [:index]
   get 'repositories/:slug' => 'repositories#show', as: 'repository'

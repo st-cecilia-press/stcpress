@@ -4,11 +4,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~>5.2'
 
-group :production do
-  gem 'mysql2'
-  gem 'dotenv-rails', :require => 'dotenv/rails-now'
-end
-
 gem 'pg'
 
 gem 'webpacker'
@@ -23,8 +18,6 @@ gem 'mail_form'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'midilib'
 gem 'redcarpet'
-gem 'devise'
-gem 'cancancan'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 

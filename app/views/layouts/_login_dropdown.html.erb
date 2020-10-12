@@ -1,9 +1,0 @@
-<% if user_signed_in? %>
-  <li class="nav-item dropdown">
-    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
-    <div class="dropdown-menu">
-      <%= nav_dropdown_link_to 'Dashboard', "/dashboard" %>
-      <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'dropdown-item') %> </li>
-    </div>
-  </li>
-<% end %>

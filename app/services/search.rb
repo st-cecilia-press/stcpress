@@ -17,19 +17,20 @@ class SearchResults
     @start = response["response"]["start"].to_i
     @numFound = response["response"]["numFound"]    
     @docs = response["response"]["docs"].map{|doc| SearchResultPresenter.for(doc) }
-    @pagenation = Pagination.new(current_start: @start, total_results: numFound)
+
+    @pagination = Pagination.new(current_start: @start, total_results: numFound)
   end 
 
   def next_page
-    @pagenation.next_page
+    @pagination.next_page
   end
 
   def prev_page
-    @pagenation.prev_page
+    @pagination.prev_page
   end
 
   def pages
-    @pagenation.pages
+    @pagination.pages
   end
 
   def process_docs(docs)

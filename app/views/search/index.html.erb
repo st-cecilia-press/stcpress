@@ -1,9 +1,13 @@
 <h1>Search Results</h1>
 <%=@results.numFound %> Results for <%=@results.q%><br/>
-<% @results.docs.each do |doc| %>
+<% @results.each do |doc| %>
   <div class="mb-5">
     <h3><%= link_to doc.title, doc.url %></h3>
+    <% if doc.category == "Composer" %>
+      <%= render partial: "composer", locals: {doc: doc} %>
+    <%else%>
     <%= truncate(doc.snippet, length: 300, separator: ' ', escape: false) %>
+  <%end%>
    </div> 
 <% end %>
 <nav aria-label="Page navigation example">
